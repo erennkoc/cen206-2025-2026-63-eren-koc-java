@@ -1,33 +1,33 @@
 /**
 
-@file Calculator.java
-@brief This file serves as a demonstration file for the Calculator class.
-@details This file contains the implementation of the Calculator class, which provides various mathematical operations.
+@file projectmanager.java
+@brief This file serves as a demonstration file for the projectmanager class.
+@details This file contains the implementation of the projectmanager class, which provides various mathematical operations.
 */
 
 /**
 
-@package com.ucoruh.calculator
-@brief The com.ucoruh.calculator package contains all the classes and files related to the Calculator App.
+@package com.ucoruh.projectmanager
+@brief The com.ucoruh.projectmanager package contains all the classes and files related to the projectmanager App.
 */
-package com.ucoruh.calculator;
+package com.ucoruh.projectmanager;
 
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Logger;
 /**
 
-@class Calculator
-@brief This class represents a Calculator that performs mathematical operations.
-@details The Calculator class provides methods to perform mathematical operations such as addition, subtraction, multiplication, and division. It also supports logging functionality using the logger object.
+@class projectmanager
+@brief This class represents a projectmanager that performs mathematical operations.
+@details The projectmanager class provides methods to perform mathematical operations such as addition, subtraction, multiplication, and division. It also supports logging functionality using the logger object.
 @author ugur.coruh
 */
-public class Calculator {
+public class projectmanager {
 
   /**
-   * @brief Logger for the Calculator class.
+   * @brief Logger for the projectmanager class.
    */
-  private static final Logger logger = (Logger) LoggerFactory.getLogger(Calculator.class);
+  private static final Logger logger = (Logger) LoggerFactory.getLogger(projectmanager.class);
 
   /**
    * @brief Calculates the sum of two integers.
