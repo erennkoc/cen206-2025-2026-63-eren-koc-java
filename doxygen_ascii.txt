@@ -1,0 +1,33 @@
+doxygen.exe : warning: Tag 'H
+TML_TIMESTAMP' at line 1435 o
+f file 'Doxyfile' has become 
+obsolete.
+At line:1 char:1
++ & "C:\Program Files\doxygen
+\bin\doxygen.exe" Doxyfile 2>
+&1 | Out-File ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo           
+   : NotSpecified: (warning  
+  : Tag 'H...ecome obsolet   
+ e.:String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+         To avoid this warnin
+g please remove this line fro
+m your configuration file or 
+upgrade it using "doxygen -u"
+warning: Tag 'LATEX_TIMESTAMP
+' at line 2103 of file 'Doxyf
+ile' has become obsolete.
+         To avoid this warnin
+g please remove this line fro
+m your configuration file or 
+upgrade it using "doxygen -u"
+Doxygen version used: 1.16.1 (669aeeefca743c148e2d935b3d3c69535c7491e6)
+See 'doxygen.log' for the reason of termination.
+Exiting...

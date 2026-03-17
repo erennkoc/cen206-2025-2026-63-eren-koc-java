@@ -88,6 +88,8 @@ CTestTestfile.cmake
 _deps
 
 ### CMake Patch ###
+CMakeUserPresets.json
+
 # External projects
 *-prefix/
 
@@ -959,8 +961,4 @@ coverage*[.json, .xml, .info]
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/c,csharp,vs,visualstudio,visualstudiocode,java,maven,c++,cmake,eclipse,netbeans
-
-/projectmanager-app/src/site/markdown/readme.md
-/projectmanager-app/src/site/resources/assets/.gitkeep
-/projectmanager-app/src/site/resources/assets
-/projectmanager-app/src/site/resources/images/rteu_logo.jpg
+**/desktop.ini 

@@ -17,8 +17,6 @@
 		<url>https://github.com/ucoruh/eclipse-java-maven-template</url>
 	</scm>
 	<inceptionYear>2026</inceptionYear>
-	<inceptionYear>2026</inceptionYear>
-
 <developers>
 
     <developer>
@@ -124,10 +122,39 @@
 	</properties>
 
 	<dependencies>
+		<!-- Database Dependencies -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.41.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jline</groupId>
+			<artifactId>jline</artifactId>
+			<version>3.23.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.9.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>4.11.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>4.11.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -165,8 +192,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<includes>
-						<include>**/projectmanagerAppTest.java</include>
-						<include>**/projectmanagerTest.java</include>
+						<include>**/*Test.java</include>
 					</includes>
 				</configuration>
 			</plugin>
@@ -270,7 +296,7 @@
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>
-										com.ucoruh.projectmanager.projectmanagerApp</mainClass>
+										com.projectmanagement.app.Main</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>

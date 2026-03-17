@@ -1,0 +1,39 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< com.eren.projectmanager:projectmanager-app >-------------
+[INFO] Building projectmanager-app 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.1.0:clean (default-clean) @ projectmanager-app ---
+[INFO] Deleting C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target
+[INFO] 
+[INFO] --- jacoco:0.8.7:prepare-agent (default) @ projectmanager-app ---
+[INFO] argLine set to -javaagent:C:\\Users\\EXCALIBUR\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.7\\org.jacoco.agent-0.8.7-runtime.jar=destfile=C:\\Users\\EXCALIBUR\\Desktop\\oop_proje\\cen206-homework-eren-koc-java\\projectmanager-app\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.0.2:resources (default-resources) @ projectmanager-app ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- compiler:3.8.0:compile (default-compile) @ projectmanager-app ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 22 source files to C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\classes
+[INFO] 
+[INFO] --- resources:3.0.2:testResources (default-testResources) @ projectmanager-app ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.8.0:testCompile (default-testCompile) @ projectmanager-app ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 4 source files to C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\test-classes
+[INFO] 
+[INFO] --- surefire:2.22.1:test (default-test) @ projectmanager-app ---
+[INFO] 
+[INFO] --- jacoco:0.8.7:report (report) @ projectmanager-app ---
+[INFO] Skipping JaCoCo execution due to missing execution data file.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.388 s
+[INFO] Finished at: 2026-03-12T13:52:22+03:00
+[INFO] ------------------------------------------------------------------------

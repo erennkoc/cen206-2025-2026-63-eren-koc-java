@@ -1,0 +1,27 @@
+class BaseEntity {
+  abstract;
+  String id;
+  Date createdAt;
+}
+
+class User {
+  isA BaseEntity;
+  String username;
+  String email;
+  String password;
+}
+
+class Project {
+  isA BaseEntity;
+  String name;
+  String description;
+  1 -> * Task tasks;
+}
+
+class Task {
+  isA BaseEntity;
+  String title;
+  String description;
+  String status;
+  * -> 0..1 User assignedUser;
+}

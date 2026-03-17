@@ -1,0 +1,56 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< com.eren.projectmanager:projectmanager-app >-------------
+[INFO] Building projectmanager-app 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.1.0:clean (default-clean) @ projectmanager-app ---
+[INFO] Deleting C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target
+[INFO] 
+[INFO] --- jacoco:0.8.7:prepare-agent (default) @ projectmanager-app ---
+[INFO] argLine set to -javaagent:C:\\Users\\EXCALIBUR\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.7\\org.jacoco.agent-0.8.7-runtime.jar=destfile=C:\\Users\\EXCALIBUR\\Desktop\\oop_proje\\cen206-homework-eren-koc-java\\projectmanager-app\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.0.2:resources (default-resources) @ projectmanager-app ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- compiler:3.8.0:compile (default-compile) @ projectmanager-app ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 22 source files to C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\classes
+[INFO] 
+[INFO] --- resources:3.0.2:testResources (default-testResources) @ projectmanager-app ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.8.0:testCompile (default-testCompile) @ projectmanager-app ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 4 source files to C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/EXCALIBUR/Desktop/oop_proje/cen206-homework-eren-koc-java/projectmanager-app/src/test/java/com/projectmanagement/lib/services/ProjectServiceTest.java:[4,26] cannot access org.mockito.Mockito
+  bad class file: C:\Users\EXCALIBUR\.m2\repository\org\mockito\mockito-core\5.4.0\mockito-core-5.4.0.jar(org/mockito/Mockito.class)
+    class file has wrong version 55.0, should be 52.0
+    Please remove or make sure it appears in the correct subdirectory of the classpath.
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.173 s
+[INFO] Finished at: 2026-03-12T13:47:44+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.0:testCompile (default-testCompile) on project projectmanager-app: Compilation failure
+[ERROR] /C:/Users/EXCALIBUR/Desktop/oop_proje/cen206-homework-eren-koc-java/projectmanager-app/src/test/java/com/projectmanagement/lib/services/ProjectServiceTest.java:[4,26] cannot access org.mockito.Mockito
+[ERROR]   bad class file: C:\Users\EXCALIBUR\.m2\repository\org\mockito\mockito-core\5.4.0\mockito-core-5.4.0.jar(org/mockito/Mockito.class)
+[ERROR]     class file has wrong version 55.0, should be 52.0
+[ERROR]     Please remove or make sure it appears in the correct subdirectory of the classpath.
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

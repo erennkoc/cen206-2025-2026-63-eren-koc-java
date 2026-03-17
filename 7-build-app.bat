@@ -47,10 +47,10 @@ echo Change directory to projectmanager-app
 cd projectmanager-app
 
 echo Generate ReportGenerator HTML Report
-call reportgenerator "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Html
+call "%USERPROFILE%\.dotnet\tools\reportgenerator.exe" "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Html
 
 echo Generate ReportGenerator Badges
-call reportgenerator "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Badges
+call "%USERPROFILE%\.dotnet\tools\reportgenerator.exe" "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Badges
 
 echo Display information about the binary file
 echo Our Binary is a Single Jar With Dependencies. You Do Not Need to Compress It.
@@ -62,7 +62,7 @@ echo Run Coverxygen
 call python -m coverxygen --xml-dir ./projectmanager-app/target/site/doxygen/xml --src-dir ./ --format lcov --output ./projectmanager-app/target/site/coverxygen/lcov.info --prefix %currentDir%/projectmanager-app/
 
 echo Run lcov genhtml
-call perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml --legend --title "Documentation Coverage Report" ./projectmanager-app/target/site/coverxygen/lcov.info -o projectmanager-app/target/site/coverxygen
+call "C:\Program Files\Git\usr\bin\perl.exe" "%LOCALAPPDATA%\lcov\lcov-1.16\bin\genhtml" --legend --title "Documentation Coverage Report" ./projectmanager-app/target/site/coverxygen/lcov.info -o projectmanager-app/target/site/coverxygen
 
 echo Copy badge files to the "assets" directory
 call copy "projectmanager-app\target\site\coveragereport\badge_combined.svg" "assets\badge_combined.svg"
@@ -85,7 +85,9 @@ call mvn site
 cd ..
 
 echo Package Output Jar Files
-tar -czvf release\application-binary.tar.gz -C projectmanager-app\target '*.jar'
+pushd projectmanager-app\target
+tar -czvf ..\..\release\application-binary.tar.gz *.jar
+popd
 
 echo Package Jacoco Test Coverage Report (Optional)
 call tar -czvf release\test-jacoco-report.tar.gz -C projectmanager-app\target\site\jacoco .

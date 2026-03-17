@@ -1,0 +1,10 @@
+e4ae0e4 naming
+7863b0e naming
+1b3f0b7 fix naming
+db91860 naming
+e36727a On main: !!GitHub_Desktop<main>
+c6340ec index on main: a42c117 Initial commit
+23deee2 Merge pull request #1 from erennkoc/Eren-??nder
+742169b Implement Task Assignment, Progress Tracking, and Reporting module
+d60091b initial project structure and base classes
+a42c117 Initial commit
