@@ -49,6 +49,10 @@ public class ProjectServiceTest {
             projectService.createProject("ID", "", "Desc"); // Empty string
         });
 
+        assertThrows(IllegalArgumentException.class, () -> {
+            projectService.createProject("ID", "Name", null); // null desc
+        });
+
         verify(projectRepositoryMock, never()).create(any(Project.class));
     }
 

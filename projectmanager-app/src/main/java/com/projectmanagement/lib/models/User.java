@@ -1,35 +1,34 @@
 package com.projectmanagement.lib.models;
 
 /**
- * @class User
- * @brief Represents a user in the project management system.
- * @details Inherits from BaseEntity and encapsulates user-specific data like username and email.
+ * Represents a user in the project management system.
+ * <p> Inherits from BaseEntity and encapsulates user-specific data like username and email.
  */
 public class User extends BaseEntity {
     /**
-     * @brief The username of the user.
+     * The username of the user.
      */
     private String username;
 
     /**
-     * @brief The email address of the user.
+     * The email address of the user.
      */
     private String email;
 
     /**
-     * @brief The password of the user.
+     * The password of the user.
      */
     private String password;
 
     /**
-     * @brief Default constructor for User.
+     * Default constructor for User.
      */
     public User() {
         super();
     }
 
     /**
-     * @brief Parameterized constructor for User.
+     * Parameterized constructor for User.
      * @param id The unique identifier of the user.
      * @param username The username of the user.
      * @param email The email address of the user.
@@ -43,7 +42,7 @@ public class User extends BaseEntity {
     }
 
     /**
-     * @brief Gets the username.
+     * Gets the username.
      * @return The username.
      */
     public String getUsername() {
@@ -51,7 +50,7 @@ public class User extends BaseEntity {
     }
 
     /**
-     * @brief Sets the username.
+     * Sets the username.
      * @param username The new username.
      */
     public void setUsername(String username) {
@@ -59,7 +58,7 @@ public class User extends BaseEntity {
     }
 
     /**
-     * @brief Gets the email address.
+     * Gets the email address.
      * @return The email address.
      */
     public String getEmail() {
@@ -67,7 +66,7 @@ public class User extends BaseEntity {
     }
 
     /**
-     * @brief Sets the email address.
+     * Sets the email address.
      * @param email The new email address.
      */
     public void setEmail(String email) {
@@ -75,7 +74,7 @@ public class User extends BaseEntity {
     }
 
     /**
-     * @brief Gets the user's password.
+     * Gets the user's password.
      * @return The password.
      */
     public String getPassword() {
@@ -83,7 +82,7 @@ public class User extends BaseEntity {
     }
 
     /**
-     * @brief Sets the user's password.
+     * Sets the user's password.
      * @param password The new password.
      */
     public void setPassword(String password) {
@@ -91,8 +90,8 @@ public class User extends BaseEntity {
     }
 
     /**
-     * @brief Displays the details of the user.
-     * @details Implementation of the abstract method from BaseEntity.
+     * Displays the details of the user.
+     * <p> Implementation of the abstract method from BaseEntity.
      */
     @Override
     public void displayDetails() {

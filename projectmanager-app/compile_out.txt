@@ -4,12 +4,13 @@
 [INFO] Building projectmanager-app 1.0-SNAPSHOT
 [INFO]   from pom.xml
 [INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
 [INFO] 
 [INFO] --- clean:3.1.0:clean (default-clean) @ projectmanager-app ---
-[INFO] Deleting C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target
+[INFO] Deleting C:\Github Clones\cen206-homework-eren-koc-java\projectmanager-app\target
 [INFO] 
 [INFO] --- jacoco:0.8.7:prepare-agent (default) @ projectmanager-app ---
-[INFO] argLine set to -javaagent:C:\\Users\\EXCALIBUR\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.7\\org.jacoco.agent-0.8.7-runtime.jar=destfile=C:\\Users\\EXCALIBUR\\Desktop\\oop_proje\\cen206-homework-eren-koc-java\\projectmanager-app\\target\\jacoco.exec
+[INFO] argLine set to "-javaagent:C:\\Users\\erenn\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.7\\org.jacoco.agent-0.8.7-runtime.jar=destfile=C:\\Github Clones\\cen206-homework-eren-koc-java\\projectmanager-app\\target\\jacoco.exec"
 [INFO] 
 [INFO] --- resources:3.0.2:resources (default-resources) @ projectmanager-app ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
@@ -17,23 +18,219 @@
 [INFO] 
 [INFO] --- compiler:3.8.0:compile (default-compile) @ projectmanager-app ---
 [INFO] Changes detected - recompiling the module!
-[INFO] Compiling 24 source files to C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\classes
+[INFO] Compiling 23 source files to C:\Github Clones\cen206-homework-eren-koc-java\projectmanager-app\target\classes
 [INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
 [INFO] -------------------------------------------------------------
-[ERROR] /C:/Users/EXCALIBUR/Desktop/oop_proje/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/ucoruh/projectmanager/ProjectmanagerApp.java:[30,8] class projectmanagerApp is public, should be declared in a file named projectmanagerApp.java
-[ERROR] /C:/Users/EXCALIBUR/Desktop/oop_proje/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/ucoruh/projectmanager/Projectmanager.java:[25,8] class projectmanager is public, should be declared in a file named projectmanager.java
-[INFO] 2 errors 
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Project.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Project.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Project.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Project.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Task.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Task.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/TaskStatus.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/TaskStatus.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/StorageConfig.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/StorageConfig.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[7,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[8,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[7,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[8,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[7,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[8,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[9,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[10,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[11,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[12,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[13,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[14,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[15,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[17,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[18,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/User.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/User.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/RepositoryFactory.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/RepositoryFactory.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/RepositoryFactory.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/RepositoryFactory.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/RepositoryFactory.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/IRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/IRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/IRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[7,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[8,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/BaseEntity.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/BaseEntity.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/BaseEntity.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/BaseEntity.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryTaskRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryTaskRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryTaskRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryTaskRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryTaskRepository.java:[5,1] class, interface, or enum expected
+[INFO] 100 errors 
 [INFO] -------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.020 s
-[INFO] Finished at: 2026-03-12T13:47:08+03:00
+[INFO] Total time:  0.925 s
+[INFO] Finished at: 2026-03-18T23:27:56+03:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.0:compile (default-compile) on project projectmanager-app: Compilation failure: Compilation failure: 
-[ERROR] /C:/Users/EXCALIBUR/Desktop/oop_proje/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/ucoruh/projectmanager/ProjectmanagerApp.java:[30,8] class projectmanagerApp is public, should be declared in a file named projectmanagerApp.java
-[ERROR] /C:/Users/EXCALIBUR/Desktop/oop_proje/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/ucoruh/projectmanager/Projectmanager.java:[25,8] class projectmanager is public, should be declared in a file named projectmanager.java
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryUserRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteUserRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Project.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Project.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Project.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Project.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Task.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/Task.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/TaskStatus.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/TaskStatus.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLUserRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/StorageConfig.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/StorageConfig.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[7,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLTaskRepository.java:[8,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[7,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/SQLiteTaskRepository.java:[8,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[7,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[8,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[9,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[10,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[11,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[12,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[13,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[14,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[15,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[17,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/app/Main.java:[18,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/User.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/User.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/MySQLProjectRepository.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/ProjectService.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/RepositoryFactory.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/RepositoryFactory.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/RepositoryFactory.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/RepositoryFactory.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/RepositoryFactory.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/IRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/IRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/IRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[5,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[6,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[7,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/services/UserService.java:[8,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/BaseEntity.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/BaseEntity.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/BaseEntity.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/models/BaseEntity.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryTaskRepository.java:[1,1] illegal character: '\ufeff'
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryTaskRepository.java:[1,10] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryTaskRepository.java:[3,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryTaskRepository.java:[4,1] class, interface, or enum expected
+[ERROR] /C:/Github Clones/cen206-homework-eren-koc-java/projectmanager-app/src/main/java/com/projectmanagement/lib/storage/BinaryTaskRepository.java:[5,1] class, interface, or enum expected
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.

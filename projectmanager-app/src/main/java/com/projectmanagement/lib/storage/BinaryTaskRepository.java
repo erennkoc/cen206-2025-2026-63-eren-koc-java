@@ -6,19 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @class BinaryTaskRepository
- * @brief Binary File I/O implementation of the Task repository.
- * @details Implements IRepository to persist Task entities to local binary file storage.
+ * Binary File I/O implementation of the Task repository.
+ * <p> Implements IRepository to persist Task entities to local binary file storage.
  */
 public class BinaryTaskRepository implements IRepository<Task> {
 
     /**
-     * @brief The file path where task data is serialized.
+     * The file path where task data is serialized.
      */
     private final String FILE_PATH = "tasks.dat";
 
     /**
-     * @brief Loads task list from the binary file.
+     * Loads task list from the binary file.
      * @return A list of tasks.
      */
     @SuppressWarnings("unchecked")
@@ -27,7 +26,8 @@ public class BinaryTaskRepository implements IRepository<Task> {
         if (!file.exists()) {
             return new ArrayList<>();
         }
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+        try (FileInputStream fis = new FileInputStream(file);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
             return (List<Task>) ois.readObject();
         } catch (Exception e) {
             return new ArrayList<>();
@@ -35,7 +35,7 @@ public class BinaryTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Saves the given task list to the binary file.
+     * Saves the given task list to the binary file.
      * @param tasks The list of tasks to be saved.
      */
     private void saveToFile(List<Task> tasks) {
@@ -47,7 +47,7 @@ public class BinaryTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Generates a new Task recording in the binary file.
+     * Generates a new Task recording in the binary file.
      * @param entity The Task form to log.
      */
     @Override
@@ -58,7 +58,7 @@ public class BinaryTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Fetches a Task by correlating ID from the binary data stream.
+     * Fetches a Task by correlating ID from the binary data stream.
      * @param id The matching Task ID.
      * @return The target Task object, resolving to null otherwise.
      */
@@ -74,7 +74,7 @@ public class BinaryTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Interprets all Task entries secured inside binary files.
+     * Interprets all Task entries secured inside binary files.
      * @return Collection array of Tasks.
      */
     @Override
@@ -83,7 +83,7 @@ public class BinaryTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Refreshes an operational Task entity in binary file content.
+     * Refreshes an operational Task entity in binary file content.
      * @param entity Altered Task structure holding new details.
      */
     @Override
@@ -99,7 +99,7 @@ public class BinaryTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Strips a Task entity from the binary footprint by ID matching.
+     * Strips a Task entity from the binary footprint by ID matching.
      * @param id The corresponding identifier.
      */
     @Override

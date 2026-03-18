@@ -8,26 +8,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @class SQLiteTaskRepository
- * @brief SQLite implementation of the Task repository.
- * @details Implements IRepository to persist Task entities securely within an SQLite local db.
+ * SQLite implementation of the Task repository.
+ * <p> Implements IRepository to persist Task entities securely within an SQLite local db.
  */
 public class SQLiteTaskRepository implements IRepository<Task> {
 
     /**
-     * @brief SQLite database connection string.
+     * SQLite database connection string.
      */
     private static final String URL = "jdbc:sqlite:projectmanager.db";
 
     /**
-     * @brief Constructor for SQLiteTaskRepository.
+     * Constructor for SQLiteTaskRepository.
      */
     public SQLiteTaskRepository() {
         createTableIfNotExists();
     }
 
     /**
-     * @brief Creates tasks table if missing.
+     * Creates tasks table if missing.
      */
     private void createTableIfNotExists() {
         String sql = "CREATE TABLE IF NOT EXISTS tasks ("
@@ -37,7 +36,7 @@ public class SQLiteTaskRepository implements IRepository<Task> {
                    + "status TEXT NOT NULL,"
                    + "assigned_user_id TEXT"
                    + ");";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
@@ -46,13 +45,13 @@ public class SQLiteTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Initiates a Task entity registry within the SQLite db.
+     * Initiates a Task entity registry within the SQLite db.
      * @param entity The Task implementation object.
      */
     @Override
     public void create(Task entity) {
         String sql = "INSERT INTO tasks(id, title, description, status, assigned_user_id) VALUES(?, ?, ?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, entity.getId());
             pstmt.setString(2, entity.getTitle());
@@ -66,14 +65,14 @@ public class SQLiteTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Reads a specific Task from the SQLite db using its ID.
+     * Reads a specific Task from the SQLite db using its ID.
      * @param id Tracking index of the desired Task.
      * @return Single Task reference, or null when undiscovered.
      */
     @Override
     public Task findById(String id) {
         String sql = "SELECT * FROM tasks WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -98,14 +97,14 @@ public class SQLiteTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Discovers and yields all Task forms positioned in the SQLite db.
+     * Discovers and yields all Task forms positioned in the SQLite db.
      * @return Exhaustive list collection of Tasks.
      */
     @Override
     public List<Task> findAll() {
         List<Task> tasks = new ArrayList<>();
         String sql = "SELECT * FROM tasks";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             SQLiteUserRepository userRepo = new SQLiteUserRepository();
@@ -129,13 +128,13 @@ public class SQLiteTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Re-registers an associated Task inside SQLite with incoming tweaks.
+     * Re-registers an associated Task inside SQLite with incoming tweaks.
      * @param entity Modified Task form.
      */
     @Override
     public void update(Task entity) {
         String sql = "UPDATE tasks SET title = ?, description = ?, status = ?, assigned_user_id = ? WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, entity.getTitle());
             pstmt.setString(2, entity.getDescription());
@@ -149,13 +148,13 @@ public class SQLiteTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Withdraws a given Task from the associated SQLite db using ID.
+     * Withdraws a given Task from the associated SQLite db using ID.
      * @param id The corresponding Task id string.
      */
     @Override
     public void delete(String id) {
         String sql = "DELETE FROM tasks WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             pstmt.executeUpdate();
@@ -163,4 +162,6 @@ public class SQLiteTaskRepository implements IRepository<Task> {
             System.err.println("Error deleting task: " + e.getMessage());
         }
     }
+
+    protected Connection getConnection() throws SQLException { return DriverManager.getConnection(URL); }
 }

@@ -6,27 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @class SQLiteUserRepository
- * @brief SQLite implementation of the User repository.
- * @details Implements IRepository to persist User data to a local SQLite database.
+ * SQLite implementation of the User repository.
+ * <p> Implements IRepository to persist User data to a local SQLite database.
  */
 public class SQLiteUserRepository implements IRepository<User> {
 
     /**
-     * @brief The connection string for the SQLite database.
+     * The connection string for the SQLite database.
      */
     private static final String URL = "jdbc:sqlite:projectmanager.db";
 
     /**
-     * @brief Constructor for SQLiteUserRepository.
-     * @details Ensures that the users table exists when the repository is created.
+     * Constructor for SQLiteUserRepository.
+     * <p> Ensures that the users table exists when the repository is created.
      */
     public SQLiteUserRepository() {
         createTableIfNotExists();
     }
 
     /**
-     * @brief Creates the users table if it does not already exist.
+     * Creates the users table if it does not already exist.
      */
     private void createTableIfNotExists() {
         String sql = "CREATE TABLE IF NOT EXISTS users ("
@@ -35,7 +34,7 @@ public class SQLiteUserRepository implements IRepository<User> {
                    + "email TEXT NOT NULL,"
                    + "password TEXT NOT NULL"
                    + ");";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
@@ -44,13 +43,13 @@ public class SQLiteUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Inserts a new User into the SQLite db.
+     * Inserts a new User into the SQLite db.
      * @param entity The User object to insert.
      */
     @Override
     public void create(User entity) {
         String sql = "INSERT INTO users(id, username, email, password) VALUES(?, ?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, entity.getId());
             pstmt.setString(2, entity.getUsername());
@@ -63,14 +62,14 @@ public class SQLiteUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Queries for a User by identifier from the SQLite db.
+     * Queries for a User by identifier from the SQLite db.
      * @param id The unique identifier.
      * @return The matched User, or null if missing.
      */
     @Override
     public User findById(String id) {
         String sql = "SELECT * FROM users WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -89,14 +88,14 @@ public class SQLiteUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Retrieves all Users stored in the SQLite db.
+     * Retrieves all Users stored in the SQLite db.
      * @return A list of all User entities.
      */
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
@@ -114,13 +113,13 @@ public class SQLiteUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Updates an existing User's attributes in the SQLite db.
+     * Updates an existing User's attributes in the SQLite db.
      * @param entity The User instance containing modified data.
      */
     @Override
     public void update(User entity) {
         String sql = "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, entity.getUsername());
             pstmt.setString(2, entity.getEmail());
@@ -133,13 +132,13 @@ public class SQLiteUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Evicts a User from the SQLite database by ID.
+     * Evicts a User from the SQLite database by ID.
      * @param id The ID of the User to remove.
      */
     @Override
     public void delete(String id) {
         String sql = "DELETE FROM users WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             pstmt.executeUpdate();
@@ -147,4 +146,6 @@ public class SQLiteUserRepository implements IRepository<User> {
             System.err.println("Error deleting user: " + e.getMessage());
         }
     }
+
+    protected Connection getConnection() throws SQLException { return DriverManager.getConnection(URL); }
 }

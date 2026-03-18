@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @class MySQLTaskRepository
- * @brief MySQL implementation of the Task repository.
- * @details Implements IRepository.
+ * MySQL implementation of the Task repository.
+ * <p> Implements IRepository.
  */
 public class MySQLTaskRepository implements IRepository<Task> {
 
@@ -19,7 +18,7 @@ public class MySQLTaskRepository implements IRepository<Task> {
     private static final String PASS_DB = "root";
 
     /**
-     * @brief Constructor for MySQLTaskRepository.
+     * Constructor for MySQLTaskRepository.
      */
     public MySQLTaskRepository() {
         createTableIfNotExists();
@@ -33,7 +32,7 @@ public class MySQLTaskRepository implements IRepository<Task> {
                    + "status VARCHAR(50) NOT NULL,"
                    + "assigned_user_id VARCHAR(255)"
                    + ");";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
@@ -42,13 +41,13 @@ public class MySQLTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Initiates a Task entity registry within the MySQL db.
+     * Initiates a Task entity registry within the MySQL db.
      * @param entity The Task implementation object.
      */
     @Override
     public void create(Task entity) {
         String sql = "INSERT INTO tasks(id, title, description, status, assigned_user_id) VALUES(?, ?, ?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, entity.getId());
             pstmt.setString(2, entity.getTitle());
@@ -62,14 +61,14 @@ public class MySQLTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Reads a specific Task from the MySQL db using its ID.
+     * Reads a specific Task from the MySQL db using its ID.
      * @param id Tracking index of the desired Task.
      * @return Single Task reference, or null when undiscovered.
      */
     @Override
     public Task findById(String id) {
         String sql = "SELECT * FROM tasks WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -94,14 +93,14 @@ public class MySQLTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Discovers and yields all Task forms positioned in the MySQL db.
+     * Discovers and yields all Task forms positioned in the MySQL db.
      * @return Exhaustive list collection of Tasks.
      */
     @Override
     public List<Task> findAll() {
         List<Task> tasks = new ArrayList<>();
         String sql = "SELECT * FROM tasks";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             MySQLUserRepository userRepo = new MySQLUserRepository();
@@ -125,13 +124,13 @@ public class MySQLTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Re-registers an associated Task inside MySQL with incoming tweaks.
+     * Re-registers an associated Task inside MySQL with incoming tweaks.
      * @param entity Modified Task form.
      */
     @Override
     public void update(Task entity) {
         String sql = "UPDATE tasks SET title = ?, description = ?, status = ?, assigned_user_id = ? WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, entity.getTitle());
             pstmt.setString(2, entity.getDescription());
@@ -145,13 +144,13 @@ public class MySQLTaskRepository implements IRepository<Task> {
     }
 
     /**
-     * @brief Withdraws a given Task from the associated MySQL db using ID.
+     * Withdraws a given Task from the associated MySQL db using ID.
      * @param id The corresponding Task id string.
      */
     @Override
     public void delete(String id) {
         String sql = "DELETE FROM tasks WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             pstmt.executeUpdate();
@@ -159,4 +158,6 @@ public class MySQLTaskRepository implements IRepository<Task> {
             System.err.println("Error deleting task: " + e.getMessage());
         }
     }
+
+    protected Connection getConnection() throws SQLException { return DriverManager.getConnection(URL, USER_DB, PASS_DB); }
 }

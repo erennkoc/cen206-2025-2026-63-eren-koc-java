@@ -6,26 +6,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @class SQLiteProjectRepository
- * @brief SQLite implementation of the Project repository.
- * @details Implements IRepository to persist Project entities to a local SQLite database.
+ * SQLite implementation of the Project repository.
+ * <p> Implements IRepository to persist Project entities to a local SQLite database.
  */
 public class SQLiteProjectRepository implements IRepository<Project> {
 
     /**
-     * @brief SQLite database url
+     * SQLite database url
      */
     private static final String URL = "jdbc:sqlite:projectmanager.db";
 
     /**
-     * @brief Constructor for SQLiteProjectRepository.
+     * Constructor for SQLiteProjectRepository.
      */
     public SQLiteProjectRepository() {
         createTableIfNotExists();
     }
 
     /**
-     * @brief Creates projects table.
+     * Creates projects table.
      */
     private void createTableIfNotExists() {
         String sql = "CREATE TABLE IF NOT EXISTS projects ("
@@ -38,7 +37,7 @@ public class SQLiteProjectRepository implements IRepository<Project> {
                    + "task_id TEXT,"
                    + "PRIMARY KEY (project_id, task_id)"
                    + ");";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
             stmt.execute(mappingSql);
@@ -48,13 +47,13 @@ public class SQLiteProjectRepository implements IRepository<Project> {
     }
 
     /**
-     * @brief Inserts a new Project record into the SQLite db.
+     * Inserts a new Project record into the SQLite db.
      * @param entity The Project instance to be added.
      */
     @Override
     public void create(Project entity) {
         String sql = "INSERT INTO projects(id, name, description) VALUES(?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, entity.getId());
             pstmt.setString(2, entity.getName());
@@ -87,14 +86,14 @@ public class SQLiteProjectRepository implements IRepository<Project> {
     }
 
     /**
-     * @brief Looks up a Project from the SQLite db based on ID.
+     * Looks up a Project from the SQLite db based on ID.
      * @param id The sought-after Project ID.
      * @return The distinct Project, or null if undiscovered.
      */
     @Override
     public Project findById(String id) {
         String sql = "SELECT * FROM projects WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -129,14 +128,14 @@ public class SQLiteProjectRepository implements IRepository<Project> {
     }
 
     /**
-     * @brief Retrieves the entirety of Project records from the SQLite db.
+     * Retrieves the entirety of Project records from the SQLite db.
      * @return Complete list of Project occurrences.
      */
     @Override
     public List<Project> findAll() {
         List<Project> projects = new ArrayList<>();
         String sql = "SELECT * FROM projects";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
@@ -155,13 +154,13 @@ public class SQLiteProjectRepository implements IRepository<Project> {
     }
 
     /**
-     * @brief Applies modifications to a documented Project in the SQLite db.
+     * Applies modifications to a documented Project in the SQLite db.
      * @param entity Project entity carrying current revisions.
      */
     @Override
     public void update(Project entity) {
         String sql = "UPDATE projects SET name = ?, description = ? WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, entity.getName());
             pstmt.setString(2, entity.getDescription());
@@ -175,13 +174,13 @@ public class SQLiteProjectRepository implements IRepository<Project> {
     }
 
     /**
-     * @brief Eradicates a Project from the SQLite database stream by ID.
+     * Eradicates a Project from the SQLite database stream by ID.
      * @param id Targeted Project identifier.
      */
     @Override
     public void delete(String id) {
         String sql = "DELETE FROM projects WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             pstmt.executeUpdate();
@@ -195,4 +194,6 @@ public class SQLiteProjectRepository implements IRepository<Project> {
             System.err.println("Error deleting project: " + e.getMessage());
         }
     }
+
+    protected Connection getConnection() throws SQLException { return DriverManager.getConnection(URL); }
 }

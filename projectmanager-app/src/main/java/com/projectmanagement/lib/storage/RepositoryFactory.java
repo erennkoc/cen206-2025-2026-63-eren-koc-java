@@ -5,19 +5,18 @@ import com.projectmanagement.lib.models.Task;
 import com.projectmanagement.lib.models.User;
 
 /**
- * @class RepositoryFactory
- * @brief Factory class to resolve and retrieve specific storage repositories.
- * @details Examines the current StorageConfig and supplies the correct implementation (Binary, SQLite, MySQL) for User, Project, or Task. Applies the Factory Design Pattern.
+ * Factory class to resolve and retrieve specific storage repositories.
+ * <p> Examines the current StorageConfig and supplies the correct implementation (Binary, SQLite, MySQL) for User, Project, or Task. Applies the Factory Design Pattern.
  */
 public class RepositoryFactory {
 
     /**
-     * @brief The configuration dictating which storage type to manufacture.
+     * The configuration dictating which storage type to manufacture.
      */
     private StorageConfig config;
 
     /**
-     * @brief Constructor for the RepositoryFactory.
+     * Constructor for the RepositoryFactory.
      * @param config The active storage configuration to reference during instantiation.
      */
     public RepositoryFactory(StorageConfig config) {
@@ -25,7 +24,7 @@ public class RepositoryFactory {
     }
 
     /**
-     * @brief Generates the matched IRepository for User domains.
+     * Generates the matched IRepository for User domains.
      * @return The correctly typed User repository.
      * @throws IllegalStateException If the configured storage type is unsupported.
      */
@@ -43,7 +42,7 @@ public class RepositoryFactory {
     }
 
     /**
-     * @brief Generates the matched IRepository for Project domains.
+     * Generates the matched IRepository for Project domains.
      * @return The correctly typed Project repository.
      * @throws IllegalStateException If the configured storage type is unsupported.
      */
@@ -61,7 +60,7 @@ public class RepositoryFactory {
     }
 
     /**
-     * @brief Generates the matched IRepository for Task domains.
+     * Generates the matched IRepository for Task domains.
      * @return The correctly typed Task repository.
      * @throws IllegalStateException If the configured storage type is unsupported.
      */

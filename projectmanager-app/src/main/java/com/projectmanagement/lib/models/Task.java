@@ -1,34 +1,33 @@
 package com.projectmanagement.lib.models;
 
 /**
- * @class Task
- * @brief Represents a task within a project.
- * @details Inherits from BaseEntity. Encapsulates task data such as title, status, and the assigned user.
+ * Represents a task within a project.
+ * <p> Inherits from BaseEntity. Encapsulates task data such as title, status, and the assigned user.
  */
 public class Task extends BaseEntity {
     /**
-     * @brief The title of the task.
+     * The title of the task.
      */
     private String title;
 
     /**
-     * @brief The detailed description of the task.
+     * The detailed description of the task.
      */
     private String description;
 
     /**
-     * @brief The current status of the task.
+     * The current status of the task.
      */
     private TaskStatus status;
 
     /**
-     * @brief The user assigned to complete the task.
+     * The user assigned to complete the task.
      */
     private User assignedUser;
 
     /**
-     * @brief Default constructor for Task.
-     * @details Sets the default status to TODO.
+     * Default constructor for Task.
+     * <p> Sets the default status to TODO.
      */
     public Task() {
         super();
@@ -36,7 +35,7 @@ public class Task extends BaseEntity {
     }
 
     /**
-     * @brief Parameterized constructor for Task.
+     * Parameterized constructor for Task.
      * @param id The unique identifier of the task.
      * @param title The title of the task.
      * @param description The task description.
@@ -49,7 +48,7 @@ public class Task extends BaseEntity {
     }
 
     /**
-     * @brief Gets the title of the task.
+     * Gets the title of the task.
      * @return The task title.
      */
     public String getTitle() {
@@ -57,7 +56,7 @@ public class Task extends BaseEntity {
     }
 
     /**
-     * @brief Sets the title of the task.
+     * Sets the title of the task.
      * @param title The new task title.
      */
     public void setTitle(String title) {
@@ -65,7 +64,7 @@ public class Task extends BaseEntity {
     }
 
     /**
-     * @brief Gets the description of the task.
+     * Gets the description of the task.
      * @return The task description.
      */
     public String getDescription() {
@@ -73,7 +72,7 @@ public class Task extends BaseEntity {
     }
 
     /**
-     * @brief Sets the description of the task.
+     * Sets the description of the task.
      * @param description The new task description.
      */
     public void setDescription(String description) {
@@ -81,7 +80,7 @@ public class Task extends BaseEntity {
     }
 
     /**
-     * @brief Gets the current status of the task.
+     * Gets the current status of the task.
      * @return The task status.
      */
     public TaskStatus getStatus() {
@@ -89,7 +88,7 @@ public class Task extends BaseEntity {
     }
 
     /**
-     * @brief Sets the status of the task.
+     * Sets the status of the task.
      * @param status The new task status.
      */
     public void setStatus(TaskStatus status) {
@@ -97,7 +96,7 @@ public class Task extends BaseEntity {
     }
 
     /**
-     * @brief Gets the user assigned to the task.
+     * Gets the user assigned to the task.
      * @return The assigned user, or null if unassigned.
      */
     public User getAssignedUser() {
@@ -105,7 +104,7 @@ public class Task extends BaseEntity {
     }
 
     /**
-     * @brief Assigns a user to the task.
+     * Assigns a user to the task.
      * @param assignedUser The user to be assigned to this task.
      */
     public void setAssignedUser(User assignedUser) {
@@ -113,8 +112,8 @@ public class Task extends BaseEntity {
     }
 
     /**
-     * @brief Displays the details of the task.
-     * @details Implementation of the abstract method from BaseEntity.
+     * Displays the details of the task.
+     * <p> Implementation of the abstract method from BaseEntity.
      */
     @Override
     public void displayDetails() {

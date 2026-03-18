@@ -54,6 +54,14 @@ public class ReportServiceTest {
     }
 
     @Test
+    public void testGenerateGeneralSystemReport_EmptyLists() {
+        when(mockUserService.getAllUsers()).thenReturn(new ArrayList<>());
+        when(mockProjectService.getAllProjects()).thenReturn(new ArrayList<>());
+        when(mockTaskService.getAllTasks()).thenReturn(new ArrayList<>());
+        reportService.generateGeneralSystemReport();
+    }
+
+    @Test
     public void testGenerateTaskStatusReport() {
         Task t1 = new Task("t1", "T1", "Desc");
         t1.setStatus(TaskStatus.TODO);

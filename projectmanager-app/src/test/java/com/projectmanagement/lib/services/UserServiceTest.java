@@ -64,6 +64,10 @@ public class UserServiceTest {
             userService.registerUser("id", "username", "email", ""); // Empty string
         });
 
+        assertThrows(IllegalArgumentException.class, () -> {
+            userService.registerUser("id", "username", "email", null); // null password
+        });
+
         // Verify create was NEVER called
         verify(userRepositoryMock, never()).create(any(User.class));
     }
@@ -109,6 +113,12 @@ public class UserServiceTest {
         assertNull(userService.login(null, "password"));
         assertNull(userService.login("username", null));
         assertNull(userService.login("username", ""));
+    }
+
+    @Test
+    public void testLogin_NoUsersInDb() {
+        when(userRepositoryMock.findAll()).thenReturn(null);
+        assertNull(userService.login("user", "pass"));
     }
 
     @Test

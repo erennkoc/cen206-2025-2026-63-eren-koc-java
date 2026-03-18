@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @class MySQLUserRepository
- * @brief MySQL implementation of the User repository.
- * @details Implements IRepository. Connects to a remote MySQL database for User CRUD operations.
+ * MySQL implementation of the User repository.
+ * <p> Implements IRepository. Connects to a remote MySQL database for User CRUD operations.
  */
 public class MySQLUserRepository implements IRepository<User> {
 
@@ -17,7 +16,7 @@ public class MySQLUserRepository implements IRepository<User> {
     private static final String PASS_DB = "root";
 
     /**
-     * @brief Constructor for MySQLUserRepository.
+     * Constructor for MySQLUserRepository.
      */
     public MySQLUserRepository() {
         createTableIfNotExists();
@@ -30,7 +29,7 @@ public class MySQLUserRepository implements IRepository<User> {
                    + "email VARCHAR(255) NOT NULL,"
                    + "password VARCHAR(255) NOT NULL"
                    + ");";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
@@ -39,13 +38,13 @@ public class MySQLUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Persists a novel User entity to the MySQL db.
+     * Persists a novel User entity to the MySQL db.
      * @param entity The User to save.
      */
     @Override
     public void create(User entity) {
         String sql = "INSERT INTO users(id, username, email, password) VALUES(?, ?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, entity.getId());
             pstmt.setString(2, entity.getUsername());
@@ -58,14 +57,14 @@ public class MySQLUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Searches the MySQL db for a given User ID.
+     * Searches the MySQL db for a given User ID.
      * @param id The target User identifier.
      * @return The matched User, or null if unlocated.
      */
     @Override
     public User findById(String id) {
         String sql = "SELECT * FROM users WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -84,14 +83,14 @@ public class MySQLUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Pulls all Users from the MySQL tables.
+     * Pulls all Users from the MySQL tables.
      * @return Full list of User entities.
      */
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
@@ -109,13 +108,13 @@ public class MySQLUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Merges an updated User entity into the MySQL db.
+     * Merges an updated User entity into the MySQL db.
      * @param entity User object sporting recent updates.
      */
     @Override
     public void update(User entity) {
         String sql = "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, entity.getUsername());
             pstmt.setString(2, entity.getEmail());
@@ -128,13 +127,13 @@ public class MySQLUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Executes a DELETE statement on a User in the MySQL db.
+     * Executes a DELETE statement on a User in the MySQL db.
      * @param id Target ID to drop.
      */
     @Override
     public void delete(String id) {
         String sql = "DELETE FROM users WHERE id = ?";
-        try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             pstmt.executeUpdate();
@@ -142,4 +141,6 @@ public class MySQLUserRepository implements IRepository<User> {
             System.err.println("Error deleting user (MySQL): " + e.getMessage());
         }
     }
+
+    protected Connection getConnection() throws SQLException { return DriverManager.getConnection(URL, USER_DB, PASS_DB); }
 }

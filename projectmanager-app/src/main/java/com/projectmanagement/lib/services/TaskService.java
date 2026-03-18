@@ -7,19 +7,18 @@ import com.projectmanagement.lib.storage.IRepository;
 import java.util.List;
 
 /**
- * @class TaskService
- * @brief Interfaces business constraints and operations related precisely to Tasks.
- * @details Executes core routines spanning Task Assignment, detail configuration, and Status tracking. Accepts an IRepository<Task> parameter compliant with the core Dependency Injection rule.
+ * Interfaces business constraints and operations related precisely to Tasks.
+ * <p> Executes core routines spanning Task Assignment, detail configuration, and Status tracking. Accepts an {@code IRepository<Task>} parameter compliant with the core Dependency Injection rule.
  */
 public class TaskService {
 
     /**
-     * @brief The data storage implementation explicitly for Task persistence.
+     * The data storage implementation explicitly for Task persistence.
      */
     private final IRepository<Task> taskRepository;
 
     /**
-     * @brief Formulates a TaskService requiring an explicit storage implementation.
+     * Formulates a TaskService requiring an explicit storage implementation.
      * @param taskRepository The storage backend (dependency string) connected for CRUD.
      */
     public TaskService(IRepository<Task> taskRepository) {
@@ -27,7 +26,7 @@ public class TaskService {
     }
 
     /**
-     * @brief Instantiates a blank Task form and inserts it immediately into the operational repository.
+     * Instantiates a blank Task form and inserts it immediately into the operational repository.
      * @param id The unique Task string identifier.
      * @param title Distinct name characterizing the Task objective.
      * @param description Narrative outlining the core deliverables of this Task.
@@ -43,7 +42,7 @@ public class TaskService {
     }
 
     /**
-     * @brief Allocates an established User entity onto a registered target Task.
+     * Allocates an established User entity onto a registered target Task.
      * @param taskId Key string pointing to the persistent Task.
      * @param assignedUser Complete User object structure inheriting responsibility for this Task.
      * @throws IllegalArgumentException Triggers when either parameter is essentially unallocated or empty.
@@ -64,7 +63,7 @@ public class TaskService {
     }
 
     /**
-     * @brief Pushes a status transition onto an existing Task.
+     * Pushes a status transition onto an existing Task.
      * @param taskId Reference string locating the Task in progress.
      * @param newStatus Enum value directing the new tracking state (e.g., TODO, IN_PROGRESS, DONE).
      * @throws IllegalArgumentException Returns if Task ID or Target Status params are completely unbound.
@@ -85,7 +84,7 @@ public class TaskService {
     }
 
     /**
-     * @brief Retrieves all registered tasks.
+     * Retrieves all registered tasks.
      * @return A list of all stored Task objects.
      */
     public List<Task> getAllTasks() {

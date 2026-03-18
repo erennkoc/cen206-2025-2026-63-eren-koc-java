@@ -17,9 +17,8 @@ import org.jline.utils.NonBlockingReader;
 import java.util.Scanner;
 import java.util.UUID;
 /**
- * @class Main
- * @brief Main entry point for the Project Management Console UI.
- * @details Implements a standard console-based interface using Scanner.
+ * Main entry point for the Project Management Console UI.
+ * <p> Implements a standard console-based interface using Scanner.
  */
 public class Main {
 

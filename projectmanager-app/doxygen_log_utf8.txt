@@ -1,0 +1,420 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< com.eren.projectmanager:projectmanager-app >-------------
+[INFO] Building projectmanager-app 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> javadoc:3.12.0:javadoc (default-cli) > generate-sources @ projectmanager-app >>>
+[INFO] 
+[INFO] --- jacoco:0.8.7:prepare-agent (default) @ projectmanager-app ---
+[INFO] argLine set to -javaagent:C:\\Users\\EXCALIBUR\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.7\\org.jacoco.agent-0.8.7-runtime.jar=destfile=C:\\Users\\EXCALIBUR\\Desktop\\oop_proje\\cen206-homework-eren-koc-java\\projectmanager-app\\target\\jacoco.exec
+[INFO] 
+[INFO] <<< javadoc:3.12.0:javadoc (default-cli) < generate-sources @ projectmanager-app <<<
+[INFO] 
+[INFO] 
+[INFO] --- javadoc:3.12.0:javadoc (default-cli) @ projectmanager-app ---
+[INFO] 
+Loading source files for package com.projectmanagement.app...
+Loading source files for package com.projectmanagement.lib.models...
+Loading source files for package com.projectmanagement.lib.services...
+Loading source files for package com.projectmanagement.lib.storage...
+Constructing Javadoc information...
+Standard Doclet version 1.8.0_472
+Building tree for all the packages and classes...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\app\Main.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\BaseEntity.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\Project.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\Task.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\TaskStatus.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\User.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\services\ProjectService.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\services\TaskService.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\services\UserService.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\BinaryProjectRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\BinaryTaskRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\BinaryUserRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\IRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\MySQLProjectRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\MySQLTaskRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\MySQLUserRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\RepositoryFactory.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\SQLiteProjectRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\SQLiteTaskRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\SQLiteUserRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\StorageConfig.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\StorageType.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\overview-frame.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\app\package-frame.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\app\package-summary.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\app\package-tree.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\package-frame.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\package-summary.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\package-tree.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\services\package-frame.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\services\package-summary.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\services\package-tree.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\package-frame.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\package-summary.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\package-tree.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\constant-values.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\app\class-use\Main.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\class-use\User.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\class-use\TaskStatus.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\class-use\Task.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\class-use\Project.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\class-use\BaseEntity.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\services\class-use\UserService.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\services\class-use\TaskService.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\services\class-use\ProjectService.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\StorageType.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\StorageConfig.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\SQLiteUserRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\SQLiteTaskRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\SQLiteProjectRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\RepositoryFactory.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\MySQLUserRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\MySQLTaskRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\MySQLProjectRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\IRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\BinaryUserRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\BinaryTaskRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\class-use\BinaryProjectRepository.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\app\package-use.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\models\package-use.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\services\package-use.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\com\projectmanagement\lib\storage\package-use.html...
+Building index for all the packages and classes...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\overview-tree.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\index-all.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\deprecated-list.html...
+Building index for all classes...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\allclasses-frame.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\allclasses-noframe.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\index.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\overview-summary.html...
+Generating C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs\help-doc.html...
+100 errors
+1 warning
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.926 s
+[INFO] Finished at: 2026-03-12T14:07:34+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-javadoc-plugin:3.12.0:javadoc (default-cli) on project projectmanager-app: An error has occurred in Javadoc report generation: 
+[ERROR] Exit code: 1
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:64: error: unknown tag: brief
+[ERROR]      * @brief Primary execution bootstrap method.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:88: error: unknown tag: brief
+[ERROR]      * @brief Reinitializes logical services according to the current StorageConfig enum.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:98: error: unknown tag: brief
+[ERROR]      * @brief Handles user-facing input queries reliably through JLine's LineReader.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:108: error: unknown tag: brief
+[ERROR]      * @brief Handles hidden password typing logic securely.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:118: error: unknown tag: brief
+[ERROR]      * @brief Evaluates an interactive menu leveraging hardware interrupts (Keys: Arrow Up, Arrow Down, Enter).
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:176: error: unknown tag: brief
+[ERROR]      * @brief Primary gateway processing Unauthenticated user requests.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:207: error: unknown tag: brief
+[ERROR]      * @brief Executes logic enabling a User credentials check.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:208: error: unknown tag: details
+[ERROR]      * @details Connects input requests against the localized UserService instance.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:226: error: unknown tag: brief
+[ERROR]      * @brief Captures payload strings required to populate a new User identity.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:244: error: unknown tag: brief
+[ERROR]      * @brief Interfaces through another interactive component facilitating a seamless StorageType swap.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:261: error: unknown tag: brief
+[ERROR]      * @brief Generates actionable management components allocated to a validated User.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:300: error: unknown tag: brief
+[ERROR]      * @brief Halts the Thread briefly simulating a 'Wait' to view prompts.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:22: error: unknown tag: class
+[ERROR]  * @class Main
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:23: error: unknown tag: brief
+[ERROR]  * @brief Main entry point for the Project Management Console UI.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:24: error: unknown tag: details
+[ERROR]  * @details Implements an interactive JLine 3 terminal interface leveraging raw terminal interaction to process arrow-key navigation, bypassing the java.util.Scanner entirely. Coordinates User Authentication, Service dispatching, and contextual routing like the Dashboard and storage swaps.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:54: error: unknown tag: brief
+[ERROR]      * @brief Currently authenticated user token/session.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:44: error: unknown tag: brief
+[ERROR]      * @brief Dedicated service governing Projects.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:34: error: unknown tag: brief
+[ERROR]      * @brief Persistent Factory dictating current repository generation.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:29: error: unknown tag: brief
+[ERROR]      * @brief Context setting to orient storage location.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:49: error: unknown tag: brief
+[ERROR]      * @brief Dedicated service governing Tasks.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:59: error: unknown tag: brief
+[ERROR]      * @brief Native JLine 3 terminal instance interface.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\app\Main.java:39: error: unknown tag: brief
+[ERROR]      * @brief Dedicated service governing Users.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:39: error: unknown tag: brief
+[ERROR]      * @brief Gets the unique identifier of the entity.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:47: error: unknown tag: brief
+[ERROR]      * @brief Sets the unique identifier of the entity.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:55: error: unknown tag: brief
+[ERROR]      * @brief Gets the creation date of the entity.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:63: error: unknown tag: brief
+[ERROR]      * @brief Sets the creation date of the entity.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:71: error: unknown tag: brief
+[ERROR]      * @brief Abstract method to display entity details.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:72: error: unknown tag: details
+[ERROR]      * @details Demonstrates Polymorphism. Each subclass must implement this method to provide specific details.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:6: error: unknown tag: class
+[ERROR]  * @class BaseEntity
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:7: error: unknown tag: brief
+[ERROR]  * @brief Abstract base class for all domain models.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:8: error: unknown tag: details
+[ERROR]  * @details Applies the Abstraction and Inheritance principles of OOP. Provides common properties like id and createdDate for all entities.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:17: error: unknown tag: brief
+[ERROR]      * @brief The date and time when the entity was created.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:12: error: unknown tag: brief
+[ERROR]      * @brief Unique identifier for the entity.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:22: error: unknown tag: brief
+[ERROR]      * @brief Default constructor for BaseEntity.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:23: error: unknown tag: details
+[ERROR]      * @details Initializes the createdDate to the current date and time.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\BaseEntity.java:30: error: unknown tag: brief
+[ERROR]      * @brief Parameterized constructor for BaseEntity.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:50: error: unknown tag: brief
+[ERROR]      * @brief Gets the name of the project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:58: error: unknown tag: brief
+[ERROR]      * @brief Sets the name of the project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:66: error: unknown tag: brief
+[ERROR]      * @brief Gets the description of the project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:74: error: unknown tag: brief
+[ERROR]      * @brief Sets the description of the project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:82: error: unknown tag: brief
+[ERROR]      * @brief Gets the list of tasks in the project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:90: error: unknown tag: brief
+[ERROR]      * @brief Sets the list of tasks in the project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:98: error: unknown tag: brief
+[ERROR]      * @brief Adds a task to the project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:106: error: unknown tag: brief
+[ERROR]      * @brief Removes a task from the project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:114: error: unknown tag: brief
+[ERROR]      * @brief Displays the details of the project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:115: error: unknown tag: details
+[ERROR]      * @details Implementation of the abstract method from BaseEntity. Shows polymorphism.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:7: error: unknown tag: class
+[ERROR]  * @class Project
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:8: error: unknown tag: brief
+[ERROR]  * @brief Represents a project in the system.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:9: error: unknown tag: details
+[ERROR]  * @details Inherits from BaseEntity. Contains a collection of tasks and assigned users, demonstrating object relationships and encapsulation.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:18: error: unknown tag: brief
+[ERROR]      * @brief A brief description of the project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:13: error: unknown tag: brief
+[ERROR]      * @brief The name of the project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:23: error: unknown tag: brief
+[ERROR]      * @brief The list of tasks associated with this project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:28: error: unknown tag: brief
+[ERROR]      * @brief Default constructor for Project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:29: error: unknown tag: details
+[ERROR]      * @details Initializes the tasks list.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Project.java:37: error: unknown tag: brief
+[ERROR]      * @brief Parameterized constructor for Project.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:52: error: unknown tag: brief
+[ERROR]      * @brief Gets the title of the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:60: error: unknown tag: brief
+[ERROR]      * @brief Sets the title of the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:68: error: unknown tag: brief
+[ERROR]      * @brief Gets the description of the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:76: error: unknown tag: brief
+[ERROR]      * @brief Sets the description of the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:84: error: unknown tag: brief
+[ERROR]      * @brief Gets the current status of the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:92: error: unknown tag: brief
+[ERROR]      * @brief Sets the status of the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:100: error: unknown tag: brief
+[ERROR]      * @brief Gets the user assigned to the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:108: error: unknown tag: brief
+[ERROR]      * @brief Assigns a user to the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:116: error: unknown tag: brief
+[ERROR]      * @brief Displays the details of the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:117: error: unknown tag: details
+[ERROR]      * @details Implementation of the abstract method from BaseEntity.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:4: error: unknown tag: class
+[ERROR]  * @class Task
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:5: error: unknown tag: brief
+[ERROR]  * @brief Represents a task within a project.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:6: error: unknown tag: details
+[ERROR]  * @details Inherits from BaseEntity. Encapsulates task data such as title, status, and the assigned user.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:25: error: unknown tag: brief
+[ERROR]      * @brief The user assigned to complete the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:15: error: unknown tag: brief
+[ERROR]      * @brief The detailed description of the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:20: error: unknown tag: brief
+[ERROR]      * @brief The current status of the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:10: error: unknown tag: brief
+[ERROR]      * @brief The title of the task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:30: error: unknown tag: brief
+[ERROR]      * @brief Default constructor for Task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:31: error: unknown tag: details
+[ERROR]      * @details Sets the default status to TODO.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\Task.java:39: error: unknown tag: brief
+[ERROR]      * @brief Parameterized constructor for Task.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\TaskStatus.java:4: error: unknown tag: enum
+[ERROR]  * @enum TaskStatus
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\TaskStatus.java:5: error: unknown tag: brief
+[ERROR]  * @brief Represents the current status of a task.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\TaskStatus.java:19: error: unknown tag: brief
+[ERROR]      * @brief Indicates that the task has been completed.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\TaskStatus.java:14: error: unknown tag: brief
+[ERROR]      * @brief Indicates that the task is currently being worked on.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\TaskStatus.java:9: error: unknown tag: brief
+[ERROR]      * @brief Indicates that the task has not been started yet.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:46: error: unknown tag: brief
+[ERROR]      * @brief Gets the username.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:54: error: unknown tag: brief
+[ERROR]      * @brief Sets the username.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:62: error: unknown tag: brief
+[ERROR]      * @brief Gets the email address.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:70: error: unknown tag: brief
+[ERROR]      * @brief Sets the email address.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:78: error: unknown tag: brief
+[ERROR]      * @brief Gets the user's password.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:86: error: unknown tag: brief
+[ERROR]      * @brief Sets the user's password.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:94: error: unknown tag: brief
+[ERROR]      * @brief Displays the details of the user.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:95: error: unknown tag: details
+[ERROR]      * @details Implementation of the abstract method from BaseEntity.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:4: error: unknown tag: class
+[ERROR]  * @class User
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:5: error: unknown tag: brief
+[ERROR]  * @brief Represents a user in the project management system.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:6: error: unknown tag: details
+[ERROR]  * @details Inherits from BaseEntity and encapsulates user-specific data like username and email.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:15: error: unknown tag: brief
+[ERROR]      * @brief The email address of the user.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:20: error: unknown tag: brief
+[ERROR]      * @brief The password of the user.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:10: error: unknown tag: brief
+[ERROR]      * @brief The username of the user.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:25: error: unknown tag: brief
+[ERROR]      * @brief Default constructor for User.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\models\User.java:32: error: unknown tag: brief
+[ERROR]      * @brief Parameterized constructor for User.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\services\ProjectService.java:29: error: unknown tag: brief
+[ERROR]      * @brief Establishes a new Project and commits it to the designated storage backend.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\services\ProjectService.java:45: error: unknown tag: brief
+[ERROR]      * @brief Appends a Task to a persistent Project based on the Project's id.
+[ERROR]        ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\services\ProjectService.java:8: error: unknown tag: class
+[ERROR]  * @class ProjectService
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\services\ProjectService.java:9: error: unknown tag: brief
+[ERROR]  * @brief Manages business operations and logic connected to Projects.
+[ERROR]    ^
+[ERROR] C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\src\main\java\com\projectmanagement\lib\storage\StorageConfig.java:19: warning: no @param for defaultStorage
+[ERROR]     public StorageConfig(StorageType defaultStorage) {
+[ERROR]            ^
+[ERROR] Command line was: cmd.exe /X /D /C ""C:\Program Files\Eclipse Adoptium\jdk-8.0.472.8-hotspot\jre\..\bin\javadoc.exe" -J-Duser.language= -J-Duser.country= @options @packages"
+[ERROR] 
+[ERROR] Refer to the generated Javadoc files in 'C:\Users\EXCALIBUR\Desktop\oop_proje\cen206-homework-eren-koc-java\projectmanager-app\target\reports\apidocs' dir.
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

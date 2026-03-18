@@ -8,20 +8,19 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
- * @class UserService
- * @brief Provides business logic and validation for User operations.
- * @details Implements functionalities such as User Registration, Login and Password Hashing using SHA-256. Follows the Dependency Injection principle by accepting an IRepository instance.
+ * Provides business logic and validation for User operations.
+ * <p> Implements functionalities such as User Registration, Login and Password Hashing using SHA-256. Follows the Dependency Injection principle by accepting an IRepository instance.
  */
 public class UserService {
 
     /**
-     * @brief The User repository used for data persistence.
-     * @details Abstracted via IRepository to allow flexible storage backends.
+     * The User repository used for data persistence.
+     * <p> Abstracted via IRepository to allow flexible storage backends.
      */
     private final IRepository<User> userRepository;
 
     /**
-     * @brief Constructs a new UserService with the designated User repository.
+     * Constructs a new UserService with the designated User repository.
      * @param userRepository The storage implementation (dependency) to be injected.
      */
     public UserService(IRepository<User> userRepository) {
@@ -29,8 +28,8 @@ public class UserService {
     }
 
     /**
-     * @brief Registers a new user in the system.
-     * @details Securely hashes the provided password before storing the User object.
+     * Registers a new user in the system.
+     * <p> Securely hashes the provided password before storing the User object.
      * @param id The unique identifier for the new user.
      * @param username The desired username.
      * @param email The user's email address.
@@ -48,8 +47,8 @@ public class UserService {
     }
 
     /**
-     * @brief Authenticates a user attempting to log in.
-     * @details Retrieves all active users and verifies if the username and securely hashed password match a system record.
+     * Authenticates a user attempting to log in.
+     * <p> Retrieves all active users and verifies if the username and securely hashed password match a system record.
      * @param username The username attempting login.
      * @param plainPassword The unencrypted password provided during login.
      * @return The authenticated User object if credentials are correct, null otherwise.
@@ -75,7 +74,7 @@ public class UserService {
     }
 
     /**
-     * @brief Retrieves all registered users from the repository.
+     * Retrieves all registered users from the repository.
      * @return List of all User instances in storage.
      */
     public List<User> getAllUsers() {
@@ -83,8 +82,8 @@ public class UserService {
     }
 
     /**
-     * @brief Utility method to securely hash a plain text password.
-     * @details Implements the "Data Security" constraint using the SHA-256 cryptographic hash function.
+     * Utility method to securely hash a plain text password.
+     * <p> Implements the "Data Security" constraint using the SHA-256 cryptographic hash function.
      * @param password The plaintext string to encompass via hashing.
      * @return The hexadecimal string representation of the hashed payload.
      * @throws RuntimeException If the underlying JVM lacks the SHA-256 algorithm.
@@ -100,7 +99,7 @@ public class UserService {
     }
 
     /**
-     * @brief Helper function to convert a byte array to a hex string.
+     * Helper function to convert a byte array to a hex string.
      * @param hash The byte array returned from MessageDigest.
      * @return The formatted hexadecimal String.
      */

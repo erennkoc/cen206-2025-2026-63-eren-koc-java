@@ -69,8 +69,39 @@ class BinaryRepositoryTest {
         
         List<Task> all = taskRepo.findAll();
         assertFalse(all.isEmpty());
-        
         taskRepo.delete("t-b1");
         assertNull(taskRepo.findById("t-b1"));
+    }
+
+    @Test
+    void testFileExceptions() throws Exception {
+        java.nio.file.Path userFile = java.nio.file.Paths.get("users.dat");
+        java.nio.file.Path projFile = java.nio.file.Paths.get("projects.dat");
+        java.nio.file.Path taskFile = java.nio.file.Paths.get("tasks.dat");
+
+        // Create corrupt files to trigger Exception during readObject()
+        java.nio.file.Files.write(userFile, "corrupted_data".getBytes());
+        java.nio.file.Files.write(projFile, "corrupted_data".getBytes());
+        java.nio.file.Files.write(taskFile, "corrupted_data".getBytes());
+        userRepo.findAll();
+        projectRepo.findAll();
+        taskRepo.findAll();
+
+        // Delete and create directories with the same name to cause IOException on FileOutputStream
+        java.nio.file.Files.deleteIfExists(userFile);
+        java.nio.file.Files.createDirectory(userFile);
+        java.nio.file.Files.deleteIfExists(projFile);
+        java.nio.file.Files.createDirectory(projFile);
+        java.nio.file.Files.deleteIfExists(taskFile);
+        java.nio.file.Files.createDirectory(taskFile);
+
+        userRepo.create(new User("id", "u", "e", "p"));
+        projectRepo.create(new Project("id", "p", "d"));
+        taskRepo.create(new Task("id", "t", "t"));
+
+        // Cleanup the directories so other tests can pass
+        java.nio.file.Files.deleteIfExists(userFile);
+        java.nio.file.Files.deleteIfExists(projFile);
+        java.nio.file.Files.deleteIfExists(taskFile);
     }
 }

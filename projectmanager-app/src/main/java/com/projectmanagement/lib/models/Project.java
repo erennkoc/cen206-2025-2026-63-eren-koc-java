@@ -4,29 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @class Project
- * @brief Represents a project in the system.
- * @details Inherits from BaseEntity. Contains a collection of tasks and assigned users, demonstrating object relationships and encapsulation.
+ * Represents a project in the system.
+ * <p> Inherits from BaseEntity. Contains a collection of tasks and assigned users, demonstrating object relationships and encapsulation.
  */
 public class Project extends BaseEntity {
     /**
-     * @brief The name of the project.
+     * The name of the project.
      */
     private String name;
 
     /**
-     * @brief A brief description of the project.
+     * A brief description of the project.
      */
     private String description;
 
     /**
-     * @brief The list of tasks associated with this project.
+     * The list of tasks associated with this project.
      */
     private List<Task> tasks;
 
     /**
-     * @brief Default constructor for Project.
-     * @details Initializes the tasks list.
+     * Default constructor for Project.
+     * <p> Initializes the tasks list.
      */
     public Project() {
         super();
@@ -34,7 +33,7 @@ public class Project extends BaseEntity {
     }
 
     /**
-     * @brief Parameterized constructor for Project.
+     * Parameterized constructor for Project.
      * @param id The unique identifier for the project.
      * @param name The name of the project.
      * @param description The description of the project.
@@ -47,7 +46,7 @@ public class Project extends BaseEntity {
     }
 
     /**
-     * @brief Gets the name of the project.
+     * Gets the name of the project.
      * @return The project name.
      */
     public String getName() {
@@ -55,7 +54,7 @@ public class Project extends BaseEntity {
     }
 
     /**
-     * @brief Sets the name of the project.
+     * Sets the name of the project.
      * @param name The new project name.
      */
     public void setName(String name) {
@@ -63,7 +62,7 @@ public class Project extends BaseEntity {
     }
 
     /**
-     * @brief Gets the description of the project.
+     * Gets the description of the project.
      * @return The project description.
      */
     public String getDescription() {
@@ -71,7 +70,7 @@ public class Project extends BaseEntity {
     }
 
     /**
-     * @brief Sets the description of the project.
+     * Sets the description of the project.
      * @param description The new project description.
      */
     public void setDescription(String description) {
@@ -79,7 +78,7 @@ public class Project extends BaseEntity {
     }
 
     /**
-     * @brief Gets the list of tasks in the project.
+     * Gets the list of tasks in the project.
      * @return The list of tasks.
      */
     public List<Task> getTasks() {
@@ -87,7 +86,7 @@ public class Project extends BaseEntity {
     }
 
     /**
-     * @brief Sets the list of tasks in the project.
+     * Sets the list of tasks in the project.
      * @param tasks The new list of tasks.
      */
     public void setTasks(List<Task> tasks) {
@@ -95,7 +94,7 @@ public class Project extends BaseEntity {
     }
 
     /**
-     * @brief Adds a task to the project.
+     * Adds a task to the project.
      * @param task The task to add.
      */
     public void addTask(Task task) {
@@ -103,7 +102,7 @@ public class Project extends BaseEntity {
     }
 
     /**
-     * @brief Removes a task from the project.
+     * Removes a task from the project.
      * @param task The task to remove.
      */
     public void removeTask(Task task) {
@@ -111,8 +110,8 @@ public class Project extends BaseEntity {
     }
 
     /**
-     * @brief Displays the details of the project.
-     * @details Implementation of the abstract method from BaseEntity. Shows polymorphism.
+     * Displays the details of the project.
+     * <p> Implementation of the abstract method from BaseEntity. Shows polymorphism.
      */
     @Override
     public void displayDetails() {

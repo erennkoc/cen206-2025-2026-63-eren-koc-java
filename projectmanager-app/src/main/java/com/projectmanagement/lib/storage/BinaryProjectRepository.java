@@ -6,19 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @class BinaryProjectRepository
- * @brief Binary File I/O implementation of the Project repository.
- * @details Implements IRepository to persist Project entities to local binary files.
+ * Binary File I/O implementation of the Project repository.
+ * <p> Implements IRepository to persist Project entities to local binary files.
  */
 public class BinaryProjectRepository implements IRepository<Project> {
 
     /**
-     * @brief The file path where project data is serialized.
+     * The file path where project data is serialized.
      */
     private final String FILE_PATH = "projects.dat";
 
     /**
-     * @brief Loads project list from the binary file.
+     * Loads project list from the binary file.
      * @return A list of projects.
      */
     @SuppressWarnings("unchecked")
@@ -27,7 +26,8 @@ public class BinaryProjectRepository implements IRepository<Project> {
         if (!file.exists()) {
             return new ArrayList<>();
         }
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+        try (FileInputStream fis = new FileInputStream(file);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
             return (List<Project>) ois.readObject();
         } catch (Exception e) {
             return new ArrayList<>();
@@ -35,7 +35,7 @@ public class BinaryProjectRepository implements IRepository<Project> {
     }
 
     /**
-     * @brief Saves the given project list to the binary file.
+     * Saves the given project list to the binary file.
      * @param projects The list of projects to be saved.
      */
     private void saveToFile(List<Project> projects) {
@@ -47,7 +47,7 @@ public class BinaryProjectRepository implements IRepository<Project> {
     }
 
     /**
-     * @brief Writes a new Project entity into the binary file.
+     * Writes a new Project entity into the binary file.
      * @param entity The Project instance to log.
      */
     @Override
@@ -58,7 +58,7 @@ public class BinaryProjectRepository implements IRepository<Project> {
     }
 
     /**
-     * @brief Reads a Project by ID from the binary file stream.
+     * Reads a Project by ID from the binary file stream.
      * @param id The sought-after Project ID.
      * @return The Project object, or null on failure.
      */
@@ -74,7 +74,7 @@ public class BinaryProjectRepository implements IRepository<Project> {
     }
 
     /**
-     * @brief Loads all stored Project entries from binary serialization.
+     * Loads all stored Project entries from binary serialization.
      * @return Complete list of documented Projects.
      */
     @Override
@@ -83,7 +83,7 @@ public class BinaryProjectRepository implements IRepository<Project> {
     }
 
     /**
-     * @brief Replaces an existing Project record in the binary file with new details.
+     * Replaces an existing Project record in the binary file with new details.
      * @param entity Modified Project object.
      */
     @Override
@@ -99,7 +99,7 @@ public class BinaryProjectRepository implements IRepository<Project> {
     }
 
     /**
-     * @brief Eliminates a Project by ID from the binary data store.
+     * Eliminates a Project by ID from the binary data store.
      * @param id Distinct identifier of the target Project.
      */
     @Override

@@ -6,19 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @class BinaryUserRepository
- * @brief Binary File I/O implementation of the User repository.
- * @details Implements IRepository. Handles CRUD operations for User entities using a Binary File.
+ * Binary File I/O implementation of the User repository.
+ * <p> Implements IRepository. Handles CRUD operations for User entities using a Binary File.
  */
 public class BinaryUserRepository implements IRepository<User> {
 
     /**
-     * @brief The file path where user data is serialized.
+     * The file path where user data is serialized.
      */
     private final String FILE_PATH = "users.dat";
 
     /**
-     * @brief Loads user list from the binary file.
+     * Loads user list from the binary file.
      * @return A list of users.
      */
     @SuppressWarnings("unchecked")
@@ -27,7 +26,8 @@ public class BinaryUserRepository implements IRepository<User> {
         if (!file.exists()) {
             return new ArrayList<>();
         }
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+        try (FileInputStream fis = new FileInputStream(file);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
             return (List<User>) ois.readObject();
         } catch (Exception e) {
             return new ArrayList<>();
@@ -35,7 +35,7 @@ public class BinaryUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Saves the given user list to the binary file.
+     * Saves the given user list to the binary file.
      * @param users The list of users to be saved.
      */
     private void saveToFile(List<User> users) {
@@ -47,7 +47,7 @@ public class BinaryUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Creates a new User record in the binary file.
+     * Creates a new User record in the binary file.
      * @param entity The User object to save.
      */
     @Override
@@ -58,7 +58,7 @@ public class BinaryUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Finds a User by corresponding ID.
+     * Finds a User by corresponding ID.
      * @param id The unique identifier.
      * @return The matched User, or null if not found.
      */
@@ -74,7 +74,7 @@ public class BinaryUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Retrieves a roster of all Users from the binary file.
+     * Retrieves a roster of all Users from the binary file.
      * @return List of all stored User entities.
      */
     @Override
@@ -83,7 +83,7 @@ public class BinaryUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Overwrites an existing User's data in the binary file.
+     * Overwrites an existing User's data in the binary file.
      * @param entity The updated User instance containing changes.
      */
     @Override
@@ -99,7 +99,7 @@ public class BinaryUserRepository implements IRepository<User> {
     }
 
     /**
-     * @brief Purges a User from the binary storage system by ID.
+     * Purges a User from the binary storage system by ID.
      * @param id The ID of the User to delete.
      */
     @Override
