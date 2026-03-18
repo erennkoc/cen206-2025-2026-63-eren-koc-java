@@ -75,6 +75,14 @@ public class UserService {
     }
 
     /**
+     * @brief Retrieves all registered users from the repository.
+     * @return List of all User instances in storage.
+     */
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    /**
      * @brief Utility method to securely hash a plain text password.
      * @details Implements the "Data Security" constraint using the SHA-256 cryptographic hash function.
      * @param password The plaintext string to encompass via hashing.

@@ -4,6 +4,7 @@ import com.projectmanagement.lib.models.Task;
 import com.projectmanagement.lib.models.TaskStatus;
 import com.projectmanagement.lib.models.User;
 import com.projectmanagement.lib.storage.IRepository;
+import java.util.List;
 
 /**
  * @class TaskService
@@ -81,5 +82,13 @@ public class TaskService {
         } else {
              throw new IllegalArgumentException("Could not identify the selected Task.");
         }
+    }
+
+    /**
+     * @brief Retrieves all registered tasks.
+     * @return A list of all stored Task objects.
+     */
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll();
     }
 }

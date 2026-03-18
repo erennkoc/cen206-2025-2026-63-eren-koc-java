@@ -85,4 +85,13 @@ public class ProjectServiceTest {
         
         verify(projectRepositoryMock, never()).update(any(Project.class));
     }
+
+    @Test
+    public void testGetAllProjects() {
+        java.util.List<Project> mockList = java.util.Arrays.asList(new Project("proj-1", "T", "D"));
+        when(projectRepositoryMock.findAll()).thenReturn(mockList);
+        java.util.List<Project> result = projectService.getAllProjects();
+        assertEquals(1, result.size());
+        verify(projectRepositoryMock, times(1)).findAll();
+    }
 }

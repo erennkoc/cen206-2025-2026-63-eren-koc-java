@@ -47,10 +47,10 @@ echo Change directory to projectmanager-app
 cd projectmanager-app
 
 echo Generate ReportGenerator HTML Report
-call "%USERPROFILE%\.dotnet\tools\reportgenerator.exe" "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Html
+call reportgenerator "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Html
 
 echo Generate ReportGenerator Badges
-call "%USERPROFILE%\.dotnet\tools\reportgenerator.exe" "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Badges
+call reportgenerator "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Badges
 
 echo Display information about the binary file
 echo Our Binary is a Single Jar With Dependencies. You Do Not Need to Compress It.

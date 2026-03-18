@@ -119,4 +119,13 @@ public class TaskServiceTest {
 
         verify(taskRepositoryMock, never()).update(any(Task.class));
     }
+
+    @Test
+    public void testGetAllTasks() {
+        java.util.List<Task> mockList = java.util.Arrays.asList(new Task("task-1", "T", "D"));
+        when(taskRepositoryMock.findAll()).thenReturn(mockList);
+        java.util.List<Task> result = taskService.getAllTasks();
+        assertEquals(1, result.size());
+        verify(taskRepositoryMock, times(1)).findAll();
+    }
 }

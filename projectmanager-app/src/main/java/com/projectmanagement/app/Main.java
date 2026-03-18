@@ -7,6 +7,13 @@ import com.projectmanagement.lib.services.UserService;
 import com.projectmanagement.lib.storage.RepositoryFactory;
 import com.projectmanagement.lib.storage.StorageConfig;
 import com.projectmanagement.lib.storage.StorageType;
+import com.projectmanagement.lib.services.ReportService;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
+import org.jline.terminal.Attributes;
+import org.jline.utils.InfoCmp.Capability;
+import org.jline.utils.NonBlockingReader;
+
 import java.util.Scanner;
 import java.util.UUID;
 /**
@@ -21,12 +28,20 @@ public class Main {
     private static UserService userService = new UserService(repoFactory.getUserRepository());
     private static ProjectService projectService = new ProjectService(repoFactory.getProjectRepository());
     private static TaskService taskService = new TaskService(repoFactory.getTaskRepository());
+    private static ReportService reportService = new ReportService(projectService, taskService, userService);
     
     private static User loggedInUser = null;
     private static boolean isGuest = false;
     private static Scanner scanner = new Scanner(System.in);
+    private static Terminal terminal;
 
     public static void main(String[] args) {
+        try {
+            terminal = TerminalBuilder.builder().jna(true).system(true).build();
+        } catch (Exception e) {
+            terminal = null;
+        }
+
         boolean appRunning = true;
         while (appRunning) {
             if (loggedInUser == null && !isGuest) {
@@ -44,6 +59,7 @@ public class Main {
         userService = new UserService(repoFactory.getUserRepository());
         projectService = new ProjectService(repoFactory.getProjectRepository());
         taskService = new TaskService(repoFactory.getTaskRepository());
+        reportService = new ReportService(projectService, taskService, userService);
     }
 
     private static String askInput(String prompt) {
@@ -57,6 +73,61 @@ public class Main {
     }
 
     private static int interactiveMenu(String title, String[] options) {
+        if (terminal == null || terminal.getType().equals(Terminal.TYPE_DUMB) || terminal.getType().equals(Terminal.TYPE_DUMB_COLOR)) {
+            return fallbackInteractiveMenu(title, options);
+        }
+        
+        try {
+            Attributes prevAttrs = terminal.enterRawMode();
+            NonBlockingReader reader = terminal.reader();
+            
+            int selectedIndex = 0;
+            while (true) {
+                terminal.puts(Capability.clear_screen);
+                terminal.writer().println("=====================================\r");
+                terminal.writer().println("   " + title + "\r");
+                terminal.writer().println("=====================================\r");
+                terminal.writer().println("Use Arrow Keys or [W=Up, S=Down]. Enter to select.\r");
+                terminal.writer().println("\r");
+                
+                for (int i = 0; i < options.length; i++) {
+                    if (i == selectedIndex) {
+                        terminal.writer().println(" -> " + options[i] + "\r");
+                    } else {
+                        terminal.writer().println("    " + options[i] + "\r");
+                    }
+                }
+                terminal.writer().flush();
+                
+                int c = reader.read();
+                if (c == 27) { // ESC sequence
+                    int next = reader.read(50L); 
+                    if (next == 91) { // [
+                        int arrow = reader.read(50L);
+                        if (arrow == 65) { // Up
+                            selectedIndex = (selectedIndex - 1 + options.length) % options.length;
+                        } else if (arrow == 66) { // Down
+                            selectedIndex = (selectedIndex + 1) % options.length;
+                        }
+                    }
+                } else if (c == 'w' || c == 'W') {
+                    selectedIndex = (selectedIndex - 1 + options.length) % options.length;
+                } else if (c == 's' || c == 'S') {
+                    selectedIndex = (selectedIndex + 1) % options.length;
+                } else if (c == 13 || c == 10) { // Enter
+                    terminal.setAttributes(prevAttrs);
+                    // clear screen before exiting so the next output is clean
+                    terminal.puts(Capability.clear_screen);
+                    terminal.writer().flush();
+                    return selectedIndex;
+                }
+            }
+        } catch (Exception e) {
+            return fallbackInteractiveMenu(title, options);
+        }
+    }
+
+    private static int fallbackInteractiveMenu(String title, String[] options) {
         while (true) {
             System.out.println("\n=====================================");
             System.out.println("   " + title);
@@ -201,16 +272,35 @@ public class Main {
         while (!back) {
             String[] options = {
                 "Create Project",
-                "Manage Projects",
+                "View All Projects",
                 "Back to Main Menu"
             };
             int selection = interactiveMenu("PROJECT SETUP", options);
             switch (selection) {
                 case 0:
-                    System.out.println("Action: [Create Project]..."); pause();
+                    System.out.println("\n--- Create New Project ---");
+                    String pName = askInput("Project Name: ");
+                    String pDesc = askInput("Project Description: ");
+                    try {
+                        projectService.createProject(UUID.randomUUID().toString(), pName, pDesc);
+                        System.out.println("Project created successfully!");
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    pause();
                     break;
                 case 1:
-                    System.out.println("Action: [Manage Projects]..."); pause();
+                    System.out.println("\n--- All Projects ---");
+                    java.util.List<com.projectmanagement.lib.models.Project> projects = projectService.getAllProjects();
+                    if (projects == null || projects.isEmpty()) {
+                        System.out.println("No projects found.");
+                    } else {
+                        for (com.projectmanagement.lib.models.Project p : projects) {
+                            p.displayDetails();
+                            System.out.println("-");
+                        }
+                    }
+                    pause();
                     break;
                 case 2:
                     back = true;
@@ -223,19 +313,88 @@ public class Main {
         boolean back = false;
         while (!back) {
             String[] options = {
-                "Assign Tasks",
-                "Manage Tasks",
+                "Create New Task & Add to Project",
+                "Assign User to Task",
+                "View All Tasks",
                 "Back to Main Menu"
             };
-            int selection = interactiveMenu("TASK ASSIGNMENT", options);
+            int selection = interactiveMenu("TASK MANAGEMENT", options);
             switch (selection) {
                 case 0:
-                    System.out.println("Action: [Assign Tasks]..."); pause();
+                    System.out.println("\n--- Create Task ---");
+                    java.util.List<com.projectmanagement.lib.models.Project> projs = projectService.getAllProjects();
+                    if (projs == null || projs.isEmpty()) {
+                        System.out.println("Please create a Project first!");
+                        pause();
+                        break;
+                    }
+                    System.out.println("Available Projects:");
+                    for (int i = 0; i < projs.size(); i++) {
+                        System.out.println((i+1) + ". " + projs.get(i).getName());
+                    }
+                    String pIndexStr = askInput("Select Project Number: ");
+                    try {
+                        int idx = Integer.parseInt(pIndexStr) - 1;
+                        if (idx >= 0 && idx < projs.size()) {
+                            String tTitle = askInput("Task Title: ");
+                            String tDesc = askInput("Task Description: ");
+                            com.projectmanagement.lib.models.Task newTask = new com.projectmanagement.lib.models.Task(UUID.randomUUID().toString(), tTitle, tDesc);
+                            taskService.registerTask(newTask.getId(), tTitle, tDesc);
+                            projectService.addTaskToProject(projs.get(idx).getId(), newTask);
+                            System.out.println("Task created and added to Project.");
+                        } else {
+                            System.out.println("Invalid selection.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    pause();
                     break;
                 case 1:
-                    System.out.println("Action: [Manage Tasks]..."); pause();
+                    System.out.println("\n--- Assign User to Task ---");
+                    java.util.List<com.projectmanagement.lib.models.Task> allTasks = taskService.getAllTasks();
+                    java.util.List<User> allUsers = userService.getAllUsers();
+                    if (allTasks == null || allTasks.isEmpty() || allUsers == null || allUsers.isEmpty()) {
+                        System.out.println("You need both Tasks and Users in the system to assign them.");
+                        pause();
+                        break;
+                    }
+                    System.out.println("Tasks:");
+                    for (int i=0; i<allTasks.size(); i++) {
+                        System.out.println((i+1) + ". " + allTasks.get(i).getTitle() + " (Status: " + allTasks.get(i).getStatus() + ")");
+                    }
+                    String tIdxStr = askInput("Select Task Number: ");
+                    
+                    System.out.println("Users:");
+                    for (int i=0; i<allUsers.size(); i++) {
+                        System.out.println((i+1) + ". " + allUsers.get(i).getUsername());
+                    }
+                    String uIdxStr = askInput("Select User Number: ");
+                    
+                    try {
+                        int currentTaskIndex = Integer.parseInt(tIdxStr) - 1;
+                        int currentUserIndex = Integer.parseInt(uIdxStr) - 1;
+                        taskService.assignTaskToUser(allTasks.get(currentTaskIndex).getId(), allUsers.get(currentUserIndex));
+                        System.out.println("Task successfully assigned.");
+                    } catch (Exception e) {
+                        System.out.println("Error assigning task. Check inputs.");
+                    }
+                    pause();
                     break;
                 case 2:
+                    System.out.println("\n--- All Tasks ---");
+                    java.util.List<com.projectmanagement.lib.models.Task> tasks = taskService.getAllTasks();
+                    if (tasks == null || tasks.isEmpty()) {
+                        System.out.println("No tasks found.");
+                    } else {
+                        for (com.projectmanagement.lib.models.Task t : tasks) {
+                            t.displayDetails();
+                            System.out.println("-");
+                        }
+                    }
+                    pause();
+                    break;
+                case 3:
                     back = true;
                     break;
             }
@@ -247,18 +406,41 @@ public class Main {
         while (!back) {
             String[] options = {
                 "Update Task Status",
-                "View Progress Timeline",
                 "Back to Main Menu"
             };
             int selection = interactiveMenu("PROGRESS TRACKING", options);
             switch (selection) {
                 case 0:
-                    System.out.println("Action: [Update Task Status]..."); pause();
+                    System.out.println("\n--- Update Task Status ---");
+                    java.util.List<com.projectmanagement.lib.models.Task> tasks = taskService.getAllTasks();
+                    if(tasks == null || tasks.isEmpty()) {
+                        System.out.println("No tasks available.");
+                        pause();
+                        break;
+                    }
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i+1) + ". " + tasks.get(i).getTitle() + " [" + tasks.get(i).getStatus() + "]");
+                    }
+                    String tIdxStr = askInput("Select Task Number: ");
+                    
+                    System.out.println("1. TODO\n2. IN_PROGRESS\n3. DONE");
+                    String sIdxStr = askInput("Select New Status (1-3): ");
+                    
+                    try {
+                        int tIdx = Integer.parseInt(tIdxStr) - 1;
+                        int sIdx = Integer.parseInt(sIdxStr);
+                        com.projectmanagement.lib.models.TaskStatus newStatus = com.projectmanagement.lib.models.TaskStatus.TODO;
+                        if(sIdx == 2) newStatus = com.projectmanagement.lib.models.TaskStatus.IN_PROGRESS;
+                        if(sIdx == 3) newStatus = com.projectmanagement.lib.models.TaskStatus.DONE;
+                        
+                        taskService.updateTaskStatus(tasks.get(tIdx).getId(), newStatus);
+                        System.out.println("Task status updated to " + newStatus.name());
+                    } catch (Exception e) {
+                        System.out.println("Invalid input!");
+                    }
+                    pause();
                     break;
                 case 1:
-                    System.out.println("Action: [View Progress Timeline]..."); pause();
-                    break;
-                case 2:
                     back = true;
                     break;
             }
@@ -269,15 +451,21 @@ public class Main {
         boolean back = false;
         while (!back) {
             String[] options = {
-                "Generate Project Reports",
+                "Generate General System Report",
+                "Generate Task Status Report",
                 "Back to Main Menu"
             };
             int selection = interactiveMenu("REPORTING", options);
             switch (selection) {
                 case 0:
-                    System.out.println("Action: [Generate Project Reports]..."); pause();
+                    reportService.generateGeneralSystemReport();
+                    pause();
                     break;
                 case 1:
+                    reportService.generateTaskStatusReport();
+                    pause();
+                    break;
+                case 2:
                     back = true;
                     break;
             }

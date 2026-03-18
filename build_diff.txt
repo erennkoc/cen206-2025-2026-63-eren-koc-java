@@ -1,0 +1,286 @@
+﻿commit f492618830cc55d4f213c43012bf1d641524d230
+Author: erennkoc <erenn.kcc@gmail.com>
+Date:   Tue Mar 17 16:57:18 2026 +0300
+
+    Add projectmanager-app, update Doxygen & build
+    
+    Introduce a complete projectmanager-app module (sources, models, services, storage implementations, repository factory, tests, site resources, assets and data files) and supporting files (diagrams, docker-compose, logs). Upgrade and harden Doxyfile to Doxygen 1.16 with many modernized settings and added options (markdown strict, external tool path, timestamp, etc.). Update .gitignore and add VSCode Java build configuration. Fix Windows build script to call reportgenerator/genhtml via explicit paths and adjust packaging steps. Update coverage badge assets and remove old package artifacts.
+
+diff --git a/7-build-app.bat b/7-build-app.bat
+index fcae3a5..c073698 100644
+--- a/7-build-app.bat
++++ b/7-build-app.bat
+@@ -47,10 +47,10 @@ echo Change directory to projectmanager-app
+ cd projectmanager-app
+ 
+ echo Generate ReportGenerator HTML Report
+-call reportgenerator "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Html
++call "%USERPROFILE%\.dotnet\tools\reportgenerator.exe" "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Html
+ 
+ echo Generate ReportGenerator Badges
+-call reportgenerator "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Badges
++call "%USERPROFILE%\.dotnet\tools\reportgenerator.exe" "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Badges
+ 
+ echo Display information about the binary file
+ echo Our Binary is a Single Jar With Dependencies. You Do Not Need to Compress It.
+@@ -62,7 +62,7 @@ echo Run Coverxygen
+ call python -m coverxygen --xml-dir ./projectmanager-app/target/site/doxygen/xml --src-dir ./ --format lcov --output ./projectmanager-app/target/site/coverxygen/lcov.info --prefix %currentDir%/projectmanager-app/
+ 
+ echo Run lcov genhtml
+-call perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml --legend --title "Documentation Coverage Report" ./projectmanager-app/target/site/coverxygen/lcov.info -o projectmanager-app/target/site/coverxygen
++call "C:\Program Files\Git\usr\bin\perl.exe" "%LOCALAPPDATA%\lcov\lcov-1.16\bin\genhtml" --legend --title "Documentation Coverage Report" ./projectmanager-app/target/site/coverxygen/lcov.info -o projectmanager-app/target/site/coverxygen
+ 
+ echo Copy badge files to the "assets" directory
+ call copy "projectmanager-app\target\site\coveragereport\badge_combined.svg" "assets\badge_combined.svg"
+@@ -85,7 +85,9 @@ call mvn site
+ cd ..
+ 
+ echo Package Output Jar Files
+-tar -czvf release\application-binary.tar.gz -C projectmanager-app\target '*.jar'
++pushd projectmanager-app\target
++tar -czvf ..\..\release\application-binary.tar.gz *.jar
++popd
+ 
+ echo Package Jacoco Test Coverage Report (Optional)
+ call tar -czvf release\test-jacoco-report.tar.gz -C projectmanager-app\target\site\jacoco .
+
+commit db9186025fa30e1116237ab3a7c34f07677c4a78
+Author: erennkoc <erenn.kcc@gmail.com>
+Date:   Wed Mar 11 20:36:04 2026 +0300
+
+    naming
+
+diff --git a/7-build-app.bat b/7-build-app.bat
+index f299b25..fcae3a5 100644
+--- a/7-build-app.bat
++++ b/7-build-app.bat
+@@ -10,16 +10,16 @@ echo Change the current working directory to the script directory
+ @cd /d "%~dp0"
+ 
+ echo Delete the "docs" folder and its contents
+-rd /S /Q "calculator-app\target\site\coverxygen"
+-rd /S /Q "calculator-app\target\site\coveragereport"
+-rd /S /Q "calculator-app\target\site\doxygen"
++rd /S /Q "projectmanager-app\target\site\coverxygen"
++rd /S /Q "projectmanager-app\target\site\coveragereport"
++rd /S /Q "projectmanager-app\target\site\doxygen"
+ 
+ echo Delete and Create the "release" folder and its contents
+ rd /S /Q "release"
+ mkdir release
+ 
+-echo Change directory to calculator-app
+-cd calculator-app
++echo Change directory to projectmanager-app
++cd projectmanager-app
+ 
+ echo Perform Maven clean, test, and packaging
+ call mvn clean test package
+@@ -28,7 +28,7 @@ echo Return to the previous directory
+ cd ..
+ 
+ echo Create Required Folders coverxygen/coveragereport/doxygen
+-cd calculator-app
++cd projectmanager-app
+ mkdir target
+ cd target
+ mkdir site
+@@ -43,8 +43,8 @@ cd ..
+ echo Generate Doxygen HTML and XML Documentation
+ call doxygen Doxyfile
+ 
+-echo Change directory to calculator-app
+-cd calculator-app
++echo Change directory to projectmanager-app
++cd projectmanager-app
+ 
+ echo Generate ReportGenerator HTML Report
+ call reportgenerator "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Html
+@@ -59,48 +59,48 @@ echo Return to the previous directory
+ cd ..
+ 
+ echo Run Coverxygen
+-call python -m coverxygen --xml-dir ./calculator-app/target/site/doxygen/xml --src-dir ./ --format lcov --output ./calculator-app/target/site/coverxygen/lcov.info --prefix %currentDir%/calculator-app/
++call python -m coverxygen --xml-dir ./projectmanager-app/target/site/doxygen/xml --src-dir ./ --format lcov --output ./projectmanager-app/target/site/coverxygen/lcov.info --prefix %currentDir%/projectmanager-app/
+ 
+ echo Run lcov genhtml
+-call perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml --legend --title "Documentation Coverage Report" ./calculator-app/target/site/coverxygen/lcov.info -o calculator-app/target/site/coverxygen
++call perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml --legend --title "Documentation Coverage Report" ./projectmanager-app/target/site/coverxygen/lcov.info -o projectmanager-app/target/site/coverxygen
+ 
+ echo Copy badge files to the "assets" directory
+-call copy "calculator-app\target\site\coveragereport\badge_combined.svg" "assets\badge_combined.svg"
+-call copy "calculator-app\target\site\coveragereport\badge_combined.svg" "assets\badge_combined.svg"
+-call copy "calculator-app\target\site\coveragereport\badge_branchcoverage.svg" "assets\badge_branchcoverage.svg"
+-call copy "calculator-app\target\site\coveragereport\badge_linecoverage.svg" "assets\badge_linecoverage.svg"
+-call copy "calculator-app\target\site\coveragereport\badge_methodcoverage.svg" "assets\badge_methodcoverage.svg"
++call copy "projectmanager-app\target\site\coveragereport\badge_combined.svg" "assets\badge_combined.svg"
++call copy "projectmanager-app\target\site\coveragereport\badge_combined.svg" "assets\badge_combined.svg"
++call copy "projectmanager-app\target\site\coveragereport\badge_branchcoverage.svg" "assets\badge_branchcoverage.svg"
++call copy "projectmanager-app\target\site\coveragereport\badge_linecoverage.svg" "assets\badge_linecoverage.svg"
++call copy "projectmanager-app\target\site\coveragereport\badge_methodcoverage.svg" "assets\badge_methodcoverage.svg"
+ 
+-call copy "assets\rteu_logo.jpg" "calculator-app\src\site\resources\images\rteu_logo.jpg"
++call copy "assets\rteu_logo.jpg" "projectmanager-app\src\site\resources\images\rteu_logo.jpg"
+ 
+ echo Copy the "assets" folder and its contents to "maven site images" recursively
+-call robocopy assets "calculator-app\src\site\resources\assets" /E
++call robocopy assets "projectmanager-app\src\site\resources\assets" /E
+ 
+-echo Copy the "README.md" file to "calculator-app\src\site\markdown\readme.md"
+-call copy README.md "calculator-app\src\site\markdown\readme.md"
++echo Copy the "README.md" file to "projectmanager-app\src\site\markdown\readme.md"
++call copy README.md "projectmanager-app\src\site\markdown\readme.md"
+ 
+-cd calculator-app
++cd projectmanager-app
+ echo Perform Maven site generation
+ call mvn site
+ cd ..
+ 
+ echo Package Output Jar Files
+-tar -czvf release\application-binary.tar.gz -C calculator-app\target '*.jar'
++tar -czvf release\application-binary.tar.gz -C projectmanager-app\target '*.jar'
+ 
+ echo Package Jacoco Test Coverage Report (Optional)
+-call tar -czvf release\test-jacoco-report.tar.gz -C calculator-app\target\site\jacoco .
++call tar -czvf release\test-jacoco-report.tar.gz -C projectmanager-app\target\site\jacoco .
+ 
+ echo Package ReportGenerator Test Coverage Report
+-call tar -czvf release\test-coverage-report.tar.gz -C calculator-app\target\site\coveragereport .
++call tar -czvf release\test-coverage-report.tar.gz -C projectmanager-app\target\site\coveragereport .
+ 
+ echo Package Code Documentation
+-call tar -czvf release\application-documentation.tar.gz -C calculator-app\target\site\doxygen .
++call tar -czvf release\application-documentation.tar.gz -C projectmanager-app\target\site\doxygen .
+ 
+ echo Package Documentation Coverage
+-call tar -czvf release\doc-coverage-report.tar.gz -C calculator-app\target\site\coverxygen .
++call tar -czvf release\doc-coverage-report.tar.gz -C projectmanager-app\target\site\coverxygen .
+ 
+ echo Package Product Site
+-call tar -czvf release\application-site.tar.gz -C calculator-app\target\site .
++call tar -czvf release\application-site.tar.gz -C projectmanager-app\target\site .
+ 
+ echo ....................
+ echo Operation Completed!
+
+commit a42c1179c908c923cda1404f82d25ad3a84d775d
+Author: erennkoc <erenn.kcc@gmail.com>
+Date:   Sat Mar 7 17:22:30 2026 +0300
+
+    Initial commit
+
+diff --git a/7-build-app.bat b/7-build-app.bat
+new file mode 100644
+index 0000000..f299b25
+--- /dev/null
++++ b/7-build-app.bat
+@@ -0,0 +1,108 @@
++@echo off
++
++:: Enable necessary extensions
++@setlocal enableextensions
++
++echo Get the current directory
++set "currentDir=%CD%"
++
++echo Change the current working directory to the script directory
++@cd /d "%~dp0"
++
++echo Delete the "docs" folder and its contents
++rd /S /Q "calculator-app\target\site\coverxygen"
++rd /S /Q "calculator-app\target\site\coveragereport"
++rd /S /Q "calculator-app\target\site\doxygen"
++
++echo Delete and Create the "release" folder and its contents
++rd /S /Q "release"
++mkdir release
++
++echo Change directory to calculator-app
++cd calculator-app
++
++echo Perform Maven clean, test, and packaging
++call mvn clean test package
++
++echo Return to the previous directory
++cd ..
++
++echo Create Required Folders coverxygen/coveragereport/doxygen
++cd calculator-app
++mkdir target
++cd target
++mkdir site
++cd site
++mkdir coverxygen
++mkdir coveragereport
++mkdir doxygen
++cd ..
++cd ..
++cd ..
++
++echo Generate Doxygen HTML and XML Documentation
++call doxygen Doxyfile
++
++echo Change directory to calculator-app
++cd calculator-app
++
++echo Generate ReportGenerator HTML Report
++call reportgenerator "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Html
++
++echo Generate ReportGenerator Badges
++call reportgenerator "-reports:target\site\jacoco\jacoco.xml" "-sourcedirs:src\main\java" "-targetdir:target\site\coveragereport" -reporttypes:Badges
++
++echo Display information about the binary file
++echo Our Binary is a Single Jar With Dependencies. You Do Not Need to Compress It.
++
++echo Return to the previous directory
++cd ..
++
++echo Run Coverxygen
++call python -m coverxygen --xml-dir ./calculator-app/target/site/doxygen/xml --src-dir ./ --format lcov --output ./calculator-app/target/site/coverxygen/lcov.info --prefix %currentDir%/calculator-app/
++
++echo Run lcov genhtml
++call perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml --legend --title "Documentation Coverage Report" ./calculator-app/target/site/coverxygen/lcov.info -o calculator-app/target/site/coverxygen
++
++echo Copy badge files to the "assets" directory
++call copy "calculator-app\target\site\coveragereport\badge_combined.svg" "assets\badge_combined.svg"
++call copy "calculator-app\target\site\coveragereport\badge_combined.svg" "assets\badge_combined.svg"
++call copy "calculator-app\target\site\coveragereport\badge_branchcoverage.svg" "assets\badge_branchcoverage.svg"
++call copy "calculator-app\target\site\coveragereport\badge_linecoverage.svg" "assets\badge_linecoverage.svg"
++call copy "calculator-app\target\site\coveragereport\badge_methodcoverage.svg" "assets\badge_methodcoverage.svg"
++
++call copy "assets\rteu_logo.jpg" "calculator-app\src\site\resources\images\rteu_logo.jpg"
++
++echo Copy the "assets" folder and its contents to "maven site images" recursively
++call robocopy assets "calculator-app\src\site\resources\assets" /E
++
++echo Copy the "README.md" file to "calculator-app\src\site\markdown\readme.md"
++call copy README.md "calculator-app\src\site\markdown\readme.md"
++
++cd calculator-app
++echo Perform Maven site generation
++call mvn site
++cd ..
++
++echo Package Output Jar Files
++tar -czvf release\application-binary.tar.gz -C calculator-app\target '*.jar'
++
++echo Package Jacoco Test Coverage Report (Optional)
++call tar -czvf release\test-jacoco-report.tar.gz -C calculator-app\target\site\jacoco .
++
++echo Package ReportGenerator Test Coverage Report
++call tar -czvf release\test-coverage-report.tar.gz -C calculator-app\target\site\coveragereport .
++
++echo Package Code Documentation
++call tar -czvf release\application-documentation.tar.gz -C calculator-app\target\site\doxygen .
++
++echo Package Documentation Coverage
++call tar -czvf release\doc-coverage-report.tar.gz -C calculator-app\target\site\coverxygen .
++
++echo Package Product Site
++call tar -czvf release\application-site.tar.gz -C calculator-app\target\site .
++
++echo ....................
++echo Operation Completed!
++echo ....................
++pause

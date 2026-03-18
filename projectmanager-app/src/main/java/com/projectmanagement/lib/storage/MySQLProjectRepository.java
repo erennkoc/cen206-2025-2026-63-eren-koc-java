@@ -29,9 +29,15 @@ public class MySQLProjectRepository implements IRepository<Project> {
                    + "name VARCHAR(255) NOT NULL,"
                    + "description TEXT"
                    + ");";
+        String mappingSql = "CREATE TABLE IF NOT EXISTS project_tasks ("
+                   + "project_id VARCHAR(255),"
+                   + "task_id VARCHAR(255),"
+                   + "PRIMARY KEY (project_id, task_id)"
+                   + ");";
         try (Connection conn = DriverManager.getConnection(URL, USER_DB, PASS_DB);
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
+            stmt.execute(mappingSql);
         } catch (SQLException e) {
             System.err.println("Error creating projects table (MySQL): " + e.getMessage());
         }
@@ -50,8 +56,29 @@ public class MySQLProjectRepository implements IRepository<Project> {
             pstmt.setString(2, entity.getName());
             pstmt.setString(3, entity.getDescription());
             pstmt.executeUpdate();
+            
+            saveProjectTasks(conn, entity);
         } catch (SQLException e) {
             System.err.println("Error creating project: " + e.getMessage());
+        }
+    }
+
+    private void saveProjectTasks(Connection conn, Project entity) throws SQLException {
+        String delSql = "DELETE FROM project_tasks WHERE project_id = ?";
+        try (PreparedStatement delStmt = conn.prepareStatement(delSql)) {
+            delStmt.setString(1, entity.getId());
+            delStmt.executeUpdate();
+        }
+
+        if (entity.getTasks() != null && !entity.getTasks().isEmpty()) {
+            String insSql = "INSERT INTO project_tasks (project_id, task_id) VALUES (?, ?)";
+            try (PreparedStatement insStmt = conn.prepareStatement(insSql)) {
+                for (com.projectmanagement.lib.models.Task task : entity.getTasks()) {
+                    insStmt.setString(1, entity.getId());
+                    insStmt.setString(2, task.getId());
+                    insStmt.executeUpdate();
+                }
+            }
         }
     }
 
@@ -68,16 +95,33 @@ public class MySQLProjectRepository implements IRepository<Project> {
             pstmt.setString(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                return new Project(
+                Project project = new Project(
                     rs.getString("id"),
                     rs.getString("name"),
                     rs.getString("description")
                 );
+                loadProjectTasks(conn, project);
+                return project;
             }
         } catch (SQLException e) {
             System.err.println("Error finding project by id: " + e.getMessage());
         }
         return null;
+    }
+
+    private void loadProjectTasks(Connection conn, Project project) throws SQLException {
+        String taskSql = "SELECT task_id FROM project_tasks WHERE project_id = ?";
+        try (PreparedStatement tpstmt = conn.prepareStatement(taskSql)) {
+            tpstmt.setString(1, project.getId());
+            ResultSet trs = tpstmt.executeQuery();
+            MySQLTaskRepository taskRepo = new MySQLTaskRepository();
+            while (trs.next()) {
+                com.projectmanagement.lib.models.Task task = taskRepo.findById(trs.getString("task_id"));
+                if (task != null) {
+                    project.addTask(task);
+                }
+            }
+        }
     }
 
     /**
@@ -92,11 +136,13 @@ public class MySQLProjectRepository implements IRepository<Project> {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                projects.add(new Project(
+                Project project = new Project(
                     rs.getString("id"),
                     rs.getString("name"),
                     rs.getString("description")
-                ));
+                );
+                loadProjectTasks(conn, project);
+                projects.add(project);
             }
         } catch (SQLException e) {
             System.err.println("Error finding all projects: " + e.getMessage());
@@ -117,6 +163,8 @@ public class MySQLProjectRepository implements IRepository<Project> {
             pstmt.setString(2, entity.getDescription());
             pstmt.setString(3, entity.getId());
             pstmt.executeUpdate();
+            
+            saveProjectTasks(conn, entity);
         } catch (SQLException e) {
             System.err.println("Error updating project: " + e.getMessage());
         }
@@ -133,6 +181,12 @@ public class MySQLProjectRepository implements IRepository<Project> {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             pstmt.executeUpdate();
+            
+            String delSql = "DELETE FROM project_tasks WHERE project_id = ?";
+            try (PreparedStatement delStmt = conn.prepareStatement(delSql)) {
+                delStmt.setString(1, id);
+                delStmt.executeUpdate();
+            }
         } catch (SQLException e) {
             System.err.println("Error deleting project: " + e.getMessage());
         }

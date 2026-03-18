@@ -110,4 +110,13 @@ public class UserServiceTest {
         assertNull(userService.login("username", null));
         assertNull(userService.login("username", ""));
     }
+
+    @Test
+    public void testGetAllUsers() {
+        java.util.List<User> mockList = Arrays.asList(new User("u-1", "T", "D", "P"));
+        when(userRepositoryMock.findAll()).thenReturn(mockList);
+        java.util.List<User> result = userService.getAllUsers();
+        assertEquals(1, result.size());
+        verify(userRepositoryMock, times(1)).findAll();
+    }
 }

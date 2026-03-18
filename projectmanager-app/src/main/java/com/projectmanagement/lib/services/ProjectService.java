@@ -3,6 +3,7 @@ package com.projectmanagement.lib.services;
 import com.projectmanagement.lib.models.Project;
 import com.projectmanagement.lib.models.Task;
 import com.projectmanagement.lib.storage.IRepository;
+import java.util.List;
 
 /**
  * @class ProjectService
@@ -59,5 +60,13 @@ public class ProjectService {
         
         existingProject.addTask(task);
         projectRepository.update(existingProject); // Merges the modified relation structure back to the Repo
+    }
+
+    /**
+     * @brief Retrieves all registered projects from the repository.
+     * @return List containing all Project instances.
+     */
+    public List<Project> getAllProjects() {
+        return projectRepository.findAll();
     }
 }
