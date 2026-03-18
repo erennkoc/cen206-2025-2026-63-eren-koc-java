@@ -49,7 +49,8 @@ class SQLiteRepositoryTest {
 
         when(mockConn.prepareStatement("SELECT task_id FROM project_tasks WHERE project_id = ?")).thenReturn(mockTaskPstmt);
         when(mockTaskPstmt.executeQuery()).thenReturn(mockTaskRs);
-        when(mockTaskRs.next()).thenReturn(false);
+        when(mockTaskRs.next()).thenReturn(true, false);
+        when(mockTaskRs.getString("task_id")).thenReturn("mockTask1");
         
         userRepo = new SQLiteUserRepository() {
             @Override
@@ -97,6 +98,7 @@ class SQLiteRepositoryTest {
     @Test
     void testProjectCrud() throws Exception {
         Project proj = new Project("p-s1", "PName", "pdesc");
+        proj.addTask(new Task("mockTask1", "Title", "Desc"));
         projectRepo.create(proj);
         
         Project foundProj = projectRepo.findById("p-s1");

@@ -49,7 +49,8 @@ class MySQLRepositoryTest {
 
         when(mockConn.prepareStatement("SELECT task_id FROM project_tasks WHERE project_id = ?")).thenReturn(mockTaskPstmt);
         when(mockTaskPstmt.executeQuery()).thenReturn(mockTaskRs);
-        when(mockTaskRs.next()).thenReturn(false);
+        when(mockTaskRs.next()).thenReturn(true, false);
+        when(mockTaskRs.getString("task_id")).thenReturn("mockTask1");
         
         userRepo = new MySQLUserRepository() {
             @Override
@@ -97,6 +98,7 @@ class MySQLRepositoryTest {
     @Test
     void testProjectCrud() throws Exception {
         Project proj = new Project("p-m1", "PName", "pdesc");
+        proj.addTask(new Task("mockTask1", "TName", "TDesc"));
         projectRepo.create(proj);
         
         Project foundProj = projectRepo.findById("p-m1");
