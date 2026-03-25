@@ -17,24 +17,50 @@ import org.jline.utils.NonBlockingReader;
 import java.util.Scanner;
 import java.util.UUID;
 /**
- * Main entry point for the Project Management Console UI.
+ * Main entry point for the Project Management Console App UI.
  * <p> Implements a standard console-based interface using Scanner.
  */
 public class Main {
 
+    /** Configuration component specifying current storage details (MySQL, SQLite, etc.). */
     private static StorageConfig storageConfig = new StorageConfig(StorageType.BINARY_FILE);
+    
+    /** Factory handling the abstraction mechanism for multiple database interfaces. */
     private static RepositoryFactory repoFactory = new RepositoryFactory(storageConfig);
+    
+    /** System service for dispatching user validations, registrations and queries. */
     private static UserService userService = new UserService(repoFactory.getUserRepository());
+    
+    /** Core service to construct and retrieve overarching Project structures. */
     private static ProjectService projectService = new ProjectService(repoFactory.getProjectRepository());
+    
+    /** Auxiliary task service to assign tasks, mutate statuses and extract dependencies. */
     private static TaskService taskService = new TaskService(repoFactory.getTaskRepository());
+    
+    /** Analytical aggregation service exporting metrics and text-based reports for end-users. */
     private static ReportService reportService = new ReportService(projectService, taskService, userService);
     
+    /** Stores the memory instance of the presently authenticated user. */
     private static User loggedInUser = null;
+    
+    /** Flags whether the application sequence runs under limited Guest capacities. */
     private static boolean isGuest = false;
-    private static Scanner scanner = new Scanner(System.in);
+    
+    /** Static reader attached to the standard application input sequence. */
+    private static Scanner scanner;
+    
+    /** System terminal reference employed for raw OS terminal interfacing when present. */
     private static Terminal terminal;
 
+    /**
+     * Bootstrapping function serving as application lifecycle container.
+     * Starts Terminal integrations and enters the eternal authentication/main-menu loop.
+     * @param args Standalone command-line runtime instruction variables.
+     */
     public static void main(String[] args) {
+        // Initialize scanner freshly. Allows unit tests to intercept System.in cleanly.
+        scanner = new Scanner(System.in);
+        
         try {
             terminal = TerminalBuilder.builder().jna(true).system(true).build();
         } catch (Exception e) {

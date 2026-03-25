@@ -1,0 +1,28 @@
+@startuml
+title State Machine Diagram for Task Status Workflow
+
+[*] --> TODO : Task Created
+
+state TODO {
+  TODO : Actions: Edit Task info
+  TODO : Actions: Assign User
+}
+
+TODO --> IN_PROGRESS : Mark as Started
+IN_PROGRESS --> TODO : Revert Status
+
+state IN_PROGRESS {
+  IN_PROGRESS : State: Being worked on
+  IN_PROGRESS : Actions: Add Work Notes
+}
+
+IN_PROGRESS --> DONE : Mark as Completed
+
+state DONE {
+  DONE : State: Review/Finished
+}
+
+DONE --> IN_PROGRESS : Re-open for Revision
+
+DONE --> [*] : Archival (Optional)
+@enduml

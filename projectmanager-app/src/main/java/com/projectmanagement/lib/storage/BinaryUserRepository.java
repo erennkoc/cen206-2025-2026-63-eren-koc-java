@@ -51,7 +51,7 @@ public class BinaryUserRepository implements IRepository<User> {
      * @param entity The User object to save.
      */
     @Override
-    public void create(User entity) {
+    public void save(User entity) {
         List<User> users = loadFromFile();
         users.add(entity);
         saveToFile(users);

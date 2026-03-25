@@ -47,7 +47,7 @@ public class MySQLProjectRepository implements IRepository<Project> {
      * @param entity The Project instance to be added.
      */
     @Override
-    public void create(Project entity) {
+    public void save(Project entity) {
         String sql = "INSERT INTO projects(id, name, description) VALUES(?, ?, ?)";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

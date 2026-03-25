@@ -1,0 +1,28 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title C4 Container Diagram for Project Management Console Application
+
+Person(user, "User", "A user of the console application (Admin, Project Manager, or Guest).")
+
+System_Boundary(ppm_system, "Project Management Console Application") {
+    Container(ui, "Console Interface", "Java Scanner / TerminalBuilder", "Provides interactive text-based interface for the user.")
+    
+    Container(core, "Core Services", "Java Services", "Handles business logic (UserService, ProjectService, TaskService, ReportService).")
+    
+    Container(storage_factory, "Repository Factory", "Java Factory Pattern", "Abstracts and routes data requests based on chosen StorageConfig.")
+    
+    ContainerDb(db_mysql, "MySQL Database", "Relational Database", "Stores persistent user, project, and task data over a network.")
+    ContainerDb(db_sqlite, "SQLite Database", "Embedded DB", "Stores persistent data locally in a .db file.")
+    ContainerDb(file_bin, "Binary File Store", "Local Java Serialization", "Stores persistent data locally using binary object streams (.dat).")
+}
+
+Rel(user, ui, "Interacts using CLI via", "Standard In/Out")
+Rel(ui, core, "Invokes business processes", "Method calls")
+Rel(core, storage_factory, "Delegates data queries to", "IRepository interfaces")
+
+Rel(storage_factory, db_mysql, "Reads from and writes to", "JDBC")
+Rel(storage_factory, db_sqlite, "Reads from and writes to", "JDBC")
+Rel(storage_factory, file_bin, "Reads from and writes to", "File I/O")
+
+@enduml

@@ -32,7 +32,7 @@ public class ProjectServiceTest {
         String desc = "Testing Project Logic";
 
         projectService.createProject(id, name, desc);
-        verify(projectRepositoryMock, times(1)).create(any(Project.class));
+        verify(projectRepositoryMock, times(1)).save(any(Project.class));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ProjectServiceTest {
             projectService.createProject("ID", "Name", null); // null desc
         });
 
-        verify(projectRepositoryMock, never()).create(any(Project.class));
+        verify(projectRepositoryMock, never()).save(any(Project.class));
     }
 
     @Test

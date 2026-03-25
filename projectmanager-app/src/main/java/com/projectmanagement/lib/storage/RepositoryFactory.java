@@ -26,54 +26,45 @@ public class RepositoryFactory {
     /**
      * Generates the matched IRepository for User domains.
      * @return The correctly typed User repository.
-     * @throws IllegalStateException If the configured storage type is unsupported.
      */
     public IRepository<User> getUserRepository() {
-        switch (config.getActiveStorageType()) {
-            case BINARY_FILE:
-                return new BinaryUserRepository();
-            case SQLITE:
-                return new SQLiteUserRepository();
-            case MYSQL:
-                return new MySQLUserRepository();
-            default:
-                throw new IllegalStateException("Unsupported storage type for Users");
+        if (config.getActiveStorageType() == StorageType.BINARY_FILE) {
+            return new BinaryUserRepository();
+        } else if (config.getActiveStorageType() == StorageType.SQLITE) {
+            return new SQLiteUserRepository();
+        } else if (config.getActiveStorageType() == StorageType.MYSQL) {
+            return new MySQLUserRepository();
         }
+        throw new IllegalStateException("Unsupported storage type for Users");
     }
 
     /**
      * Generates the matched IRepository for Project domains.
      * @return The correctly typed Project repository.
-     * @throws IllegalStateException If the configured storage type is unsupported.
      */
     public IRepository<Project> getProjectRepository() {
-        switch (config.getActiveStorageType()) {
-            case BINARY_FILE:
-                return new BinaryProjectRepository();
-            case SQLITE:
-                return new SQLiteProjectRepository();
-            case MYSQL:
-                return new MySQLProjectRepository();
-            default:
-                throw new IllegalStateException("Unsupported storage type for Projects");
+        if (config.getActiveStorageType() == StorageType.BINARY_FILE) {
+            return new BinaryProjectRepository();
+        } else if (config.getActiveStorageType() == StorageType.SQLITE) {
+            return new SQLiteProjectRepository();
+        } else if (config.getActiveStorageType() == StorageType.MYSQL) {
+            return new MySQLProjectRepository();
         }
+        throw new IllegalStateException("Unsupported storage type for Projects");
     }
 
     /**
      * Generates the matched IRepository for Task domains.
      * @return The correctly typed Task repository.
-     * @throws IllegalStateException If the configured storage type is unsupported.
      */
     public IRepository<Task> getTaskRepository() {
-        switch (config.getActiveStorageType()) {
-            case BINARY_FILE:
-                return new BinaryTaskRepository();
-            case SQLITE:
-                return new SQLiteTaskRepository();
-            case MYSQL:
-                return new MySQLTaskRepository();
-            default:
-                throw new IllegalStateException("Unsupported storage type for Tasks");
+        if (config.getActiveStorageType() == StorageType.BINARY_FILE) {
+            return new BinaryTaskRepository();
+        } else if (config.getActiveStorageType() == StorageType.SQLITE) {
+            return new SQLiteTaskRepository();
+        } else if (config.getActiveStorageType() == StorageType.MYSQL) {
+            return new MySQLTaskRepository();
         }
+        throw new IllegalStateException("Unsupported storage type for Tasks");
     }
 }

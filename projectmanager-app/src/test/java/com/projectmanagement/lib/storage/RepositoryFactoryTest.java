@@ -63,8 +63,8 @@ public class RepositoryFactoryTest {
         StorageConfig config = new StorageConfig(null);
         RepositoryFactory factory = new RepositoryFactory(config);
 
-        assertThrows(NullPointerException.class, factory::getUserRepository);
-        assertThrows(NullPointerException.class, factory::getProjectRepository);
-        assertThrows(NullPointerException.class, factory::getTaskRepository);
+        assertThrows(IllegalStateException.class, factory::getUserRepository);
+        assertThrows(IllegalStateException.class, factory::getProjectRepository);
+        assertThrows(IllegalStateException.class, factory::getTaskRepository);
     }
 }

@@ -38,7 +38,7 @@ public class UserServiceTest {
 
         // Capture what was passed to create()
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
-        verify(userRepositoryMock, times(1)).create(userCaptor.capture());
+        verify(userRepositoryMock, times(1)).save(userCaptor.capture());
 
         User capturedUser = userCaptor.getValue();
         assertEquals(username, capturedUser.getUsername());
@@ -69,7 +69,7 @@ public class UserServiceTest {
         });
 
         // Verify create was NEVER called
-        verify(userRepositoryMock, never()).create(any(User.class));
+        verify(userRepositoryMock, never()).save(any(User.class));
     }
 
     @Test
@@ -77,13 +77,13 @@ public class UserServiceTest {
         String username = "testuser";
         String plainPassword = "SuperSecretPassword";
         
-        java.lang.reflect.Method method = UserService.class.getDeclaredMethod("hashPassword", String.class);
-        method.setAccessible(true);
-        String expectedHashedPassword = (String) method.invoke(userService, plainPassword);
-
-        User mockedUser = new User("uuid-1", username, "test@user.com", expectedHashedPassword);
+        // Register to capture correctly hashed user
+        userService.registerUser("uuid-1", username, "test@user.com", plainPassword);
+        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
+        verify(userRepositoryMock, times(1)).save(userCaptor.capture());
+        User registeredUser = userCaptor.getValue();
         
-        when(userRepositoryMock.findAll()).thenReturn(Arrays.asList(mockedUser));
+        when(userRepositoryMock.findAll()).thenReturn(Arrays.asList(registeredUser));
 
         User loggedInUser = userService.login(username, plainPassword);
 
@@ -97,12 +97,12 @@ public class UserServiceTest {
         String plainPassword = "SuperSecretPassword";
         String wrongPassword = "WrongPassword!";
         
-        java.lang.reflect.Method method = UserService.class.getDeclaredMethod("hashPassword", String.class);
-        method.setAccessible(true);
-        String expectedHashedPassword = (String) method.invoke(userService, plainPassword);
+        userService.registerUser("uuid-1", username, "test@user.com", plainPassword);
+        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
+        verify(userRepositoryMock, times(1)).save(userCaptor.capture());
+        User registeredUser = userCaptor.getValue();
 
-        User mockedUser = new User("uuid-1", username, "test@user.com", expectedHashedPassword);
-        when(userRepositoryMock.findAll()).thenReturn(Arrays.asList(mockedUser));
+        when(userRepositoryMock.findAll()).thenReturn(Arrays.asList(registeredUser));
 
         User loggedInUser = userService.login(username, wrongPassword);
         assertNull(loggedInUser, "Should return null for wrong password.");

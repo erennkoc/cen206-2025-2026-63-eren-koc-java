@@ -51,7 +51,7 @@ public class BinaryProjectRepository implements IRepository<Project> {
      * @param entity The Project instance to log.
      */
     @Override
-    public void create(Project entity) {
+    public void save(Project entity) {
         List<Project> projects = loadFromFile();
         projects.add(entity);
         saveToFile(projects);

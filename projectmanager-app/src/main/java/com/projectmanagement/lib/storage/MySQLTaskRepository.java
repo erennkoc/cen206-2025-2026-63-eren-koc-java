@@ -45,7 +45,7 @@ public class MySQLTaskRepository implements IRepository<Task> {
      * @param entity The Task implementation object.
      */
     @Override
-    public void create(Task entity) {
+    public void save(Task entity) {
         String sql = "INSERT INTO tasks(id, title, description, status, assigned_user_id) VALUES(?, ?, ?, ?, ?)";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

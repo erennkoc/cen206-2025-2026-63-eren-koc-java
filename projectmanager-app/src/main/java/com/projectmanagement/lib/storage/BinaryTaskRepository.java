@@ -51,7 +51,7 @@ public class BinaryTaskRepository implements IRepository<Task> {
      * @param entity The Task form to log.
      */
     @Override
-    public void create(Task entity) {
+    public void save(Task entity) {
         List<Task> tasks = loadFromFile();
         tasks.add(entity);
         saveToFile(tasks);

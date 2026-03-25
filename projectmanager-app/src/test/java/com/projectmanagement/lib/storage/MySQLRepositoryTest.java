@@ -80,7 +80,7 @@ class MySQLRepositoryTest {
     @Test
     void testUserCrud() throws Exception {
         User user = new User("u-m1", "MName", "m@name.com", "mpass");
-        userRepo.create(user);
+        userRepo.save(user);
         
         User foundUser = userRepo.findById("u-m1"); 
         assertNotNull(foundUser);
@@ -99,7 +99,7 @@ class MySQLRepositoryTest {
     void testProjectCrud() throws Exception {
         Project proj = new Project("p-m1", "PName", "pdesc");
         proj.addTask(new Task("mockTask1", "TName", "TDesc"));
-        projectRepo.create(proj);
+        projectRepo.save(proj);
         
         Project foundProj = projectRepo.findById("p-m1");
         assertNotNull(foundProj);
@@ -120,7 +120,7 @@ class MySQLRepositoryTest {
         
         Task task = new Task("t-m1", "TName", "tdesc");
         task.setStatus(TaskStatus.TODO);
-        taskRepo.create(task);
+        taskRepo.save(task);
         
         Task foundTask = taskRepo.findById("t-m1");
         assertNotNull(foundTask);
@@ -140,24 +140,39 @@ class MySQLRepositoryTest {
         when(mockConn.createStatement()).thenThrow(new SQLException("Mocked Exception"));
 
         User user = new User("id", "name", "email", "pass");
-        userRepo.create(user);
+        userRepo.save(user);
         userRepo.findById("id");
         userRepo.findAll();
         userRepo.update(user);
         userRepo.delete("id");
 
         Project proj = new Project("id", "name", "desc");
-        projectRepo.create(proj);
+        projectRepo.save(proj);
         projectRepo.findById("id");
         projectRepo.findAll();
         projectRepo.update(proj);
         projectRepo.delete("id");
 
         Task task = new Task("id", "title", "desc");
-        taskRepo.create(task);
+        taskRepo.save(task);
         taskRepo.findById("id");
         taskRepo.findAll();
         taskRepo.update(task);
         taskRepo.delete("id");
+    }
+
+    @Test
+    void testConstructorSQLExceptions() {
+        org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> {
+            new MySQLUserRepository() {
+                @Override protected Connection getConnection() throws SQLException { throw new SQLException("Mock Constructor Ex"); }
+            };
+            new MySQLProjectRepository() {
+                @Override protected Connection getConnection() throws SQLException { throw new SQLException("Mock Constructor Ex"); }
+            };
+            new MySQLTaskRepository() {
+                @Override protected Connection getConnection() throws SQLException { throw new SQLException("Mock Constructor Ex"); }
+            };
+        });
     }
 }

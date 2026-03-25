@@ -33,7 +33,7 @@ public class TaskServiceTest {
         String desc = "Write all the missing Doxygen comments";
 
         taskService.registerTask(id, title, desc);
-        verify(taskRepositoryMock, times(1)).create(any(Task.class));
+        verify(taskRepositoryMock, times(1)).save(any(Task.class));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class TaskServiceTest {
             taskService.registerTask("ID", "Title", null);
         });
 
-        verify(taskRepositoryMock, never()).create(any(Task.class));
+        verify(taskRepositoryMock, never()).save(any(Task.class));
     }
 
     @Test

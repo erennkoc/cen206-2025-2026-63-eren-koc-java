@@ -1,0 +1,38 @@
+class User {
+  id;
+  username;
+  email;
+  password;
+  
+  1 -- * Task assignedTasks;
+}
+
+class Project {
+  id;
+  name;
+  description;
+  
+  1 -- * Task projectTasks;
+}
+
+class Task {
+  id;
+  title;
+  description;
+  status;
+}
+
+// Associations and constraints
+association {
+  0..1 User assignedUser <---- Task assignedTasks;
+}
+
+association {
+  1 Project project <---- * Task projectTasks;
+}
+
+enum TaskStatus {
+  TODO,
+  IN_PROGRESS,
+  DONE
+}

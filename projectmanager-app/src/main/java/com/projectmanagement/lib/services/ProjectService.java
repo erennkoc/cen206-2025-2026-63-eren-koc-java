@@ -38,7 +38,7 @@ public class ProjectService {
         }
 
         Project newProject = new Project(id, name, description);
-        projectRepository.create(newProject);
+        projectRepository.save(newProject);
     }
 
     /**

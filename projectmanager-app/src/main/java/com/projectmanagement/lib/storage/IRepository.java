@@ -13,7 +13,7 @@ public interface IRepository<T> {
      * Creates a new entity in the repository.
      * @param entity The entity object to be saved.
      */
-    void create(T entity);
+    void save(T entity);
 
     /**
      * Retrieves an entity by its unique identifier.

@@ -80,7 +80,7 @@ class SQLiteRepositoryTest {
     @Test
     void testUserCrud() throws Exception {
         User user = new User("u-s1", "SName", "s@name.com", "spass");
-        userRepo.create(user);
+        userRepo.save(user);
         
         User foundUser = userRepo.findById("u-s1");
         assertNotNull(foundUser);
@@ -99,7 +99,7 @@ class SQLiteRepositoryTest {
     void testProjectCrud() throws Exception {
         Project proj = new Project("p-s1", "PName", "pdesc");
         proj.addTask(new Task("mockTask1", "Title", "Desc"));
-        projectRepo.create(proj);
+        projectRepo.save(proj);
         
         Project foundProj = projectRepo.findById("p-s1");
         assertNotNull(foundProj);
@@ -120,7 +120,7 @@ class SQLiteRepositoryTest {
         
         Task task = new Task("t-s1", "TName", "tdesc");
         task.setStatus(TaskStatus.TODO);
-        taskRepo.create(task);
+        taskRepo.save(task);
         
         Task foundTask = taskRepo.findById("t-s1");
         assertNotNull(foundTask);
@@ -140,24 +140,39 @@ class SQLiteRepositoryTest {
         when(mockConn.createStatement()).thenThrow(new SQLException("Mocked Exception"));
 
         User user = new User("id", "name", "email", "pass");
-        userRepo.create(user);
+        userRepo.save(user);
         userRepo.findById("id");
         userRepo.findAll();
         userRepo.update(user);
         userRepo.delete("id");
 
         Project proj = new Project("id", "name", "desc");
-        projectRepo.create(proj);
+        projectRepo.save(proj);
         projectRepo.findById("id");
         projectRepo.findAll();
         projectRepo.update(proj);
         projectRepo.delete("id");
 
         Task task = new Task("id", "title", "desc");
-        taskRepo.create(task);
+        taskRepo.save(task);
         taskRepo.findById("id");
         taskRepo.findAll();
         taskRepo.update(task);
         taskRepo.delete("id");
+    }
+
+    @Test
+    void testConstructorSQLExceptions() {
+        org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> {
+            new SQLiteUserRepository() {
+                @Override protected Connection getConnection() throws SQLException { throw new SQLException("Mock Constructor Ex"); }
+            };
+            new SQLiteProjectRepository() {
+                @Override protected Connection getConnection() throws SQLException { throw new SQLException("Mock Constructor Ex"); }
+            };
+            new SQLiteTaskRepository() {
+                @Override protected Connection getConnection() throws SQLException { throw new SQLException("Mock Constructor Ex"); }
+            };
+        });
     }
 }

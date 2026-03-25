@@ -43,7 +43,7 @@ public class UserService {
 
         String hashedPassword = hashPassword(plainPassword);
         User newUser = new User(id, username, email, hashedPassword);
-        userRepository.create(newUser);
+        userRepository.save(newUser);
     }
 
     /**

@@ -42,7 +42,7 @@ public class MySQLUserRepository implements IRepository<User> {
      * @param entity The User to save.
      */
     @Override
-    public void create(User entity) {
+    public void save(User entity) {
         String sql = "INSERT INTO users(id, username, email, password) VALUES(?, ?, ?, ?)";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

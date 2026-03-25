@@ -25,7 +25,7 @@ class BinaryRepositoryTest {
     @Test
     void testUserCrud() {
         User user = new User("u-b1", "BName", "b@name.com", "bpass");
-        userRepo.create(user);
+        userRepo.save(user);
         assertNotNull(userRepo.findById("u-b1"));
         
         user.setUsername("BName2");
@@ -42,7 +42,7 @@ class BinaryRepositoryTest {
     @Test
     void testProjectCrud() {
         Project proj = new Project("p-b1", "PName", "pdesc");
-        projectRepo.create(proj);
+        projectRepo.save(proj);
         assertNotNull(projectRepo.findById("p-b1"));
         
         proj.setName("PName2");
@@ -60,7 +60,7 @@ class BinaryRepositoryTest {
     void testTaskCrud() {
         Task task = new Task("t-b1", "TName", "tdesc");
         task.setStatus(TaskStatus.TODO);
-        taskRepo.create(task);
+        taskRepo.save(task);
         assertNotNull(taskRepo.findById("t-b1"));
         
         task.setTitle("TName2");
@@ -95,9 +95,9 @@ class BinaryRepositoryTest {
         java.nio.file.Files.deleteIfExists(taskFile);
         java.nio.file.Files.createDirectory(taskFile);
 
-        userRepo.create(new User("id", "u", "e", "p"));
-        projectRepo.create(new Project("id", "p", "d"));
-        taskRepo.create(new Task("id", "t", "t"));
+        userRepo.save(new User("id", "u", "e", "p"));
+        projectRepo.save(new Project("id", "p", "d"));
+        taskRepo.save(new Task("id", "t", "t"));
 
         // Cleanup the directories so other tests can pass
         java.nio.file.Files.deleteIfExists(userFile);

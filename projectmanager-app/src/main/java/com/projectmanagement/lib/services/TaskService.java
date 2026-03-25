@@ -38,7 +38,7 @@ public class TaskService {
         }
 
         Task newTask = new Task(id, title, description);
-        taskRepository.create(newTask);
+        taskRepository.save(newTask);
     }
 
     /**
