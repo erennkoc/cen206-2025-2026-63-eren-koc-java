@@ -1,0 +1,35 @@
+﻿
+>     [["]-reporttypes:<Badges|cjson
+|Clover|...>[;<Badges|cjson|Clover|.
+..>]["]]"
+      [["]-sourcedirs:<directory>[;<
+directory>][;<directory>]["]]
+      [["]-historydir:<history direc
+tory>["]]
+      [["]-plugins:<plugin>[;<plugin
+>][;<plugin>]["]]
+      [["]-assemblyfilters:<(+|-)fil
+ter>[;<(+|-)filter>][;<(+|-)filter>]
+["]]
+      [["]-classfilters:<(+|-)filter
+>[;<(+|-)filter>][;<(+|-)filter>]["]
+]
+>    -reporttypes:Html
+     -assemblyfilters:+*
+     -classfilters:+*
+     -filefilters:+*
+     -riskhotspotassemblyfilters:+*
+     -riskhotspotclassfilters:+*
+>    "-reports:target\*\*.xml" "-tar
+getdir:C:\report" -reporttypes:Latex
+;HtmlSummary -title:IntegrationTest 
+-tag:v1.4.5
+     "-reports:coverage1.xml;coverag
+e2.xml" "-targetdir:report" "-source
+dirs:C:\MyProject" -plugins:CustomRe
+ports.dll
+     "-reports:coverage.xml" "-targe
+tdir:C:\report" "-assemblyfilters:+I
+ncluded;-Excluded.*"
+
+

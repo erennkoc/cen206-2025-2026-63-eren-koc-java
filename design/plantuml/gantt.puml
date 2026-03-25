@@ -9,12 +9,12 @@ Project starts 2026-02-15
 [Arch] starts at [Req]'s end
 [Core Implementation (Sprint 1)] as [Sprint1] lasts 14 days
 [Sprint1] starts at [Arch]'s end
-[Midterm Release & Docs] as [Midterm] occurs at [Sprint1]'s end
+[Midterm Release & Docs] as [Midterm] happens at [Sprint1]'s end
 [Advanced Features (Sprint 2)] as [Sprint2] lasts 14 days
 [Sprint2] starts at [Midterm]'s end
 [Final Testing & QA] as [QA] lasts 5 days
 [QA] starts at [Sprint2]'s end
-[Final Release] occurs at [QA]'s end
+[Final Release] happens at [QA]'s end
 
 [Req] is colored in LightBlue
 [Sprint1] is colored in Green

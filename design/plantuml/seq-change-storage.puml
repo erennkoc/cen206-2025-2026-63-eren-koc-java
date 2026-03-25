@@ -1,4 +1,4 @@
-@startuml seq-change-storage
+@startuml
 actor User as U
 participant "Main Console" as UI
 participant "StorageConfig" as SC

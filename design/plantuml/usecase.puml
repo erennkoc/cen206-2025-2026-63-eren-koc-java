@@ -1,4 +1,4 @@
-@startuml usecase
+@startuml
 actor User as U
 rectangle "Project Management Console App" {
     usecase "Manage Projects\n(Add, Update, Delete, List)" as UC1

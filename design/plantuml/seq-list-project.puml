@@ -1,4 +1,4 @@
-@startuml seq-list-project
+@startuml
 actor User as U
 participant "Main Console" as UI
 participant "ProjectService" as PS

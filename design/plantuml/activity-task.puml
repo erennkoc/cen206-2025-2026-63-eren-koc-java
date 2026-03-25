@@ -1,4 +1,4 @@
-@startuml activity-task
+@startuml
 start
 :User selects Task Management from Main Menu;
 if (Action?) then (Add Task)

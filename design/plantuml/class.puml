@@ -1,4 +1,4 @@
-@startuml ProjectManager Class Diagram
+@startuml
 skinparam classAttributeIconSize 0
 
 package com.projectmanagement.lib.models {
