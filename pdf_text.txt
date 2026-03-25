@@ -1,0 +1,2540 @@
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+1 
+ 
+Recep Tayyip Erdogan University 
+Faculty of Engineering and Architecture 
+Computer Engineering Department 
+ 
+CEN206 — Object Oriented Programming 
+Term Project Guideline & Evaluation Manual 
+Spring Semester, 2025–2026 
+ 
+Instructor 
+Asst. Prof. Dr. Uğur CORUH 
+Contact 
+ugur.coruh@erdogan.edu.tr 
+Publish Date 
+05 March 2026 (Friday) 
+Midterm Submission Due 
+27 March 2026 (Friday)  —  08:00  (in-office review) 
+Final Submission Due 
+29 May 2026 (Friday)  —  08:00  (in-office review) 
+Programming Language 
+Java (JDK 11 or 17 preferred) 
+Build System 
+Maven  +  Eclipse IDE 
+Midterm Phase 
+Console Application  (A1 × 60%  +  A2 × 40%) 
+Final Phase 
+Swing GUI Extension of the same application  (F1 × 70%  +  F2 × 30%) 
+Minimum Coverage 
+Midterm: 100% JUnit5 + 100% Doxygen  |  Final: ≥80% JUnit5 + 100% 
+Doxygen 
+ 
+Complete the following project requirements according to the project plan, prepare them in the format given in this 
+document by the stated deadlines, and upload the single ZIP archive to the related assignment on Microsoft Teams. 
+ 
+ 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+2 
+1. PROJECT DESCRIPTION 
+In this term project you will collaboratively design and develop a Java application demonstrating core Object-Oriented 
+Programming principles. The same application evolves across two phases: 
+ 
+MIDTERM — Console Application 
+FINAL — Swing GUI Extension 
+Core Requirements 
+• Console-based menu with keyboard navigation 
+(arrow / tab) 
+• Separate library (lib) and application (app) layers 
+• Storage Layer — ALL THREE backends required, 
+switchable at runtime from within the application 
+(Settings screen or config menu): Binary File I/O 
+(.bin/.dat), SQLite (JDBC), MySQL (Docker 
+Compose). Implemented via IRepository<T> 
+interface + RepositoryFactory. 
+• OOP 4 principles demonstrably applied (LO.1–
+LO.3) 
+• JUnit5 unit tests — 100% coverage 
+• Doxygen documentation — 100% coverage 
+Design Documents 
+• PlantUML: Class + Sequence (≥3) + Use-Case + 
+Activity (per use-case) + State (if applicable) + ER 
+Diagram + Gantt (.puml — all committed) 
+• C4 Model: Context + Container + Component 
+diagrams (.puml) 
+• UMPLE: domain class model (.ump) 
+• Figma: wireframes for ALL console screens (every 
+menu, input screen, output screen, error screen) 
+— label set as Console Screens 
+• draw.io: Deployment diagram — app modules, 
+JVM, file system, external dependencies (.drawio 
+committed + PNG exported) 
+• ProjectLibre: Gantt chart covering both phases 
+(.xml) 
+GUI Extension (same project, new layer) 
+• Swing GUI — extends console app without 
+rewriting logic 
+• MVC pattern: strict separation of UI and business 
+logic 
+• Event handling, input validation, error dialogs 
+• Windows + WSL/Linux cross-platform 
+compatibility 
+• Design patterns min. 3 (Creational + Structural + 
+Behavioral) 
+• Code smell detection & refactoring (min. 3 smells) 
+• GitHub Actions CI/CD pipeline (badge in README) 
+Updated Design Documents 
+• PlantUML: update Class diagram (Swing classes); 
+add Sequence diagrams for GUI flows; update 
+Activity, C4, and Gantt diagrams 
+• C4 Model: update Container + Component to 
+reflect Swing layer 
+• UMPLE: extend model with GUI-triggered 
+transitions 
+• Figma: add ALL Swing GUI screen wireframes 
+(separate section from Console screens); annotate 
+plan-vs-actual differences 
+• draw.io: update Deployment diagram — add 
+Swing GUI layer and any new runtime modules 
+• ProjectLibre: mark milestones, update actual dates 
+ 
+ℹ  Project Constraints (MÜDEK Ölçüt 5.5 — PÇ.3) 
+• Your application must address at least ONE realistic constraint: budget limits, time pressure, user 
+accessibility, data security, regulatory compliance, or privacy. 
+• Document the chosen constraint in your project report and explain how your design decisions respond to 
+it. 
+• Where applicable, reference an engineering standard (e.g. IEEE 730 for quality assurance, ISO/IEC 25010 
+for software quality characteristics). 
+ 
+ 
+2. ASSESSMENT STRUCTURE 
+The project grade is composed of the following components. MÜDEK v3.0 Ölçüt 3.2 requires Skill-category outcomes to 
+be evidenced by practical project outputs, not solely by written exams. 
+ 
+Component 
+Description 
+Weight 
+LOs Measured 
+MÜDEK Evidence Type 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+3 
+A1 
+Midterm Project — Console App + 
+All Design Documents 
+60% 
+LO.1, LO.2, LO.3 
+Console app, PlantUML (all 
+UML + C4 + Gantt), UMPLE 
+(.ump), Figma (console 
+screens), draw.io 
+(Deployment), ProjectLibre 
+(.xml), JUnit5, Doxygen PDF 
+A2 
+Quiz — Theory + Application 
+40% 
+LO.1–LO.5 
+Written exam (application / 
+analysis level) 
+MID-SEMESTER TOTAL  40%   ·   END-OF-SEMESTER TOTAL  60% 
+F1 
+Final Project — Swing GUI 
+Extension + Updated Design 
+Documents 
+70% 
+LO.1–LO.7 
+Swing GUI app, updated 
+PlantUML (UML + C4 + 
+Gantt), UMPLE, Figma (GUI 
+screens), draw.io (updated 
+Deployment), design 
+patterns, refactoring log, 
+CI/CD 
+F2 
+Final Quiz — Comprehensive 
+30% 
+LO.1–LO.7 
+Written exam (analysis / 
+synthesis level) 
+ 
+ℹ  MÜDEK v3.0 Evidence Notes 
+• Skill outcomes (LO.2–LO.7): project output is the primary evidence — quiz grade alone is insufficient. 
+• A1 (Midterm) and F1 (Final) project submissions serve as the primary Skill evidence for their respective 
+LOs. 
+• Design documents (PlantUML, UMPLE, Figma, draw.io, ProjectLibre) are required at Midterm and must be 
+updated at Final. 
+• The project also develops teamwork (PÇ.6), written/oral communication (PÇ.8), and project management 
+(PÇ.12) skills through collaborative work, reports, presentations, and Gantt planning. 
+ 
+ 
+3. LEARNING OUTCOMES (LO — MÜDEK v3.0) 
+The table below shows each Learning Outcome with its Bloom taxonomy level, MÜDEK v3.0 Knowledge / Skill category, 
+and the assessment components that measure it. 
+ 
+LO 
+Learning Outcome (MÜDEK v3.0) 
+Bloom 
+Category 
+A1 
+A2 
+F1 
+F2 
+LO.1 
+Explains OOP fundamentals 
+(encapsulation, inheritance, 
+polymorphism, abstraction) and their 
+advantages. 
+Understand 
+Knowledge 
+✓ 
+✓ 
+✓ 
+✓ 
+LO.2 
+Designs and implements classes, objects, 
+and methods in Java (constructors, 
+access modifiers, static members). 
+Apply 
+Skill 
+✓ 
+✓ 
+✓ 
+✓ 
+LO.3 
+Applies inheritance and polymorphism 
+(abstract classes, interfaces, method 
+overriding) for code reusability. 
+Apply 
+Skill 
+✓ 
+✓ 
+✓ 
+✓ 
+LO.4 
+Uses exception-handling mechanisms 
+(try-catch) to manage runtime errors. 
+Apply 
+Skill 
+— 
+✓ 
+✓ 
+✓ 
+LO.5 
+Creates type-independent, reusable 
+components using Java Generics. 
+Analyze 
+Skill 
+— 
+✓ 
+✓ 
+✓ 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+4 
+LO.6 
+Implements a pluggable storage layer 
+supporting Binary File I/O, SQLite, and 
+MySQL — all three switchable at runtime 
+from within the application (Repository + 
+Strategy pattern); uses Java Collections 
+Framework; produces a PlantUML ER 
+diagram. 
+Apply 
+Skill 
+— 
+— 
+✓ 
+✓ 
+LO.7 
+Develops maintainable, extensible 
+software using SOLID principles, design 
+patterns (min. 3), and refactoring. 
+Synthesize 
+Skill 
+— 
+— 
+✓ 
+✓ 
+ 
+4. REQUIRED TOOLS 
+All tools below are mandatory. Design tools (PlantUML, UMPLE, Figma, draw.io, ProjectLibre) must be used starting 
+from the Midterm phase — not deferred to Final. 
+ 
+Tool 
+Purpose 
+Output Format 
+When Required / Rule 
+PlantUML 
+ALL UML diagrams (Class, 
+Sequence, Use-Case, Activity, 
+State, Component, Object, 
+Package) + C4 Model 
+(Context/Container/Component) 
++ Gantt + ER Diagram 
+(@startuml entity) 
+.puml source + PNG 
+export per diagram 
+Required from Midterm — commit every 
+.puml; export PNG for report; C4-
+PlantUML library for C4 diagrams; 
+@startgantt for Gantt 
+C4 Model 
+(PlantUML C4) 
+Architecture diagrams: System 
+Context, Container, Component 
+levels 
+C4Context / 
+C4Container / 
+C4Component 
+.puml + PNG 
+Required from Midterm — use C4-
+PlantUML library; commit .puml to 
+GitHub 
+UMPLE 
+Model-driven dev, state 
+machine / class models 
+.ump model file 
+Required from Midterm — commit .ump 
+to GitHub 
+Figma 
+Screen wireframes — Console 
+screens (Midterm) AND Swing 
+GUI screens (Final) designed 
+separately 
+PNG or PDF export 
+per screen set 
+Required from Midterm: ALL console 
+screens; required from Final: ALL Swing 
+GUI screens; label each screen set clearly 
+draw.io 
+(diagrams.net) 
+System architecture — 
+Deployment view only (modules, 
+JVM, file system, external 
+dependencies) 
+.drawio source + 
+PNG export 
+Required from Midterm — 1 
+Deployment diagram; .drawio 
+committed + PNG exported 
+ProjectLibre 
+Gantt chart, work breakdown 
+structure 
+.xml project file 
+Required from Midterm — commit .xml 
+to GitHub 
+Maven + 
+JUnit5 
+Build, test, coverage automation 
+JaCoCo HTML 
+report 
+100% coverage; HTML report in ZIP 
+Doxygen 
+Source code documentation 
+PDF only 
+Do NOT submit HTML folder 
+GitHub 
+Actions 
+CI/CD pipeline, automated 
+testing 
+.yml workflow 
+Required from Final — 
+.github/workflows/ in repo 
+ 
+🎨  Design-First Workflow 
+• PlantUML class diagram must be drafted before writing any class code. 
+• C4 Model (Context → Container → Component) must be produced at Midterm using the C4-PlantUML 
+library. C4 gives reviewers a layered architecture view that UML alone cannot provide. 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+5 
+• Figma wireframes are required in two separate sets: Console screens at Midterm (before any coding), 
+Swing GUI screens at Final (before GUI implementation). Both sets must cover every screen including error 
+and empty-state screens. 
+• draw.io shows the Deployment view — how modules, JVM, file system, and external tools are connected 
+at runtime. It complements C4 (logical architecture) with physical deployment detail. 
+• UMPLE model must reflect the domain structure; update it when new classes are added at Final. 
+• ProjectLibre Gantt must cover both phases from day one; update actual dates as the project progresses. 
+ 
+ 
+5. PROJECT SELECTION 
+Project ideas are listed in the course project guide. Open the link below, browse the appendix, and choose one 
+application. No two teams may select the same project — first-come first-served via the shared selection spreadsheet 
+on Microsoft Teams. 
+ 
+ℹ  Project Guide (Appendix — Application List) 
+•    https://ucoruh.github.io/ce204-object-oriented-programming/project-guide/ 
+• Open the link above, go to the Appendix section, and choose one application idea. 
+• Record your selection in the shared team spreadsheet on Microsoft Teams before starting work. 
+ 
+ 
+• Team Size: Up to 4 members. Individual work is also permitted. 
+• No Changes: Once work begins, team composition cannot be altered. 
+• No Overlap: Senior and junior students may not form teams together. 
+• No Reuse: Projects from previous terms or other courses may not be reused. 
+• Approval: Submit your project selection and Gantt plan to the instructor before coding begins. 
+• Constraint: State at least one realistic constraint your project addresses (see Section 1). 
+ 
+6. MIDTERM PHASE — Console Application 
+6.1 Application Requirements 
+• Modular Architecture: Separate library (lib) and application (app) layers. App calls lib. 
+• Console UI: Keyboard-navigable menus (arrow keys / Tab). Not number-entry only. 
+• Storage Architecture — IRepository Pattern (all 3 required): lib module defines IRepository<T> interface (save, 
+findById, findAll, update, delete). Three implementations: BinaryRepository<T> (Serializable + 
+ObjectOutputStream/.bin), SqliteRepository<T> (org.xerial:sqlite-jdbc/.db), MySqlRepository<T> (mysql-
+connector-j + Docker Compose). RepositoryFactory returns active backend. User switches from Settings screen 
+at runtime — no restart required. 
+• ER Diagram (all choices): Mandatory regardless of storage choice — PlantUML @startuml entity notation; 
+shows entities, attributes, primary/foreign keys, cardinality. Committed as design/plantuml/er.puml + er.png. 
+• OOP 4 Principles: Encapsulation, inheritance, polymorphism, abstraction demonstrably applied (LO.1–LO.3). 
+• Coverage: 100% JUnit5 unit test coverage and 100% Doxygen documentation coverage. 
+ 
+6.2 Design Documents — Required at Midterm 
+🎨  These documents are checked at the first review. Missing design docs = criteria not met. 
+• PlantUML Class Diagram: all domain classes, relationships (inheritance, association, aggregation, 
+composition). 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+6 
+• PlantUML Sequence Diagrams: at least 3 key use cases as .puml files. 
+• draw.io Deployment Diagram: shows app modules, JVM, file system, and external dependencies (.drawio 
+committed + PNG exported). 
+• PlantUML Use-Case Diagram: all actors and system use cases. 
+• C4 Model Diagrams: System Context (level 1), Container (level 2), Component (level 3) — use C4-
+PlantUML library; commit .puml files. 
+• UMPLE Model (.ump): domain class model — at minimum covers the entity hierarchy. 
+• PlantUML ER Diagram (er.puml): all entities, attributes (PK/FK marked), cardinality — covers Binary, 
+SQLite, and MySQL schemas (same logical model). 
+• IRepository<T> interface + RepositoryFactory design documented in report (class diagram must show all 
+three implementations). 
+• Figma Wireframes: ALL screens planned for the Final Swing GUI — design before you code. 
+• ProjectLibre Gantt: covers both Midterm and Final phases; tasks assigned to team members. 
+ 
+ 
+6.3 Midterm Deliverables 
+All items below must be present in the GitHub repository AND in the GitHub Release before the review on 27 March 
+2026 at 08:00. 
+ 
+# 
+Deliverable 
+Format 
+Rule / Tool 
+1 
+PlantUML Class Diagram 
+design/plantuml/class.puml + 
+class.png 
+.puml (committed) .png 
+(export) 
+All domain classes, attributes, methods, 
+relationships 
+2 
+PlantUML Sequence Diagrams (min. 3) 
+design/plantuml/seq-*.puml + *.png 
+.puml (committed) .png 
+(export) 
+One .puml file per use case scenario 
+3 
+PlantUML Use-Case Diagram 
+design/plantuml/usecase.puml + 
+usecase.png 
+.puml (committed) .png 
+(export) 
+All actors and system use cases 
+4 
+C4 Model — Context + Container + 
+Component design/c4/c4-
+context.puml, c4-container.puml, c4-
+component.puml 
+.puml (committed) .png 
+(export) 
+C4-PlantUML library; all 3 levels 
+required 
+5 
+UMPLE Domain Model 
+design/umple/model.ump 
+.ump (committed) 
+Minimum: entity class hierarchy; state 
+machine if applicable 
+6 
+Figma Wireframes — Console screens 
+(ALL menus, input, output, error 
+screens) design/figma/console/ 
+PNG or PDF exports 
+Labelled 'Console Screens'; every 
+screen state included; annotated 
+7 
+draw.io Deployment Diagram 
+design/drawio/deployment.drawio 
+.drawio (committed) + 
+PNG export 
+Modules, JVM boundary, file system, 
+external tools/deps shown 
+8 
+PlantUML Gantt Chart — both phases 
+design/plantuml/gantt.puml + 
+gantt.png 
+.puml (committed) + 
+PNG export 
+@startgantt syntax; Midterm + Final 
+milestones; tasks assigned to members 
+9 
+ProjectLibre Project Plan 
+design/projectlibre/project.xml 
+.xml (committed) 
+WBS tasks assigned to members; 
+matches Gantt milestones 
+8 
+JUnit5 + JaCoCo Coverage Report 
+(100%) test-coverage/ 
+JaCoCo HTML in repo 
+tar.gz in Release 
+Run: mvn test jacoco:report 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+7 
+9 
+Doxygen Documentation 
+docs/doxygen-lib.pdf  +  
+docs/doxygen-test.pdf 
+PDF only (committed) 
+tar.gz in Release 
+Do NOT commit HTML folder; 100% 
+coverage 
+10 
+Midterm Project Report 
+report/cen206-hw-name-
+surname.docx 
+.docx (committed) 
+Cover page: GitHub URL, team 
+members, constraint statement 
+12 
+GitHub Issues & Project Board 
+(Kanban) Backlog / In Progress / In 
+Review / Done 
+GitHub Projects board 
+All Issues created, labeled, assigned to 
+milestones; board visible 
+13 
+GitHub Release  (tag: midterm-v1.0.0) 
+GitHub Release + all 
+tar.gz files 
+Release must include all 9 Maven tar.gz 
+artefacts 
+ 
+7. FINAL PHASE — Swing GUI Extension 
+7.1 Application Requirements 
+• Same Project, New Layer: Extend your console application with a Swing GUI. Do NOT rewrite business logic. 
+• MVC Pattern: Strict separation between View (Swing), Controller, and Model (lib). The console layer must still 
+work independently. 
+• All Console Screens → GUI: Every functional screen you designed in Figma at Midterm must be implemented in 
+Swing. 
+• Swing Components: Use appropriate components (JFrame, JPanel, JTable, JList, JDialog, JMenuBar, etc.) with 
+proper layout managers. 
+• Event Handling: All user actions must be handled; input validation and error dialogs required. 
+• Design Patterns: Min. 3 patterns from different categories. Observer is strongly recommended for Swing event 
+propagation. 
+• Code Smell & Refactoring: Identify ≥ 3 code smells; refactor; show before/after in the report. 
+• CI/CD: GitHub Actions pipeline: automated build + test on every push; CI badge visible in README. 
+• Cross-Platform: Must run on Windows and WSL/Linux. 
+ 
+7.2 Final Deliverables 
+All items below must be present in the GitHub repository AND in the GitHub Release before the review on 29 May 2026 
+at 08:00. Every design document from Midterm must be updated — do not resubmit unchanged files. 
+ 
+# 
+Deliverable 
+Format 
+Rule / Tool 
+1 
+Updated PlantUML Class Diagram (GUI 
+classes added) 
+design/plantuml/class.puml + 
+class.png 
+.puml (committed) .png 
+(export) 
+Add Swing view classes; update 
+relationships 
+2 
+Updated PlantUML Sequence 
+Diagrams (GUI flows) 
+design/plantuml/seq-gui-*.puml + 
+*.png 
+.puml (committed) .png 
+(export) 
+New sequences for Swing event flows 
+(min. 2 new) 
+3 
+Updated C4 Model (Swing layer in 
+Container/Component) design/c4/c4-
+container.puml, c4-component.puml 
+.puml (committed) .png 
+(export) 
+Container: add Swing UI; Component: 
+show MVC split 
+4 
+Updated UMPLE Model (GUI-triggered 
+transitions) design/umple/model.ump 
+.ump (committed) 
+Extend with state transitions triggered 
+by GUI events 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+8 
+4b 
+PlantUML ER Diagram (updated with 
+any schema changes) 
+design/plantuml/er.puml + er.png 
+.puml (committed) + 
+PNG export 
+Entities, attributes, PK/FK, cardinality — 
+updated if storage schema changed at 
+Final 
+5 
+Finalised Figma Wireframes — Swing 
+GUI screens (ALL screens) 
+design/figma/gui/ 
+PNG or PDF exports 
+Labelled 'GUI Screens'; annotate plan-
+vs-actual differences per screen 
+6 
+Updated draw.io Deployment Diagram 
+(Swing layer added) 
+design/drawio/deployment.drawio 
+.drawio (committed) + 
+PNG export 
+Swing UI layer visible; updated 
+dependencies 
+7 
+Updated PlantUML Gantt (actual dates 
+marked) design/plantuml/gantt.puml + 
+gantt.png 
+.puml (committed) + 
+PNG export 
+Actual vs. planned dates annotated; 
+Final milestones completed 
+8 
+Updated ProjectLibre Project Plan 
+(actual dates) 
+design/projectlibre/project.xml 
+.xml (committed) 
+Actual dates recorded; matches 
+updated Gantt 
+7 
+Design Patterns Report (min. 3 
+categories) → section in Final Report 
+Report section 
+Intent + location in code + rationale per 
+pattern 
+8 
+Code Smell & Refactoring Log (min. 3 
+smells) → section in Final Report 
+Report section 
+Before/after code snippets; tool used 
+to detect 
+9 
+JUnit5 + JaCoCo Coverage Report 
+(≥80%) test-coverage/ 
+JaCoCo HTML in repo 
+tar.gz in Release 
+CI pipeline must also pass on GitHub 
+Actions 
+10 
+GitHub Actions CI/CD Pipeline 
+.github/workflows/ci.yml 
+.yml (committed) CI 
+badge in README 
+Automated build + test on every push 
+to main 
+11 
+Doxygen Documentation (updated) 
+docs/doxygen-lib.pdf  +  
+docs/doxygen-test.pdf 
+PDF only (committed) 
+tar.gz in Release 
+Update for all new classes; 100% 
+coverage 
+12 
+Final Project Report report/cen206-
+hw-name-surname.docx 
+.docx (committed) 
+All sections: architecture, OOP, 
+patterns, Swing, constraint, GitHub URL 
+13 
+Presentation Deck (max 10 slides) 
+presentation/slides.pptx or .pdf 
+.pptx or .pdf 
+(committed) 
+Architecture evolution, OOP decisions, 
+live demo screenshots 
+14 
+Video Presentation (.mp4, max 4 
+min/member) video/video-name-
+surname.mp4 
+In Teams ZIP only Do 
+NOT commit to GitHub 
+Each member records and explains 
+their own contribution 
+16 
+CHANGELOG.md CHANGELOG.md in 
+repo root 
+Markdown 
+(committed) 
+Sections: [2.0.0] and [1.0.0]; Added / 
+Changed / Fixed per release 
+17 
+Ethics & Social Impact Package → in 
+Final Report + LICENSE file in repo 
+Report section + 
+LICENSE file 
+Social Impact table; IEEE/ACM clause 
+references; AI Tool Declaration; 
+dependency license list; contributor 
+table 
+18 
+Retrospective (in Final Report) → 
+section in Final Report 
+Report section 
+What went well, what to improve, 
+lessons learned about team workflow 
+19 
+GitHub Release  (tag: final-v2.0.0) 
+GitHub Release + all 
+tar.gz files 
+Release must include all 9 Maven tar.gz 
+artefacts 
+ 
+8. SUBMISSION RULES 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+9 
+8.1 What Goes Where 
+There is exactly ONE submission to Microsoft Teams: a single ZIP file. Everything goes in this ZIP — including videos. The 
+only exception: video files must NOT be committed to the GitHub repository (file size). See table in Section 8.4. 
+ 
+ℹ  Submission Rule — Simple Version 
+• GitHub Repository (private): source code + design docs + report + presentation + test coverage. No 
+videos. 
+• GitHub Release (midterm-v1.0 / final-v1.0): Maven tar.gz build artefacts attached to the release. 
+• Microsoft Teams: ONE ZIP file → release tar.gz files + video/ + report/ + presentation/. 
+• The project report MUST show the GitHub repository URL on its cover page. 
+ 
+ 
+8.2 GitHub Repository Structure 
+Every file below must be present in the repository before the submission deadline. Design document source files (.puml, 
+.ump, .xml) must also be committed — not just their exports. 
+ 
+GitHub Repository Structure 
+Contents 
+cen206-hw-name-surname-java/ 
+GitHub repository root (clone from GitHub) 
+├── src/ 
+Java source — app / lib / test modules 
+├── pom.xml 
+Maven build file 
+├── .github/workflows/ 
+GitHub Actions CI/CD pipeline (.yml) 
+├── README.md 
+README with CI badge 
+├── .gitignore 
+Excludes target/, .class, .jar, IDE caches 
+├── report/ 
+cen206-hw-name-surname.docx (project report — must include GitHub repo 
+URL) 
+├── presentation/ 
+Slide deck (.pptx or .pdf, max 10 slides) 
+├── video/ 
+⚠ DO NOT commit videos to GitHub — add to ZIP only before Teams upload 
+├── docs/ 
+Doxygen PDF only (no HTML folders) 
+├── design/plantuml/ 
+PlantUML .puml source files + PNG exports (Class, Sequence, Use-Case, 
+Activity, State, C4, Gantt, ER — all in one folder) 
+├── design/c4/ 
+C4 Model .puml files + PNG (Context/Container/Component) — uses C4-
+PlantUML library 
+├── design/umple/ 
+UMPLE .ump model files 
+├── design/figma/console/ 
+Figma Console screen wireframe exports — PNG/PDF (ALL console screens) 
+├── design/figma/gui/ 
+Figma Swing GUI screen wireframe exports — PNG/PDF (ALL GUI screens) 
+├── design/drawio/ 
+draw.io Deployment diagram — deployment.drawio + PNG export 
+├── design/projectlibre/ 
+ProjectLibre project plan — project.xml 
+├── docker-compose.yml 
+MySQL backend — Docker Compose service definition 
+└── test-coverage/ 
+JaCoCo HTML coverage report 
+ 
+8.3 GitHub Release Artefacts 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+10 
+Create a GitHub Release (tag midterm-v1.0 or final-v1.0). Maven generates the following tar.gz files automatically — 
+attach all of them to the Release. 
+ 
+GitHub Release File (tag: midterm-
+v1.0 / final-v1.0) 
+Contents 
+windows-release-binaries.tar.gz 
+Compiled release binaries for Windows 
+windows-debug-binaries.tar.gz 
+Debug build binaries for Windows 
+windows-publish-binaries.tar.gz 
+Published (self-contained) binaries for Windows 
+windows-doxygen-lib-documentation.tar.gz 
+Doxygen documentation — library module 
+windows-doxygen-test-documentation.tar.gz 
+Doxygen documentation — test module 
+windows-lib-doc-coverage-report.tar.gz 
+Documentation coverage report — library 
+windows-test-coverage-report.tar.gz 
+JaCoCo unit test coverage report 
+windows-test-doc-coverage-report.tar.gz 
+Combined test + documentation coverage report 
+windows-test-results-report.tar.gz 
+JUnit5 test results (XML + HTML) 
+ 
+8.4 Microsoft Teams Submission — Single ZIP 
+Create ONE ZIP file locally and upload it to the Teams assignment. This is the only file you submit to Teams. Name it: 
+cen206-hw-name-surname.zip 
+ 
+Contents of  cen206-hw-name-
+surname.zip 
+Notes 
+release/  →  all tar.gz artefacts 
+Download from your GitHub Release page and copy here 
+video/  →  video-name-surname.mp4 
+One .mp4 per member, max 4 min. Add here — do NOT commit to 
+GitHub 
+report/  →  cen206-hw-name-
+surname.docx 
+Must show GitHub repo URL on cover page 
+presentation/  →  slides.pptx or .pdf 
+Max 10 slides 
+ 
+✓  GitHub Repository URL in Report (Mandatory) 
+• The first page of your project report MUST include the GitHub repository URL. 
+• Format:  https://github.com/your-username/cen206-hw-name-surname-java 
+• Without a visible repo URL in the report, the reviewer cannot access your code — submission will not be 
+accepted. 
+ 
+ 
+⚠  Submission Will NOT Be Accepted If: 
+• GitHub Release (midterm-v1.0 or final-v1.0) is missing or has no tar.gz artefacts 
+• GitHub repository URL is not included in the project report 
+• Template https://github.com/ucoruh/eclipse-java-maven-template has not been used 
+• Repository is not named cen206-hw-name-surname-java 
+• PlantUML .puml source files are missing from repo (PNG alone is not sufficient) 
+• C4 Model diagrams (.puml — Context, Container, Component) are missing at Midterm 
+• UMPLE .ump file has not been committed 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+11 
+• Figma console screen wireframes missing at Midterm review (Swing GUI screens acceptable if console 
+screens absent is not acceptable) 
+• draw.io .drawio source files not committed (PNG alone is not sufficient) 
+• Gantt diagram (.puml) not committed or missing milestones 
+• ER diagram (.puml) missing — required regardless of storage choice 
+• Runtime storage switching not implemented (all three backends required) 
+• ProjectLibre .xml file has not been committed 
+• Doxygen HTML folder submitted instead of PDF in the repo 
+• Compiled binaries (.jar, .class, .exe) committed to the repository 
+• Video files committed to GitHub repository 
+• No collaborative commits from all team members 
+• Unit test or documentation coverage below 100% 
+• Plagiarism detected 
+ 
+ 
+8.5 GitHub Rules 
+• Repository Name: Fork the template and name your repository following the pattern: cen206-hw-name-
+surname-java  (e.g. cen206-hw-ali-yilmaz-java). One repository per team. 
+• Template: Use the official template: https://github.com/ucoruh/eclipse-java-maven-template — do not start 
+from scratch. 
+• Private Repository: Instructor and all team members added as collaborators. Public repositories are treated as 
+plagiarism. 
+• GitHub Profile: Configure your Git e-mail with correct name and surname. Make your GitHub profile public and 
+upload your profile picture. 
+• Pre-Commit Scripts: Run 1-configure-pre-commit.bat before your first commit to activate commit validation 
+hooks. 
+• Releases Required: GitHub Release tags midterm-v1.0 (Midterm) and final-v1.0 (Final) are mandatory. 
+• MkDocs Note: GitHub Pages unavailable for private repos. Include MkDocs-generated site ZIP in Release for 
+local review via mkdocs serve. 
+• No Binary Commits: Never commit .jar, .class, .exe files — configure .gitignore to exclude target/, build/ and 
+IDE cache folders. 
+• Commit Frequency: Each member commits at least weekly; individual contributions tracked via commit history. 
+• Branch Workflow: Feature branches; Pull Requests to main; never commit directly to main; document 
+merge/conflict resolutions in README. 
+ 
+9. TEAM WORKFLOW & ENGINEERING PRACTICES 
+This section defines how the team must work — not just what to build. These practices mirror real software company 
+workflows. Every team member is individually responsible for following them; they will be verified during the in-office 
+review. 
+ 
+9.1 Git Branching Strategy — GitHub Flow 
+The team follows GitHub Flow: one protected main branch that is always deployable, and short-lived feature branches 
+for every task. 
+ 
+Branch Type 
+Naming Convention 
+Rule 
+main 
+main 
+Protected — no direct commits. Merge via 
+Pull Request only. 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+12 
+feature 
+feature/login-screen feature/student-model 
+One branch per task/issue. Delete after 
+merge. 
+bugfix 
+bugfix/null-pointer-fix bugfix/file-not-found 
+Branch from main; merge back via PR. 
+docs 
+docs/update-readme docs/add-c4-diagrams 
+Documentation-only changes. 
+hotfix 
+hotfix/critical-data-loss 
+Urgent fix on main — branch, fix, PR, merge 
+same day. 
+ 
+⚠  Branch Protection Rules (configure on GitHub) 
+• Require Pull Request reviews before merging (minimum 1 approval from a team member). 
+• Require status checks to pass before merging (CI pipeline must be green). 
+• Restrict pushes to main — no force-push, no direct commits. 
+• To enable: Repository → Settings → Branches → Add branch protection rule → main. 
+ 
+ 
+9.2 Commit Message Convention — Conventional Commits 
+Every commit message must follow the Conventional Commits format. This makes the project history readable, enables 
+automated CHANGELOG generation, and is the industry standard. 
+ 
+Format 
+type(scope): short description  [max 72 chars]  —  blank line  —  optional body 
+feat 
+feat(storage): implement IRepository<T> + BinaryRepository / SqliteRepository / MySqlRepository 
+fix 
+fix(menu): prevent infinite loop when ESC pressed on main menu 
+test 
+test(student): add unit tests for GPA calculation edge cases 
+docs 
+docs(c4): add container diagram for console layer 
+refactor 
+refactor(repo): extract StudentRepository to reduce God Class smell 
+style 
+style: apply Google Java Format across all source files 
+ci 
+ci: add JaCoCo coverage report to GitHub Actions pipeline 
+chore 
+chore: update Maven dependencies to latest stable versions 
+ 
+ℹ  Conventional Commits Reference 
+• Specification: https://www.conventionalcommits.org 
+• A commit with BREAKING CHANGE in the footer signals a major version bump. 
+• The pre-commit hook (1-configure-pre-commit.bat) can validate commit message format automatically. 
+ 
+ 
+9.3 Pull Request (PR) Process 
+Every merge to main must go through a Pull Request. Direct commits to main are rejected by branch protection. The PR 
+is where code review happens. 
+ 
+• Create a PR: Open a Pull Request from your feature branch to main as soon as the feature is ready for review. 
+• PR Title: Follow Conventional Commits format: feat(scope): description 
+• PR Description must include: (1) What changed and why, (2) How to test it, (3) Screenshots or test output, (4) 
+Related Issue number (#issue-id). 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+13 
+• Assign a reviewer: Every PR must be reviewed and approved by at least one other team member before 
+merging. 
+• CI must pass: The GitHub Actions pipeline must be green before merging. 
+• Resolve comments: All reviewer comments must be addressed (fixed or discussed) before approval. 
+• Merge strategy: Use Squash and Merge or Merge Commit — never Rebase on shared branches. 
+• Delete branch: After merge, delete the feature branch from GitHub. 
+ 
+🎨  PR Checklist (copy into every PR description) 
+• [ ] Code compiles and all tests pass locally (mvn test) 
+• [ ] New unit tests added for new functionality 
+• [ ] JaCoCo coverage did not decrease 
+• [ ] Doxygen comments added for all new public methods 
+• [ ] Design documents updated if architecture changed 
+• [ ] No .jar / .class / .exe files committed 
+• [ ] Commit messages follow Conventional Commits format 
+• [ ] Linked to GitHub Issue: closes #___ 
+ 
+ 
+9.4 Code Review Guidelines 
+The reviewer's job is to ensure quality, catch bugs, and share knowledge — not to criticise personal style. Reviews must 
+be constructive and specific. 
+ 
+Review What? 
+What to look for 
+Correctness 
+Does the code do what the issue/PR description says? Are edge cases handled? 
+OOP & Design 
+Are SOLID principles applied? Is there unnecessary coupling? God Class? Feature Envy? 
+Tests 
+Are there tests for the new code? Do tests cover happy path AND error cases? 
+Naming 
+Class, method, and variable names follow Java conventions and are self-explanatory? 
+Documentation 
+All public methods have Doxygen @param, @return, @throws comments? 
+Security 
+No hardcoded credentials, paths, or secrets in source code? 
+Performance 
+Any obvious N+1 loops, unnecessary I/O inside loops, memory leaks? 
+ 
+✓  Review Etiquette 
+• Comment on the code, not the person. Write 'This method is hard to follow — consider extracting X' not 
+'This is bad code'. 
+• Use GitHub suggestion blocks to propose exact code changes — the author can apply them with one click. 
+• Mark blocking issues with 'Blocking:' and non-blocking suggestions with 'Nit:' or 'Suggestion:'. 
+• Reviewer must respond within 24 hours. Author must address comments within 24 hours. 
+ 
+ 
+9.5 GitHub Issues & Project Board 
+Every task, bug, and improvement must be tracked as a GitHub Issue. No work happens outside of Issues — this is how 
+professional teams manage work and prove individual contribution. 
+ 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+14 
+• Create Issues for everything: Features, bugs, documentation tasks, design work, test writing — each gets its 
+own Issue. 
+• Issue Title: Short and descriptive: 'feat: implement IRepository + BinaryRepository / SqliteRepository / 
+MySqlRepository' 
+• Issue Labels (required): Create and use: feature, bug, documentation, test, design, devops, question 
+• Assign to a member: Every Issue must be assigned to the team member responsible. 
+• Link to Milestones: Midterm milestone (due 27 March) and Final milestone (due 29 May) — assign every Issue 
+to one. 
+• Close via commit: Use 'closes #12' in your PR description to automatically close the Issue on merge. 
+ 
+Kanban Column 
+Meaning — when does a card move here? 
+📋  Backlog 
+Issue created but not yet started. All new Issues land here. 
+🚀  In Progress 
+Branch created, active development underway. Self-assign and move here when you start. 
+🔍  In Review 
+PR opened, waiting for reviewer approval. Move here when PR is submitted. 
+✅  Done 
+PR merged to main, Issue closed, Definition of Done met. 
+ 
+ℹ  GitHub Projects Setup 
+• Create a Project Board at: Repository → Projects → New project → Board view. 
+• Add columns: Backlog / In Progress / In Review / Done. 
+• Link all Issues to the board — the board is checked during the in-office review. 
+• Each team member's contribution is visible from the board + commit graph + Issue assignments. 
+ 
+ 
+9.6 Code Quality Gates 
+Code quality is enforced automatically via Maven plugins. The CI pipeline fails if any quality gate is violated — a failing 
+CI means the PR cannot be merged. 
+ 
+Tool 
+Maven Goal 
+What it checks 
+Checkstyle (Google 
+Java Style) 
+mvn checkstyle:check 
+Naming, indentation, line length, import order — 
+Google Java Style Guide 
+SpotBugs 
+mvn spotbugs:check 
+Null pointer dereferences, resource leaks, incorrect 
+equals/hashCode 
+JaCoCo 
+mvn test jacoco:report 
+Statement coverage — Midterm: 100%, Final: ≥80% 
+Doxygen 
+mvn doxygen:report 
+Documentation coverage — 100% required at both 
+phases 
+ 
+ℹ  Adding Checkstyle & SpotBugs to pom.xml 
+• Add maven-checkstyle-plugin with checkstyle-google.xml config to the <build><plugins> section. 
+• Add spotbugs-maven-plugin to <build><plugins> with <failOnError>true</failOnError>. 
+• Both plugins should run in the verify phase so 'mvn verify' catches all violations. 
+• Reference: https://checkstyle.sourceforge.io/google_style.html 
+ 
+ 
+9.7 Semantic Versioning & CHANGELOG 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+15 
+Use Semantic Versioning (SemVer) for all releases. Maintain a CHANGELOG.md file in the repository root — this is 
+standard practice in all professional Java projects. 
+ 
+• SemVer format: MAJOR.MINOR.PATCH  →  1.0.0, 1.1.0, 1.1.1 
+• Midterm release: Tag: midterm-v1.0.0  — console application, all Midterm features. 
+• Final release: Tag: final-v2.0.0  — Swing GUI added (major version bump = new user-facing layer). 
+• CHANGELOG.md format: Sections: [Unreleased], [2.0.0] - 2026-05-29, [1.0.0] - 2026-03-27. Each section: 
+Added / Changed / Fixed / Removed. 
+ 
+# CHANGELOG 
+## [Unreleased] 
+## [2.0.0] - 2026-05-29 
+### Added 
+- Swing GUI layer with MVC architecture 
+- Observer pattern for GUI event propagation 
+- GitHub Actions CI/CD pipeline 
+## [1.0.0] - 2026-03-27 
+### Added 
+- Console application with runtime-switchable storage (IRepository<T> — Binary / 
+SQLite / MySQL) 
+- PlantUML + C4 + UMPLE + Figma + draw.io design documents 
+ 
+9.8 Definition of Done 
+A task (GitHub Issue) is only 'Done' when ALL of the following are true. Moving a card to Done on the board without 
+meeting these criteria is a process violation. 
+ 
+✓ 
+Definition of Done Criterion 
+☐ 
+Code written, compiles, and runs on both Windows and WSL/Linux. 
+☐ 
+Unit tests written for all new public methods; JaCoCo coverage did not decrease. 
+☐ 
+Checkstyle and SpotBugs pass with zero violations. 
+☐ 
+All new public classes and methods have Doxygen @param / @return / @throws comments. 
+☐ 
+Pull Request opened, reviewed, and approved by at least 1 team member. 
+☐ 
+GitHub Actions CI pipeline is green (all jobs pass). 
+☐ 
+Related design document (.puml / .ump / Figma / .drawio) updated if architecture changed. 
+☐ 
+CHANGELOG.md updated under [Unreleased] with a one-line description. 
+☐ 
+GitHub Issue closed (via 'closes #N' in PR or manually after merge). 
+☐ 
+GitHub Project board card moved to Done. 
+ 
+9.9 Sprint Planning & Retrospective 
+• Sprint 1 (Midterm): Weeks 1–3 of the project. Goal: working console app + all design documents. Break down 
+into Issues, assign, estimate. 
+• Sprint 2 (Final): Weeks 4–7. Goal: Swing GUI + CI/CD + design patterns + refactoring. Continue from Sprint 1 
+backlog. 
+• Weekly sync: Brief team meeting (15 min max) at the start of each week. Update the board; identify blockers. 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+16 
+• Retrospective (required in Final Report): After the Final submission, write a 1-page retrospective: What went 
+well? What would you do differently? What did you learn about team collaboration? 
+ 
+ℹ  Why These Practices? 
+• Branch protection + PR reviews = no single person breaks the shared codebase (bus factor reduction). 
+• Conventional Commits = automated release notes; readable git log; onboarding new members is faster. 
+• GitHub Issues + Project Board = individual contribution is transparent and verifiable. 
+• Definition of Done = prevents 'it works on my machine' and half-done features in releases. 
+• These are the exact practices used at companies like GitHub, Spotify, Google, and Amazon. 
+ 
+ 
+10. PROFESSIONAL & ETHICAL RESPONSIBILITIES 
+This section maps to PÇ.9 (Toplumsal Bilinç) and PÇ.11 (Etik) in the MÜDEK accreditation framework. Every team must 
+actively address the items below — they are not optional. Evidence of ethical reasoning must appear in the project 
+report and will be verified at the in-office review. 
+ 
+MÜDEK Program Outcome 
+Requirement in This Project 
+PÇ.9 — TOPLUMSAL BİLİNÇ 
+Impact on health, environment, 
+safety; legal awareness 
+Social Impact Analysis in report; KVKK/GDPR compliance plan; accessibility 
+requirements; environmental footprint consideration 
+PÇ.11 — ETİK Ethical principles; 
+professional responsibility; 
+engineering standards 
+IEEE/ACM Code of Ethics adherence; open-source license declaration; responsible 
+AI tool use policy; authorship integrity statement 
+ 
+10.1 IEEE & ACM Code of Ethics 
+Every engineer is bound by professional codes of ethics. This project explicitly requires you to identify and apply relevant 
+clauses. 
+ 
+• IEEE Code of Ethics (clause 1): Hold paramount the safety, health, and welfare of the public. Identify at least 
+one way your application could harm users if implemented carelessly, and document how your design 
+addresses it. 
+• IEEE Code of Ethics (clause 3): Be honest and realistic in stating claims about your system. Do not exaggerate 
+what your application can do in the report or presentation. 
+• IEEE Code of Ethics (clause 7): Seek, accept, and offer honest technical criticism. Your code review process 
+(Section 10.4) is direct practice of this principle. 
+• ACM Code of Ethics (1.2): Avoid harm. Document any scenario where misuse of your application could cause 
+harm and how your design mitigates it. 
+• ACM Code of Ethics (1.6): Respect privacy. If your application stores personal data, document where it is 
+stored, who can access it, and how it is protected. 
+ 
+ℹ  References 
+• IEEE Code of Ethics: https://www.ieee.org/about/corporate/governance/p7-8.html 
+• ACM Code of Ethics: https://www.acm.org/code-of-ethics 
+• Include a dedicated 'Professional Ethics' section in your project report referencing relevant clauses. 
+ 
+ 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+17 
+10.2 Social Impact Analysis (PÇ.9) 
+Include a Social Impact Analysis section in your project report. This is a structured assessment of your application's 
+potential effects on society. It does not need to be long — half a page is sufficient — but it must be substantive. 
+ 
+Analysis Dimension 
+Questions to Answer in Your Report 
+Positive Impact 
+Who benefits from this application and how? What problem does it solve for 
+society? 
+Potential Harm 
+Could this application be misused? What happens if data is corrupted or lost? Who 
+could be harmed? 
+Privacy & Data 
+What personal data does the app store? Where? How is it protected? Does it 
+comply with KVKK (Turkey) and GDPR principles? 
+Accessibility 
+Can the application be used by people with visual or motor impairments? What 
+accommodations are made in the GUI? 
+Environmental Footprint 
+Does your application consume excessive memory, CPU, or disk space? What 
+choices did you make to reduce resource usage? 
+Legal Awareness 
+Are there regulatory requirements for applications in your domain (health, finance, 
+education)? List applicable laws or standards. 
+ 
+10.3 Open-Source Licensing (PÇ.11) 
+Every software project must declare a license. The absence of a license means no one may legally use, copy, or modify 
+your code — including your own teammates. 
+ 
+• Add a LICENSE file: Choose a license and add a LICENSE file to the root of your GitHub repository before the 
+Midterm submission. 
+• Recommended for student projects: MIT License (permissive, simple) or Apache 2.0 (includes patent clause). 
+Use https://choosealicense.com to decide. 
+• All dependencies must be compatible: List every external library (Maven dependency) in your report. State its 
+license. Confirm that your chosen project license is compatible with all dependency licenses. 
+• No license violation: Do not copy code from GitHub projects with restrictive licenses (GPL, AGPL) without 
+understanding the copyleft implications. Document any third-party code used. 
+ 
+License 
+Type 
+When to Use 
+MIT 
+Permissive 
+Simple student/open projects. Anyone can use, modify, distribute. 
+Recommended default.',5226,{fill:C.lgreen,sz:18}) 
+Apache 2.0 
+Permissive + Patent 
+Like MIT but also grants patent rights. Good for 
+libraries.',5226,{fill:C.white,sz:18}) 
+GPL v3 
+Copyleft 
+Any derivative must also be GPL. Use only if you want to enforce 
+open-source sharing.',5226,{fill:C.stripe,sz:18}) 
+Proprietary 
+Closed 
+No redistribution. Not suitable for MÜDEK evidence projects — 
+avoid.',5226,{fill:C.lred,sz:18,color:C.red}) 
+ 
+10.4 Responsible AI Tool Use Policy (PÇ.11) 
+AI coding assistants (GitHub Copilot, ChatGPT, Gemini, etc.) are part of the modern engineering landscape. Blanket 
+prohibition is not realistic. What matters is transparency, accountability, and genuine understanding. 
+ 
+• Declaration required: The final project report must include an 'AI Tool Use Declaration' section listing every AI 
+tool used, what it was used for, and how its output was verified. 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+18 
+• You own the code: Submitting AI-generated code without understanding it is an academic integrity violation. 
+During the in-office review, every line may be questioned. 
+• Acceptable use: Boilerplate generation, syntax help, test case suggestions, code formatting, documentation 
+drafting — provided you understand and verify the output. 
+• Unacceptable use: Generating entire feature implementations without understanding them; submitting AI-
+generated analysis or report sections as your own thinking. 
+• Bias awareness: AI tools reflect biases in their training data. Code suggestions may contain security 
+vulnerabilities, deprecated APIs, or incorrect logic. Always review critically. 
+ 
+🎨  AI Tool Use Declaration Template (copy into your Final Report) 
+• Tool: GitHub Copilot  |  Used for: Method stubs, Javadoc comments  |  Verified by: Manual review + unit 
+tests 
+• Tool: ChatGPT-4o  |  Used for: Explaining JaCoCo configuration  |  Verified by: Running mvn test 
+jacoco:report and checking output 
+• Tool: None used for: Business logic design, OOP architecture decisions, report analysis sections 
+ 
+ 
+10.5 Authorship & Attribution (PÇ.11) 
+• Individual contribution: Git commit history is the primary evidence of individual contribution. Each member 
+must commit code they personally wrote. 
+• Third-party code: Any code copied or adapted from Stack Overflow, tutorials, or other projects must be 
+attributed with a comment: // Source: [URL] — [License] 
+• No ghost commits: Making commits on behalf of another member (to inflate their contribution) is an integrity 
+violation equivalent to plagiarism. 
+• Peer contribution statement: The final report must include a table listing each team member's contributions 
+(features implemented, Issues resolved, PRs opened/reviewed). 
+ 
+10.6 Engineering Standards Awareness (PÇ.11) 
+Professional engineers do not work in a vacuum — they follow established standards. Your project must demonstrate 
+awareness of at least two relevant standards. 
+ 
+Standard 
+How it Applies to Your Project 
+ISO/IEC 25010 
+(Software Quality) 
+Quality model: Functionality, Reliability, Usability, Efficiency, Maintainability, Portability. 
+Reference at least 3 characteristics in your design section. 
+IEEE 829 (Test 
+Documentation) 
+Test plan structure. Your JUnit5 test class documentation should follow this: purpose, scope, 
+test items, entry/exit criteria. 
+KVKK / GDPR (Data 
+Privacy) 
+If your app stores user data: purpose limitation, data minimisation, storage limitation, user 
+consent. State which principles apply and how. 
+WCAG 2.1 
+(Accessibility) 
+GUI accessibility: keyboard navigation, sufficient colour contrast, descriptive button labels, 
+error messages in text (not colour alone). 
+Google Java Style 
+Guide 
+Enforced automatically by Checkstyle. Name conventions, indentation, line length, import 
+ordering — all checked in CI. 
+ 
+10.7 Ethics Self-Assessment Checklist 
+Complete this checklist in your Final Report. Every row corresponds to a rubric criterion — the reviewer will check each 
+item during the in-office review. A missing row = lost points. 
+ 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+19 
+✓ 
+What you must deliver 
+Rubric criterion 
+Where to find it in report/repo 
+☐ 
+LICENSE file committed to repo root (MIT or 
+Apache 2.0 recommended) 
+PÇ.11 — Midterm gate 
+Repo root → LICENSE 
+☐ 
+Initial Social Impact Analysis in Midterm Report 
+(≥ 3 dimensions) 
+PÇ.11 — Midterm gate 
+Report § Social Impact 
+☐ 
+IEEE Code of Ethics — clause 1 applied: harm 
+scenario documented 
+PÇ.11 — Final 
+Report § Professional Ethics 
+☐ 
+IEEE Code of Ethics — clause 3 applied: no 
+exaggeration in report/demo 
+PÇ.11 — Final 
+Report § Professional Ethics 
+☐ 
+ACM Code of Ethics — 1.6 applied: privacy/data 
+protection documented 
+PÇ.9 + PÇ.11 — Final 
+Report § Privacy & Data 
+☐ 
+Social Impact table — all 6 dimensions 
+completed 
+PÇ.9 — Final 
+Report § Social Impact Analysis 
+☐ 
+KVKK/GDPR: data stored, where, who can 
+access, how protected 
+PÇ.9 — Final 
+Report § Privacy & Data 
+☐ 
+Accessibility: ≥ 2 WCAG 2.1 features 
+implemented in Swing GUI 
+PÇ.9 — Final 
+Code + Report § Accessibility 
+☐ 
+AI Tool Use Declaration: tool / purpose / 
+verification for each tool used 
+PÇ.11 — Final 
+Report § AI Tool Declaration 
+☐ 
+Dependency license table: library name + 
+license + compatibility note 
+PÇ.11 — Final 
+Report § Open-Source Licenses 
+☐ 
+Contributor table: each member + features 
+implemented + Issues resolved 
+PÇ.11 — Final 
+Report § Team Contributions 
+☐ 
+ISO/IEC 25010: ≥ 3 quality characteristics 
+referenced in design section 
+PÇ.11 — Final 
+Report § Engineering Standards 
+ 
+11. OOP REQUIREMENTS 
+11.0 Storage Architecture — IRepository Pattern 
+• IRepository<T>: Define in lib module: save(T t), T findById(int id), List<T> findAll(), update(T t), delete(int id). 
+Three concrete classes: BinaryRepository<T> (ObjectOutputStream/.bin), SqliteRepository<T> (org.xerial:sqlite-
+jdbc/.db), MySqlRepository<T> (mysql-connector-j + Docker Compose). 
+• RepositoryFactory: Reads StorageConfig.getActiveBackend() and returns the correct IRepository 
+implementation. Config persisted in a .properties file so the choice survives restart. 
+• Settings screen: Both console and Swing GUI must expose a Storage Backend menu: [1] Binary  [2] SQLite  [3] 
+MySQL. On switch, factory reinitialises — existing data is NOT migrated (state this clearly in the report). 
+• Docker: MySQL backend requires docker-compose.yml in repo root. Application shows a clear error message if 
+MySQL is unreachable and falls back gracefully. 
+• Testing: Each repository implementation must have its own JUnit5 test class. Use in-memory SQLite (:memory:) 
+and an H2 MySQL-mode datasource for SQLite/MySQL unit tests to avoid Docker dependency in CI. 
+ 
+11.1 Class Hierarchy 
+Design a meaningful class hierarchy. Inheritance must be semantically justified — use composition over inheritance 
+when the relationship is not a true 'is-a' relationship. 
+11.2 Encapsulation 
+• Access modifiers: private, protected, public applied correctly to every member. 
+• Getters / Setters: All fields private; expose through accessors. 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+20 
+11.3 Polymorphism 
+• Method overriding: At least 3 meaningful @Override usages. 
+• Runtime polymorphism: At least 1 example of superclass reference pointing to subclass instance. 
+• Interfaces: At least 2 interfaces defined and implemented. 
+11.4 Design Patterns (minimum 3 — one per category) 
+• Creational: Singleton, Factory Method, Abstract Factory, Builder, or Prototype 
+• Structural: Adapter, Decorator, Facade, Composite, or Proxy 
+• Behavioral: Observer (recommended for Swing events), Strategy, Command, Template Method, or Iterator 
+For each pattern: state the intent, identify where it is used in your code, and justify why it was chosen. 
+11.5 SOLID Principles 
+• S: Single Responsibility — each class has exactly one reason to change. 
+• O: Open/Closed — open for extension, closed for modification. 
+• L: Liskov Substitution — subtype instances usable wherever supertype is expected. 
+• I: Interface Segregation — role-specific, focused interfaces; no fat interfaces. 
+• D: Dependency Inversion — high-level modules depend on abstractions, not concretes. 
+ 
+12. EVALUATION RUBRICS 
+Each criterion is scored 1–5:  5 = Excellent,  4 = Good,  3 = Fair,  2 = Poor,  1 = No Evidence. 
+ 
+Midterm Rubric  (A1 — 60% of Mid-Semester Grade) 
+ 
+Assessment Criteria 
+LO 
+ 
+Excellent 
+(5) 
+ 
+Good (4) 
+ 
+Fair (3) 
+ 
+Poor (2) 
+ 
+No Evidence 
+(1) 
+ 
+Zero 
+(0) 
+Score 
+PlantUML Diagrams — Class + 
+Sequence (≥3) + Use-Case + 
+Activity (per use-case) + State (if 
+applicable) + C4 
+(Context/Container/Component) 
++ Gantt; all .puml committed 
+LO.1,2 
+15 
+All required 
+types 
+present incl. 
+ER diagram; 
+.puml 
+committed; 
+C4 uses C4-
+PlantUML 
+library 
+12 
+1–2 
+diagram 
+types 
+missing 
+9 
+Major 
+gaps; C4 
+missing 
+5 
+.png only; 
+no .puml 
+1 
+No diagrams 
+0 
+— 
+ 
+UMPLE Model — .ump 
+committed; meaningful domain 
+model 
+LO.1,3 
+10 
+Accurate 
+model; .ump 
+committed 
+8 
+Minor 
+errors 
+6 
+Major 
+errors 
+3 
+File 
+present 
+but trivial 
+1 
+No file 
+0 
+— 
+ 
+Figma Wireframes — Console 
+screens (Midterm) + Swing GUI 
+screens (Final); annotated; 
+exported as separate sets 
+LO.2,7 
+10 
+Both screen 
+sets 
+complete; 
+annotated; 
+exported 
+separately 
+8 
+1–2 
+screens 
+missing in 
+one set 
+6 
+One 
+entire 
+set 
+missing 
+3 
+Sketch 
+only; no 
+export 
+1 
+Not started 
+0 
+— 
+ 
+ProjectLibre Gantt — both 
+phases; tasks assigned; .xml 
+committed 
+LO.2 
+5 
+Full Gantt; 
+milestones; 
+.xml 
+committed 
+4 
+Minor 
+omissions 
+3 
+Major 
+gaps 
+1 
+Only 1 
+phase 
+0 
+No file 
+0 
+— 
+ 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+21 
+OOP 4 Principles — 
+Encapsulation; Inheritance; 
+Polymorphism; Abstraction 
+LO.1–
+3 
+20 
+All 4 applied 
+with clear 
+examples 
+16 
+3 of 4 
+present 
+12 
+2 of 4 
+present 
+6 
+1 or partial 
+2 
+No OOP 
+evidence 
+0 
+— 
+ 
+Maven Build + JUnit5 Coverage 
+— 100% required 
+LO.2,4 
+20 
+100% 
+coverage; all 
+tests pass 
+16 
+80–99% 
+12 
+60–79% 
+6 
+< 60% 
+2 
+No tests 
+0 
+— 
+ 
+Doxygen Documentation — PDF 
+only; 100% coverage 
+LO.2 
+10 
+PDF 
+complete; 
+100% 
+coverage 
+8 
+Minor gaps 
+6 
+Major 
+gaps 
+3 
+Very 
+incomplete 
+1 
+No 
+documentation 
+0 
+— 
+ 
+Ethics Gate — PÇ.11: LICENSE 
+file committed; initial Social 
+Impact Analysis drafted in 
+Midterm Report 
+PÇ.11 
+5 
+LICENSE 
+present; 
+Social 
+Impact 
+drafted with 
+≥ 3 
+dimensions 
+addressed 
+4 
+LICENSE 
+present; 1–
+2 
+dimensions 
+3 
+LICENSE 
+present; 
+draft 
+empty 
+1 
+LICENSE 
+missing; no 
+draft 
+0 
+Neither 
+present 
+0 
+— 
+ 
+Midterm Project Report — 
+design decisions; constraint; 
+GitHub URL on cover 
+LO.1–
+3 
+5 
+Thorough; 
+well-
+structured; 
+constraint + 
+GitHub URL 
+documented 
+4 
+Minor 
+omissions 
+3 
+Major 
+gaps 
+1 
+Mostly 
+template 
+0 
+Not submitted 
+0 
+— 
+ 
+TOTAL 
+ 
+100 pts maximum  ·  Sum of selected values 
+/ 100 
+ 
+Midterm A1 Total:  ___ / 100   ×  40%  =  ___ / 40 
+ 
+Final Rubric  (F1 — 70% of End-of-Semester Grade) 
+ 
+Assessment Criteria 
+LO 
+ 
+Excellent 
+(5) 
+ 
+Good (4) 
+ 
+Fair (3) 
+ 
+Poor (2) 
+ 
+No 
+Evidence 
+(1) 
+ 
+Zero (0) 
+Score 
+Architecture Evolution — 
+Console→Swing; MVC; lib 
+layer unchanged; console 
+still works 
+LO.2,3 
+10 
+Clean MVC; 
+console & 
+GUI both 
+functional 
+8 
+Minor MVC 
+issues 
+6 
+Business 
+logic in UI 
+3 
+Major 
+coupling 
+1 
+Rewritten; 
+no console 
+0 
+— 
+ 
+Swing GUI — all Figma 
+screens implemented; 
+event handling; 
+validation; dialogs 
+LO.2,7 
+15 
+All screens; 
+proper 
+components; 
+validation 
+12 
+1–2 screens 
+missing 
+9 
+Major 
+screens 
+missing 
+5 
+Partial; no 
+validation 
+1 
+Not 
+implemented 
+0 
+— 
+ 
+Design Patterns — min. 3 
+categories; correct; intent 
++ rationale documented 
+LO.3,7 
+15 
+≥ 3 correct 
+patterns; 
+fully 
+documented 
+12 
+2 correct 
+9 
+1 correct 
+5 
+Attempted; 
+incorrect 
+1 
+No patterns 
+0 
+— 
+ 
+Exception Handling — try-
+catch; custom exception 
+hierarchy; GUI dialogs 
+LO.4 
+10 
+Robust; 
+custom 
+8 
+Minor gaps 
+6 
+Major gaps 
+3 
+Basic try-
+catch only 
+1 
+None 
+0 
+— 
+ 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+22 
+exceptions; 
+all edge 
+cases 
+Generics + IRepository 
+pattern — all 3 backends 
+switchable at runtime + 
+Collections + ER Diagram 
+LO.5,6 
+10 
+All 3 
+backends 
+work; 
+runtime 
+switch 
+works; ER 
+committed; 
+Collections 
+used 
+8 
+2 of 3 
+backends 
+work; 
+switch 
+works 
+6 
+1 backend 
+only; no 
+switch 
+3 
+Storage 
+present; 
+IRepository 
+missing 
+1 
+None 
+present 
+0 
+— 
+ 
+Code Smell & Refactoring 
+— min. 3 smells; 
+before/after shown 
+LO.7 
+10 
+3+ smells; 
+refactored; 
+before/after 
+in report 
+8 
+2 smells 
+6 
+1 smell 
+3 
+Mentioned; 
+not done 
+1 
+Not done 
+0 
+— 
+ 
+JUnit5 + GitHub Actions 
+CI/CD — ≥ 80% coverage; 
+CI badge 
+LO.2,4 
+5 
+Full pipeline; 
+> 80%; badge 
+visible 
+4 
+60–80% 
+3 
+40–60% 
+1 
+< 40% 
+0 
+No tests / CI 
+0 
+— 
+ 
+PÇ.9 — TOPLUMSAL 
+BİLİNÇ: Social Impact 
+Analysis — 6 dimensions; 
+privacy/KVKK; 
+accessibility in GUI 
+PÇ.9 
+5 
+All 6 
+dimensions 
+addressed; 
+KVKK noted; 
+accessibility 
+implemented 
+4 
+4–5 
+dimensions; 
+minor gaps 
+3 
+2–3 
+dimensions; 
+no KVKK 
+1 
+Only 1 
+dimension; 
+superficial 
+0 
+Not present 
+in report 
+0 
+— 
+ 
+PÇ.11 — ETİK: IEEE/ACM 
+clauses cited; LICENSE 
+committed; AI 
+declaration; dependency 
+licenses; contributor table 
+PÇ.11 
+5 
+All 5 
+elements 
+present and 
+substantive 
+4 
+4 elements 
+present 
+3 
+3 elements 
+present 
+1 
+1–2 
+elements; 
+superficial 
+0 
+Nothing 
+present 
+0 
+— 
+ 
+Git Workflow — 
+Conventional Commits; 
+feature branches; PRs 
+merged; Issues closed; 
+CHANGELOG.md; Project 
+Board updated 
+LO.2 
+5 
+All 6 
+elements 
+present and 
+consistent 
+4 
+4–5 
+elements 
+present 
+3 
+2–3 
+elements 
+present 
+1 
+1 element; 
+inconsistent 
+0 
+No evidence 
+0 
+— 
+ 
+Updated Design Docs — 
+all PlantUML diagrams + 
+UMPLE + Figma both sets 
++ draw.io Deployment 
+(actual vs. planned) 
+LO.1–
+7 
+5 
+All updated; 
+plan vs. 
+actual 
+annotated 
+4 
+Minor gaps 
+3 
+Major gaps 
+1 
+Only 1 
+updated 
+0 
+Not updated 
+0 
+— 
+ 
+Presentation + Video — 
+each member explains 
+their own contribution 
+LO.1–
+7 
+5 
+Clear; 
+complete; all 
+members 
+present their 
+own work 
+4 
+Minor gaps 
+3 
+Major gaps; 
+one 
+member 
+missing 
+1 
+One person 
+presents all 
+0 
+Not 
+submitted 
+0 
+— 
+ 
+TOTAL 
+ 
+100 pts maximum  ·  Sum of selected values 
+/ 100 
+ 
+Final F1 Total:  ___ / 100   ×  60%  =  ___ / 60 
+ 
+13. IMPORTANT REQUIREMENTS 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+23 
+Midterm 
+• Language: Java (JDK 11 or 17 LTS) 
+• Testing: JUnit 5 — 100% statement coverage required at Midterm (≥ 80% at Final) 
+• Build: Maven — mvn clean verify must pass with zero errors 
+• Documentation: Doxygen — 100% coverage — PDF output only; HTML folder must not be committed 
+• Storage Layer — all three backends required: IRepository<T> interface in lib; BinaryRepository (.bin/.dat), 
+SqliteRepository (org.xerial:sqlite-jdbc), MySqlRepository (mysql-connector-j + Docker Compose). 
+RepositoryFactory + StorageConfig drive the runtime switch. docker-compose.yml in repo root. Each backend 
+has its own JUnit5 test class. 
+• Design tools (all required): PlantUML (.puml) — Class, Sequence (≥3), Use-Case, Activity (per use-case), State (if 
+applicable), ER Diagram (@startuml entity), Gantt (@startgantt) + C4 (Context/Container/Component via C4-
+PlantUML library); UMPLE (.ump); Figma — Console screens (Midterm) + Swing GUI screens (Final) as separate 
+sets; draw.io (.drawio) — Deployment diagram; ProjectLibre (.xml) — project plan 
+• Ethics Gate: PÇ.11 — LICENSE file committed to repo root before Midterm; initial Social Impact Analysis section 
+drafted in Midterm Report 
+• Git workflow: Feature branches; Conventional Commits; min. 1 PR per feature merged before submission; 
+GitHub Issues and Project Board visible 
+• Report: Must include: constraint statement; GitHub repository URL on cover page; LO coverage table; initial 
+Social Impact Analysis 
+ 
+Final 
+• GUI: Swing — extend console app; implement ALL Figma-designed screens; console layer must still work 
+• Architecture: Strict MVC; lib layer unchanged; no business logic in View classes 
+• Patterns: Min. 3 design patterns from different categories (Creational / Structural / Behavioral) 
+• Refactoring: Min. 3 code smells identified, refactored, and documented with before/after snippets 
+• CI/CD: GitHub Actions pipeline: build + test on every push; CI badge in README; ≥ 80% coverage 
+• Platforms: Must run on Windows and WSL/Linux — verified with mvn verify on both 
+• Ethics: PÇ.9 + PÇ.11 — Social Impact Analysis complete (6 dimensions); AI Tool Declaration; dependency license 
+table; contributor table in Final Report 
+• CHANGELOG: CHANGELOG.md in repo root with entries for v1.0.0 (Midterm) and v2.0.0 (Final) 
+ 
+Minimum Pass Thresholds 
+• Midterm: At least 50 / 100 points on the Midterm Rubric 
+• Final: At least 50 / 100 points on the Final Rubric 
+• Ethics Gate: LICENSE file missing at Midterm = Ethics Gate criterion scored Zero; cannot be compensated by 
+other criteria 
+• Critical items: OOP 4 Principles, Design Patterns, and Ethics criteria must each score ≥ Fair (≥ 50% of their point 
+value) 
+ 
+14. RESOURCES 
+• Java Maven Template (mandatory): https://github.com/ucoruh/eclipse-java-maven-template 
+• C4-PlantUML Library: https://github.com/plantuml-stdlib/C4-PlantUML 
+• Project Report Template: https://github.com/rteu-ceng/rteu-ceng-project-homework-report-template 
+• PlantUML Online Editor: https://www.plantuml.com/plantuml/uml/ 
+• UMPLE Online: https://cruise.umple.org/umpleonline/ 
+• Figma: https://www.figma.com 
+• ProjectLibre: https://www.projectlibre.com 
+• Swing Tutorial (Oracle): https://docs.oracle.com/javase/tutorial/uiswing/ 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+24 
+• Web Project Guide: https://ucoruh.github.io/ce204-object-oriented-programming/project-guide/ 
+• Team & Project Selection: Shared spreadsheet — see Microsoft Teams 
+ 
+15. ACADEMIC INTEGRITY 
+⚠  Warning — Plagiarism & AI Tools 
+• Copying another person's code is strictly prohibited; plagiarism detection software will be used on every 
+submission. 
+• Code generated by AI tools (ChatGPT, GitHub Copilot, etc.) may not be submitted as original work — 
+every line will be questioned during the in-office review. 
+• Each team member must be able to explain any part of the submitted code. 
+• Plagiarism results in zero points for the entire project and initiation of disciplinary proceedings. 
+ 
+ 
+16. IN-OFFICE REVIEW QUESTIONS 
+During the in-office review (27 March and 29 May 2026) each team member will be asked questions from the categories 
+below. Every member must be able to answer independently — shared answers are not accepted. 
+ 
+16.1 GitHub & Git Usage 
+• Template: Did you fork https://github.com/ucoruh/eclipse-java-maven-template and name the repo cen206-
+hw-name-surname-java? 
+• Privacy: Is the repository private? Are the instructor and all team members added as collaborators? 
+• Collaboration: Are there collaborative commits from all team members? Show the commit graph. 
+• Commit Messages: Do your commits follow Conventional Commits format (feat/fix/test/docs/refactor)? Show 
+examples. 
+• Commit Frequency: Did you commit frequently throughout the project, not just before the deadline? 
+• Branches: Did you work on feature branches? Show the branch list and explain the naming convention used. 
+• Merge & Conflicts: Show a conflict resolution from your history. Explain what caused the conflict and how you 
+resolved it. 
+• Pull Requests: Show a merged PR. Who reviewed it? What comments were made? How were they resolved? 
+• Branch Protection: Is main protected? Show the branch protection rules in Settings. 
+• Profile: Is your GitHub profile public? Correct name/surname in Git config? Profile picture uploaded? 
+• Pre-Commit: Did you configure pre-commit hooks using 1-configure-pre-commit.bat? 
+• Issues: Show your GitHub Issues. Are they labeled, assigned to a milestone, and linked to PRs? 
+• Project Board: Show the Kanban board. Walk through a card from Backlog to Done. 
+• CHANGELOG: Open CHANGELOG.md. Explain the entries for v1.0.0 and v2.0.0. 
+• Releases: Did you create GitHub Releases tagged midterm-v1.0.0 and final-v2.0.0? Are all tar.gz files attached? 
+• Checkstyle/SpotBugs: Does mvn verify pass with zero violations? Show the CI log. 
+ 
+16.2 Submission Checklist 
+• ZIP Archive: Did you submit a single ZIP archive with the correct folder structure? 
+• Release Files: Does the Release contain Windows and Linux executable builds? 
+• Video: Did each team member submit a separate video (max 4 min) explaining their own contribution? 
+• Presentation: Did you prepare a presentation deck of max 10 slides? 
+ 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+25 
+16.3 Development Environment 
+• WSL: Did you install WSL for Linux development? Show your WSL terminal. 
+• Package Managers: Is Chocolatey (choco) installed on Windows? Is Scoop installed? Show version outputs. 
+• Environment Scripts: Did you run 4-install-windows-enviroment.bat (Windows) and 4-install-wsl-
+environment.sh (WSL)? 
+• Cross-Platform: Does the application run on both Windows Command Line and WSL? Run it from both 
+environments. 
+ 
+16.4 Project Structure & Features 
+• Module Structure: Is the project organized as app / lib / test? Show the folder structure. 
+• Library Layer: Is all core business logic in lib? Does app only call lib functions? 
+• CRUD Operations: Demonstrate add, edit, delete, and list for your main entity. Show how data survives 
+application restart (file / DB check). 
+• Menu Navigation: Are menus navigated with keyboard arrows or Tab — not just number input? 
+• Unit Tests: Show your unit tests and the JaCoCo coverage report. Is coverage 100%? 
+• Documentation: Open the Doxygen PDF. Is documentation coverage 100%? 
+• C4 Diagrams: Show your C4 Context, Container, and Component diagrams. Explain each level. 
+• UML Diagrams: Open your PlantUML .puml files. Walk through the class diagram and a sequence diagram. 
+• UMPLE Model: Open your .ump file. Explain what the model represents. 
+• Figma — Console Screens: Open your console screen wireframes. Show every screen including error states. 
+How did these designs guide your console implementation? 
+• Figma — GUI Screens: Open your Swing GUI wireframes. How do they map to the implemented screens? Show 
+at least one plan-vs-actual annotation. 
+• draw.io Deployment: Open your Deployment diagram. Explain each module, the JVM boundary, file system 
+interactions, and external tool dependencies. How does this complement your C4 Container diagram? 
+• PlantUML Activity: Open the Activity diagram for one use-case. Walk through the decision branches and 
+alternate flows. How does it differ from the Sequence diagram for the same use-case? 
+• PlantUML Gantt: Open your Gantt diagram. Show Midterm and Final milestones. How accurate were your 
+estimates vs. actual dates? 
+• Swing GUI: Open the GUI. Show all screens. Demonstrate event handling and input validation. 
+ 
+16.5 OOP & Java Programming Skills 
+• OOP Principles: Explain and show encapsulation, inheritance, polymorphism, and abstraction in your code. 
+• Design Patterns: Explain the design patterns you used. Where are they applied? Why did you choose them? 
+• SOLID: Give a concrete example of each SOLID principle in your code. 
+• Exception Handling: Show your custom exception hierarchy. Where do you catch exceptions in the GUI? 
+• Generics: Show where you use Java Generics. What problem does it solve? 
+• Collections: Which Java Collections classes do you use? Why? 
+• Storage Layer: Open er.puml — explain each entity and relationship. Then switch backends live: Binary → 
+SQLite → MySQL using the Settings screen. For each backend demonstrate a create and a read operation. Show 
+data survives restart for at least two backends. 
+• Flow Controls: Explain and show if/else, while, for loops in your code. 
+• Debugging: How do you debug your application in Eclipse? Show the call stack and variable inspector. 
+• Maven: What does the Maven lifecycle do? Explain compile → test → package steps. 
+• JUnit5: Show a test class. Explain @Test, @BeforeEach, @AfterEach annotations. 
+• MVC Architecture: Show how Model, View, and Controller are separated in your Swing application. 
+• Code Refactoring: Show the before/after of a refactored code smell. What tool did you use to detect it? 
+ 
+16.6 Professional Ethics & Social Impact  (PÇ.9 + PÇ.11) 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+26 
+Each question below maps directly to a rubric criterion. Bring your Final Report open to the relevant section — the 
+reviewer will follow along. 
+ 
+# 
+Question asked at review 
+Maps to rubric criterion 
+1 
+Open LICENSE in your repo. Which license did you choose? Why is it 
+compatible with your Maven dependencies? 
+PÇ.11 — Midterm gate + Final 
+2 
+Open your Social Impact Analysis section. Walk through all 6 
+dimensions. Give a specific example for each. 
+PÇ.9 — Final (5 pts) 
+3 
+IEEE clause 1 says engineers must hold paramount the public's safety. 
+Show the concrete harm scenario you documented and how your 
+design addresses it. 
+PÇ.11 — Final (5 pts) 
+4 
+IEEE clause 3 requires honesty. Point to one place in your report or 
+presentation where you were tempted to exaggerate and how you 
+avoided it. 
+PÇ.11 — Final (5 pts) 
+5 
+Does your application store personal data? What data, where, who 
+can access it, and which KVKK/GDPR principles apply? 
+PÇ.9 — Final (5 pts) 
+6 
+Show two WCAG 2.1 accessibility features you implemented in the 
+Swing GUI. Demonstrate them live. 
+PÇ.9 — Final (5 pts) 
+7 
+Open your AI Tool Use Declaration. Which tools did you use, for what, 
+and how did you verify the output was correct? 
+PÇ.11 — Final (5 pts) 
+8 
+Show your dependency license table. Are all licenses compatible with 
+your project license? Explain what would break if you used GPL here. 
+PÇ.11 — Final (5 pts) 
+9 
+Open the contributor table. Which features did you personally 
+implement? Show your commits and Issues for one specific feature. 
+PÇ.11 — Final (5 pts) 
+10 
+Which ISO/IEC 25010 quality characteristic most influenced a design 
+decision? Where in the code does that influence show? 
+PÇ.11 — Final (5 pts) 
+ 
+⚠  Ethics Review Rule 
+• If a team member cannot answer questions 1–4 about their own project, the PÇ.11 rubric criterion is 
+scored Zero (0) for that individual — regardless of what is written in the report. 
+• Ethics is individually assessed. One member knowing the answers does not cover the whole team. 
+ 
+ 
+17. BONUS FEATURES 
+The following advanced features earn bonus points. Core project requirements must be fully met before bonus features 
+are considered. Bonus features that are partially implemented or broken will not earn points. 
+ 
+17.1 Database Integration with Docker 
+• Database: Replace binary file storage with MySQL or PostgreSQL running in a Docker container. 
+• Schema: Define tables, relationships, and constraints in SQL. Provide schema SQL file in repo. 
+• Data Access: Use JDBC or JPA/Hibernate with connection pooling. 
+• Docker Setup: Provide Dockerfile for the Java app and docker-compose.yml to start app + DB together. 
+• Persistence: Configure Docker volumes for database persistence across container restarts. 
+ 
+17.2 Authentication & Authorisation with Keycloak 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+27 
+• Keycloak: Add Keycloak to your Docker Compose setup. Configure realm, client, and roles. 
+• Login/Register: Implement login and registration screens in your Swing GUI via Keycloak. 
+• Role-Based Access: Restrict UI features based on user role (e.g. admin vs. user). 
+• Session Management: Handle token refresh and logout correctly. 
+ 
+17.3 System Monitoring & Logging 
+• Metrics: Integrate Prometheus for metrics collection from your Spring Boot or Java app. 
+• Dashboards: Set up Grafana with at least one dashboard showing application health and request rates. 
+• Centralised Logging: Use Loki (or ELK) for log aggregation. Use SLF4J + Logback with structured log output. 
+• Log Policy: Configure log rotation and define retention policies. 
+ 
+17.4 Microservices with Spring Boot 
+• REST API: Develop a Spring Boot REST API that exposes your business logic. Document with Swagger/OpenAPI. 
+• Client: Your Swing GUI calls the REST API instead of lib directly. 
+• Dockerisation: Each service (API, GUI launcher, DB) in its own Dockerfile; orchestrated via docker-compose. 
+• Health Checks: docker-compose depends_on with health checks to control startup order. 
+ 
+ℹ  Bonus Evaluation Criteria 
+• Architecture Quality: well-defined layers, separation of concerns. 
+• Container Management: correct Docker images, volumes, networking. 
+• Security Practices: credentials stored in environment variables — never in source code. 
+• Observability: monitoring dashboards and log queries must be demonstrated live. 
+• Scalability: explain how your design could be horizontally scaled. 
+• Documentation: README covering all advanced setup steps. 
+ 
+ 
+ 
+ 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+28 
+MIDTERM EVALUATION FORM  (40%) 
+ 
+EVALUATION FORM 
+ 
+Course: 
+CEN206 — Object Oriented Programming 
+Semester: 
+Spring 2025–2026 
+Instructor: 
+Asst. Prof. Dr. Uğur CORUH 
+Evaluation Type: 
+☑  Midterm (40%)          ☐  Final (60%) 
+Date: 
+27 March 2026 (Friday) — 08:00 
+ 
+PROJECT INFORMATION 
+ 
+Project Number: 
+ 
+Project Name: 
+ 
+GitHub Repository URL: 
+ 
+ 
+TEAM MEMBERS 
+ 
+# 
+ 
+Student ID 
+ 
+Name and Surname 
+Signature 
+1. 
+Student 
+ID: 
+ 
+Name – 
+Surname: 
+ 
+Signature 
+2. 
+Student 
+ID: 
+ 
+Name – 
+Surname: 
+ 
+Signature 
+3. 
+Student 
+ID: 
+ 
+Name – 
+Surname: 
+ 
+Signature 
+4. 
+Student 
+ID: 
+ 
+Name – 
+Surname: 
+ 
+Signature 
+ 
+SCORES 
+ 
+Criterion 
+Score / Max 
+Points 
+PlantUML — Class + Sequence + Use-Case + Activity + State 
++ C4 + Gantt; all .puml committed 
+   / 15 
+   × 15% = 
+UMPLE Model — .ump committed, meaningful class / state 
+model 
+   / 10 
+   × 10% = 
+Figma Wireframes — Console screens (Midterm) + GUI 
+screens (Final), both sets annotated and exported 
+   / 10 
+   × 10% = 
+ProjectLibre Gantt — both phases, tasks assigned, .xml 
+committed 
+   / 5 
+   × 5% = 
+OOP 4 Principles — Encapsulation, Inheritance, 
+Polymorphism, Abstraction 
+   / 20 
+   × 20% = 
+Maven Build + JUnit5 Coverage — 100% required 
+   / 20 
+   × 20% = 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+29 
+Doxygen Documentation — PDF only, 100% coverage 
+   / 10 
+   × 10% = 
+Ethics Gate — PÇ.11: LICENSE committed; Social Impact 
+Analysis drafted 
+   / 5 
+   × 5% = 
+Midterm Project Report — design decisions; constraint; 
+GitHub URL on cover 
+   / 5 
+   × 5% = 
+TOTAL 
+ 
+          / 100 
+ 
+GENERAL COMMENTS 
+ 
+ 
+ 
+ 
+ 
+Instructor Signature: 
+Date: 
+  
+  
+  
+  
+ 
+ 
+ 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+30 
+FINAL EVALUATION FORM  (60%) 
+ 
+EVALUATION FORM 
+ 
+Course: 
+CEN206 — Object Oriented Programming 
+Semester: 
+Spring 2025–2026 
+Instructor: 
+Asst. Prof. Dr. Uğur CORUH 
+Evaluation Type: 
+☐  Midterm (40%)          ☑  Final (60%) 
+Date: 
+29 May 2026 (Friday) — 08:00 
+ 
+PROJECT INFORMATION 
+ 
+Project Number: 
+ 
+Project Name: 
+ 
+GitHub Repository URL: 
+ 
+ 
+TEAM MEMBERS 
+ 
+# 
+ 
+Student ID 
+ 
+Name and Surname 
+Signature 
+1. 
+Student 
+ID: 
+ 
+Name – 
+Surname: 
+ 
+Signature 
+2. 
+Student 
+ID: 
+ 
+Name – 
+Surname: 
+ 
+Signature 
+3. 
+Student 
+ID: 
+ 
+Name – 
+Surname: 
+ 
+Signature 
+4. 
+Student 
+ID: 
+ 
+Name – 
+Surname: 
+ 
+Signature 
+ 
+SCORES 
+ 
+Criterion 
+Score / Max 
+Points 
+Architecture Evolution — Console→Swing, MVC 
+separation, code reuse 
+   / 10 
+   × 10% = 
+Swing GUI — all planned screens implemented, event 
+handling, validation 
+   / 15 
+   × 15% = 
+Design Patterns — min. 3 categories, correct 
+implementation, justified 
+   / 15 
+   × 15% = 
+Exception Handling — try-catch, custom exception 
+hierarchy, GUI dialogs 
+   / 10 
+   × 10% = 
+Generics + IRepository (Binary/SQLite/MySQL runtime-
+switchable) + Collections + ER Diagram 
+   / 10 
+   × 10% = 
+CEN206 Object Oriented Programming  |  Term Project Guideline  |  Spring 2025–2026 
+RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 
+31 
+Code Smell & Refactoring — min. 3 smells, before/after 
+shown 
+   / 10 
+   × 10% = 
+JUnit5 + GitHub Actions CI/CD — ≥80% coverage, CI badge 
+   / 5 
+   × 5% = 
+PÇ.9 — Social Impact Analysis; KVKK; accessibility in GUI 
+   / 5 
+   × 5% = 
+PÇ.11 — IEEE/ACM clauses; LICENSE; AI declaration; 
+dependency licenses; contributor table 
+   / 5 
+   × 5% = 
+Git Workflow — Conventional Commits; branches; PRs; 
+Issues; CHANGELOG; Project Board 
+   / 5 
+   × 5% = 
+Updated Design Docs — all PlantUML + UMPLE + Figma 
+(both sets) + draw.io (actual vs. planned) 
+   / 5 
+   × 5% = 
+Presentation + Video — each member explains their own 
+contribution 
+   / 5 
+   × 5% = 
+TOTAL 
+ 
+          / 100 
+ 
+GENERAL COMMENTS 
+ 
+ 
+ 
+ 
+ 
+Instructor Signature: 
+Date: 
+  
+  
+  
+  
+ 
+ 
+CEN206 Object Oriented Programming  |  Spring 2025–2026  |  RTEÜ Computer Engineering  |  MÜDEK v3.0 Compliant 

@@ -1,0 +1,16 @@
+@startuml seq-change-storage
+actor User as U
+participant "Main Console" as UI
+participant "StorageConfig" as SC
+participant "RepositoryFactory" as RF
+
+U -> UI : Select "Settings Menus"
+UI -> U : Show Current Storage (e.g. SQLite)
+U -> UI : Select "Switch to MySQL"
+UI -> SC : setStorageType(StorageType.MYSQL)
+SC --> UI : Updated
+UI -> RF : reinitializeFactory()
+RF -> RF : instantiate MySQLRepositories
+RF --> UI : Repositories switched
+UI --> U : Display "Storage changed to MySQL"
+@enduml

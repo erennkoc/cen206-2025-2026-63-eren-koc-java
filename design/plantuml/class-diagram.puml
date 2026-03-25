@@ -1,0 +1,80 @@
+@startuml ProjectManager Class Diagram
+skinparam classAttributeIconSize 0
+
+package com.projectmanagement.lib.models {
+    abstract class BaseEntity {
+        - id: String
+        - createdAt: LocalDateTime
+        + getId(): String
+        + getCreatedAt(): LocalDateTime
+        + abstract displayInfo(): void
+    }
+
+    class User {
+        - username: String
+        - email: String
+        - passwordHash: String
+        + User(id, username, email, pswd)
+        + getUsername(): String
+        + setUsername(name: String)
+        + getEmail(): String
+        + displayInfo(): void
+    }
+
+    class Project {
+        - name: String
+        - description: String
+        - tasks: List<Task>
+        + Project(id, name, desc)
+        + getName(): String
+        + setName(name: String)
+        + addTask(t: Task)
+        + displayInfo(): void
+    }
+
+    class Task {
+        - title: String
+        - description: String
+        - status: TaskStatus
+        - assignedUser: User
+        + Task(id, title, desc)
+        + getTitle(): String
+        + setTitle(title: String)
+        + getStatus(): TaskStatus
+        + displayInfo(): void
+    }
+
+    enum TaskStatus {
+        TODO
+        IN_PROGRESS
+        DONE
+    }
+
+    BaseEntity <|-- User
+    BaseEntity <|-- Project
+    BaseEntity <|-- Task
+    Project "1" *-- "many" Task : contains >
+    Task "many" o-- "0..1" User : assignedTo >
+}
+
+package com.projectmanagement.lib.storage {
+    interface IRepository<T> {
+        + create(entity: T): void
+        + findById(id: String): T
+        + findAll(): List<T>
+        + update(entity: T): void
+        + delete(id: String): void
+    }
+
+    class BinaryUserRepository implements IRepository
+    class SQLiteUserRepository implements IRepository
+    class MySQLUserRepository implements IRepository
+
+    class RepositoryFactory {
+        - config: StorageConfig
+        + getUserRepository(): IRepository<User>
+        + getProjectRepository(): IRepository<Project>
+        + getTaskRepository(): IRepository<Task>
+    }
+}
+@enduml

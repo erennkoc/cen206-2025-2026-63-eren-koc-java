@@ -1,0 +1,13 @@
+@startuml seq-list-project
+actor User as U
+participant "Main Console" as UI
+participant "ProjectService" as PS
+participant "IRepository<Project>" as PR
+
+U -> UI : Select "List Projects"
+UI -> PS : getAllProjects()
+PS -> PR : findAll()
+PR --> PS : List<Project>
+PS --> UI : List<Project>
+UI --> U : Display projects table
+@enduml

@@ -1,0 +1,20 @@
+@startuml activity-task
+start
+:User selects Task Management from Main Menu;
+if (Action?) then (Add Task)
+  :Prompt for Task Name and Project;
+  :Validate input;
+  if (Valid?) then (Yes)
+    :Save Task to active IRepository backend;
+    :Show success message;
+  else (No)
+    :Show error message;
+  endif
+elseif (Action?) then (List Tasks)
+  :Fetch all tasks from IRepository;
+  :Display task list in console;
+else (Back)
+  :Return to Main Menu;
+endif
+stop
+@enduml

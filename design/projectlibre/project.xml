@@ -1,0 +1,19 @@
+<Project>
+  <Name>CEN206 Term Project 2025-2026</Name>
+  <Tasks>
+    <Task>
+      <UID>1</UID>
+      <Name>Midterm Phase - Console App</Name>
+      <Start>2026-03-05T08:00:00</Start>
+      <Finish>2026-03-27T08:00:00</Finish>
+      <PercentComplete>90</PercentComplete>
+    </Task>
+    <Task>
+      <UID>2</UID>
+      <Name>Final Phase - Swing GUI</Name>
+      <Start>2026-03-28T08:00:00</Start>
+      <Finish>2026-05-29T08:00:00</Finish>
+      <PercentComplete>0</PercentComplete>
+    </Task>
+  </Tasks>
+</Project>

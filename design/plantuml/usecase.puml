@@ -1,0 +1,15 @@
+@startuml usecase
+actor User as U
+rectangle "Project Management Console App" {
+    usecase "Manage Projects\n(Add, Update, Delete, List)" as UC1
+    usecase "Manage Tasks\n(Assign, Change Status)" as UC2
+    usecase "Manage Users" as UC3
+    usecase "Switch Storage Backend\n(MySQL, SQLite, Binary)" as UC4
+    usecase "View Console Reports" as UC5
+}
+U --> UC1
+U --> UC2
+U --> UC3
+U --> UC4
+U --> UC5
+@enduml

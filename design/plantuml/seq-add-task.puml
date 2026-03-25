@@ -1,0 +1,18 @@
+@startuml seq-add-task
+actor User as U
+participant "Main Console" as UI
+participant "TaskService" as TS
+participant "RepositoryFactory" as RF
+participant "IRepository<Task>" as TR
+
+U -> UI : Select "Add Task"
+UI -> U : Prompt for Task Details
+U --> UI : Enter details (Title, user_id, project_id)
+UI -> TS : addTask(taskDetails)
+TS -> RF : getActiveTaskRepository()
+RF --> TS : activeRepository
+TS -> TR : save(newTask)
+TR --> TS : success
+TS --> UI : Task added successfully
+UI --> U : Display success message
+@enduml
