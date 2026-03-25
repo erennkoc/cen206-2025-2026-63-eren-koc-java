@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReportService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.services</a> &gt; <span class="el_source">ReportService.java</span></div><h1>ReportService.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.services;
+
+import com.projectmanagement.lib.models.Project;
+import com.projectmanagement.lib.models.Task;
+import com.projectmanagement.lib.models.User;
+import com.projectmanagement.lib.models.TaskStatus;
+
+import java.util.List;
+
+public class ReportService {
+
+    private final ProjectService projectService;
+    private final TaskService taskService;
+    private final UserService userService;
+
+<span class="fc" id="L16">    public ReportService(ProjectService projectService, TaskService taskService, UserService userService) {</span>
+<span class="fc" id="L17">        this.projectService = projectService;</span>
+<span class="fc" id="L18">        this.taskService = taskService;</span>
+<span class="fc" id="L19">        this.userService = userService;</span>
+<span class="fc" id="L20">    }</span>
+
+    public void generateGeneralSystemReport() {
+<span class="fc" id="L23">        System.out.println(&quot;\n=====================================&quot;);</span>
+<span class="fc" id="L24">        System.out.println(&quot;       GENERAL SYSTEM REPORT         &quot;);</span>
+<span class="fc" id="L25">        System.out.println(&quot;=====================================&quot;);</span>
+        
+<span class="fc" id="L27">        List&lt;Project&gt; projects = projectService.getAllProjects();</span>
+<span class="fc" id="L28">        List&lt;Task&gt; tasks = taskService.getAllTasks();</span>
+<span class="fc" id="L29">        List&lt;User&gt; users = userService.getAllUsers();</span>
+        
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        System.out.println(&quot;Total Registered Users  : &quot; + (users != null ? users.size() : 0));</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        System.out.println(&quot;Total Managed Projects  : &quot; + (projects != null ? projects.size() : 0));</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        System.out.println(&quot;Total Tracked Tasks     : &quot; + (tasks != null ? tasks.size() : 0));</span>
+        
+<span class="fc bfc" id="L35" title="All 4 branches covered.">        if (projects != null &amp;&amp; !projects.isEmpty()) {</span>
+<span class="fc" id="L36">            System.out.println(&quot;\n--- Projects Breakdown ---&quot;);</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">            for (Project project : projects) {</span>
+<span class="fc" id="L38">                System.out.println(&quot; [Project] &quot; + project.getName() + &quot; (Contains &quot; + project.getTasks().size() + &quot; tasks)&quot;);</span>
+<span class="fc" id="L39">            }</span>
+        }
+<span class="fc" id="L41">        System.out.println(&quot;=====================================\n&quot;);</span>
+<span class="fc" id="L42">    }</span>
+
+    public void generateTaskStatusReport() {
+<span class="fc" id="L45">        System.out.println(&quot;\n=====================================&quot;);</span>
+<span class="fc" id="L46">        System.out.println(&quot;         TASK STATUS REPORT          &quot;);</span>
+<span class="fc" id="L47">        System.out.println(&quot;=====================================&quot;);</span>
+        
+<span class="fc" id="L49">        List&lt;Task&gt; tasks = taskService.getAllTasks();</span>
+<span class="fc bfc" id="L50" title="All 4 branches covered.">        if (tasks == null || tasks.isEmpty()) {</span>
+<span class="fc" id="L51">            System.out.println(&quot;No tasks found in the system.&quot;);</span>
+<span class="fc" id="L52">            System.out.println(&quot;=====================================\n&quot;);</span>
+<span class="fc" id="L53">            return;</span>
+        }
+
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        long todo = tasks.stream().filter(t -&gt; t.getStatus() == TaskStatus.TODO).count();</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        long inProgress = tasks.stream().filter(t -&gt; t.getStatus() == TaskStatus.IN_PROGRESS).count();</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        long done = tasks.stream().filter(t -&gt; t.getStatus() == TaskStatus.DONE).count();</span>
+
+<span class="fc" id="L60">        System.out.println(&quot;Total Tasks     : &quot; + tasks.size());</span>
+<span class="fc" id="L61">        System.out.println(&quot;TODO            : &quot; + todo);</span>
+<span class="fc" id="L62">        System.out.println(&quot;IN_PROGRESS     : &quot; + inProgress);</span>
+<span class="fc" id="L63">        System.out.println(&quot;DONE            : &quot; + done);</span>
+<span class="fc" id="L64">        System.out.println(&quot;=====================================\n&quot;);</span>
+<span class="fc" id="L65">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

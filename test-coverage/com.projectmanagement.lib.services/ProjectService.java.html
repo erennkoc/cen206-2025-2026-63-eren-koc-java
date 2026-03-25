@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.services</a> &gt; <span class="el_source">ProjectService.java</span></div><h1>ProjectService.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.services;
+
+import com.projectmanagement.lib.models.Project;
+import com.projectmanagement.lib.models.Task;
+import com.projectmanagement.lib.storage.IRepository;
+import java.util.List;
+
+/**
+ * Manages business operations and logic connected to Projects.
+ * &lt;p&gt; Responsible for core actions like creating a project and orchestrating modifications connected specifically to project data sets. Follows the Dependency Injection parameter layout.
+ */
+public class ProjectService {
+
+    /**
+     * The Project repository used to interact with persistent storage.
+     * &lt;p&gt; Abstracted via IRepository to facilitate swapping between backend configurations seamlessly.
+     */
+    private final IRepository&lt;Project&gt; projectRepository;
+
+    /**
+     * Instantiates the ProjectService utilizing the provided storage repository.
+     * @param projectRepository The instantiated storage repository mechanism (dependency).
+     */
+<span class="fc" id="L24">    public ProjectService(IRepository&lt;Project&gt; projectRepository) {</span>
+<span class="fc" id="L25">        this.projectRepository = projectRepository;</span>
+<span class="fc" id="L26">    }</span>
+
+    /**
+     * Establishes a new Project and commits it to the designated storage backend.
+     * @param id System-unique identifier for the Project.
+     * @param name Name branding the Project.
+     * @param description Full textual breakdown summarizing the Project's scope.
+     * @throws IllegalArgumentException If core identifying attributes are omitted.
+     */
+    public void createProject(String id, String name, String description) {
+<span class="fc bfc" id="L36" title="All 8 branches covered.">        if (id == null || name == null || name.isEmpty() || description == null) {</span>
+<span class="fc" id="L37">            throw new IllegalArgumentException(&quot;Project initialization values cannot be void or blank.&quot;);</span>
+        }
+
+<span class="fc" id="L40">        Project newProject = new Project(id, name, description);</span>
+<span class="fc" id="L41">        projectRepository.save(newProject);</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * Appends a Task to a persistent Project based on the Project's id.
+     * @param projectId Valid identifier representing the target Project.
+     * @param task System-ready Task object to attach to the Project.
+     * @throws IllegalArgumentException If the given projectId cannot be found in the current store.
+     */
+    public void addTaskToProject(String projectId, Task task) {
+<span class="fc bfc" id="L51" title="All 4 branches covered.">        if (projectId == null || task == null) {</span>
+<span class="fc" id="L52">            throw new IllegalArgumentException(&quot;Target Project identifier and Task components must be provided.&quot;);</span>
+        }
+
+<span class="fc" id="L55">        Project existingProject = projectRepository.findById(projectId);</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (existingProject == null) {</span>
+<span class="fc" id="L57">             throw new IllegalArgumentException(&quot;Targeted Project does not exist.&quot;);</span>
+        }
+        
+<span class="fc" id="L60">        existingProject.addTask(task);</span>
+<span class="fc" id="L61">        projectRepository.update(existingProject); // Merges the modified relation structure back to the Repo</span>
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * Retrieves all registered projects from the repository.
+     * @return List containing all Project instances.
+     */
+    public List&lt;Project&gt; getAllProjects() {
+<span class="fc" id="L69">        return projectRepository.findAll();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

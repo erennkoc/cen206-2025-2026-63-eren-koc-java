@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StorageConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.storage</a> &gt; <span class="el_source">StorageConfig.java</span></div><h1>StorageConfig.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.storage;
+
+/**
+ * Manages the application's current active storage type configuration.
+ * &lt;p&gt; Configures whether the application will use Binary file, SQLite, or MySQL.
+ */
+public class StorageConfig {
+    
+    /**
+     * The current storage backend type.
+     */
+    private StorageType activeStorageType;
+
+    /**
+     * Constructor for the storage configuration.
+     * @param defaultStorage The initial storage backend type to use.
+     */
+<span class="fc" id="L18">    public StorageConfig(StorageType defaultStorage) {</span>
+<span class="fc" id="L19">        this.activeStorageType = defaultStorage;</span>
+<span class="fc" id="L20">    }</span>
+
+    /**
+     * Gets the active storage backend type.
+     * @return The active StorageType.
+     */
+    public StorageType getActiveStorageType() {
+<span class="fc" id="L27">        return activeStorageType;</span>
+    }
+
+    /**
+     * Sets the active storage backend type.
+     * @param activeStorageType The new StorageType to set.
+     */
+    public void setActiveStorageType(StorageType activeStorageType) {
+<span class="fc" id="L35">        this.activeStorageType = activeStorageType;</span>
+<span class="fc" id="L36">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

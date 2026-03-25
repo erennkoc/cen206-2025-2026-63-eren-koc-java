@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TaskService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.services</a> &gt; <span class="el_source">TaskService.java</span></div><h1>TaskService.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.services;
+
+import com.projectmanagement.lib.models.Task;
+import com.projectmanagement.lib.models.TaskStatus;
+import com.projectmanagement.lib.models.User;
+import com.projectmanagement.lib.storage.IRepository;
+import java.util.List;
+
+/**
+ * Interfaces business constraints and operations related precisely to Tasks.
+ * &lt;p&gt; Executes core routines spanning Task Assignment, detail configuration, and Status tracking. Accepts an {@code IRepository&lt;Task&gt;} parameter compliant with the core Dependency Injection rule.
+ */
+public class TaskService {
+
+    /**
+     * The data storage implementation explicitly for Task persistence.
+     */
+    private final IRepository&lt;Task&gt; taskRepository;
+
+    /**
+     * Formulates a TaskService requiring an explicit storage implementation.
+     * @param taskRepository The storage backend (dependency string) connected for CRUD.
+     */
+<span class="fc" id="L24">    public TaskService(IRepository&lt;Task&gt; taskRepository) {</span>
+<span class="fc" id="L25">        this.taskRepository = taskRepository;</span>
+<span class="fc" id="L26">    }</span>
+
+    /**
+     * Instantiates a blank Task form and inserts it immediately into the operational repository.
+     * @param id The unique Task string identifier.
+     * @param title Distinct name characterizing the Task objective.
+     * @param description Narrative outlining the core deliverables of this Task.
+     * @throws IllegalArgumentException Raised when any critical task elements are effectively nonexistent.
+     */
+    public void registerTask(String id, String title, String description) {
+<span class="fc bfc" id="L36" title="All 8 branches covered.">        if (id == null || title == null || title.isEmpty() || description == null) {</span>
+<span class="fc" id="L37">            throw new IllegalArgumentException(&quot;Task attributes ID, Title, and Description are explicitly required.&quot;);</span>
+        }
+
+<span class="fc" id="L40">        Task newTask = new Task(id, title, description);</span>
+<span class="fc" id="L41">        taskRepository.save(newTask);</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * Allocates an established User entity onto a registered target Task.
+     * @param taskId Key string pointing to the persistent Task.
+     * @param assignedUser Complete User object structure inheriting responsibility for this Task.
+     * @throws IllegalArgumentException Triggers when either parameter is essentially unallocated or empty.
+     */
+    public void assignTaskToUser(String taskId, User assignedUser) {
+<span class="fc bfc" id="L51" title="All 4 branches covered.">        if (taskId == null || assignedUser == null) {</span>
+<span class="fc" id="L52">            throw new IllegalArgumentException(&quot;Target Task ID and the target User assignment cannot be vacant sequences.&quot;);</span>
+        }
+
+<span class="fc" id="L55">        Task trackingTask = taskRepository.findById(taskId);</span>
+        
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (trackingTask != null) {</span>
+<span class="fc" id="L58">            trackingTask.setAssignedUser(assignedUser);</span>
+<span class="fc" id="L59">            taskRepository.update(trackingTask);</span>
+        } else {
+<span class="fc" id="L61">             throw new IllegalArgumentException(&quot;Target Task does not exist.&quot;);</span>
+        }
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Pushes a status transition onto an existing Task.
+     * @param taskId Reference string locating the Task in progress.
+     * @param newStatus Enum value directing the new tracking state (e.g., TODO, IN_PROGRESS, DONE).
+     * @throws IllegalArgumentException Returns if Task ID or Target Status params are completely unbound.
+     */
+    public void updateTaskStatus(String taskId, TaskStatus newStatus) {
+<span class="fc bfc" id="L72" title="All 4 branches covered.">        if (taskId == null || newStatus == null) {</span>
+<span class="fc" id="L73">             throw new IllegalArgumentException(&quot;Task ID and new transition state are required constraints.&quot;);</span>
+        }
+
+<span class="fc" id="L76">        Task operatingTask = taskRepository.findById(taskId);</span>
+
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if (operatingTask != null) {</span>
+<span class="fc" id="L79">            operatingTask.setStatus(newStatus);</span>
+<span class="fc" id="L80">            taskRepository.update(operatingTask);</span>
+        } else {
+<span class="fc" id="L82">             throw new IllegalArgumentException(&quot;Could not identify the selected Task.&quot;);</span>
+        }
+<span class="fc" id="L84">    }</span>
+
+    /**
+     * Retrieves all registered tasks.
+     * @return A list of all stored Task objects.
+     */
+    public List&lt;Task&gt; getAllTasks() {
+<span class="fc" id="L91">        return taskRepository.findAll();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

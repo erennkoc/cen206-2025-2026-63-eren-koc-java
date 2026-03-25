@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SQLiteTaskRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.storage</a> &gt; <span class="el_source">SQLiteTaskRepository.java</span></div><h1>SQLiteTaskRepository.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.storage;
+
+import com.projectmanagement.lib.models.Task;
+import com.projectmanagement.lib.models.TaskStatus;
+import com.projectmanagement.lib.models.User;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * SQLite implementation of the Task repository.
+ * &lt;p&gt; Implements IRepository to persist Task entities securely within an SQLite local db.
+ */
+public class SQLiteTaskRepository implements IRepository&lt;Task&gt; {
+
+    /**
+     * SQLite database connection string.
+     */
+    private static final String URL = &quot;jdbc:sqlite:projectmanager.db&quot;;
+
+    /**
+     * Constructor for SQLiteTaskRepository.
+     */
+<span class="fc" id="L24">    public SQLiteTaskRepository() {</span>
+<span class="fc" id="L25">        createTableIfNotExists();</span>
+<span class="fc" id="L26">    }</span>
+
+    /**
+     * Creates tasks table if missing.
+     */
+    private void createTableIfNotExists() {
+<span class="fc" id="L32">        String sql = &quot;CREATE TABLE IF NOT EXISTS tasks (&quot;</span>
+                   + &quot;id TEXT PRIMARY KEY,&quot;
+                   + &quot;title TEXT NOT NULL,&quot;
+                   + &quot;description TEXT,&quot;
+                   + &quot;status TEXT NOT NULL,&quot;
+                   + &quot;assigned_user_id TEXT&quot;
+                   + &quot;);&quot;;
+<span class="fc" id="L39">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L40">             Statement stmt = conn.createStatement()) {</span>
+<span class="fc" id="L41">            stmt.execute(sql);</span>
+<span class="fc" id="L42">        } catch (SQLException e) {</span>
+<span class="fc" id="L43">            System.err.println(&quot;Error creating tasks table: &quot; + e.getMessage());</span>
+<span class="fc" id="L44">        }</span>
+<span class="fc" id="L45">    }</span>
+
+    /**
+     * Initiates a Task entity registry within the SQLite db.
+     * @param entity The Task implementation object.
+     */
+    @Override
+    public void save(Task entity) {
+<span class="fc" id="L53">        String sql = &quot;INSERT INTO tasks(id, title, description, status, assigned_user_id) VALUES(?, ?, ?, ?, ?)&quot;;</span>
+<span class="fc" id="L54">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L55">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L56">            pstmt.setString(1, entity.getId());</span>
+<span class="fc" id="L57">            pstmt.setString(2, entity.getTitle());</span>
+<span class="fc" id="L58">            pstmt.setString(3, entity.getDescription());</span>
+<span class="fc" id="L59">            pstmt.setString(4, entity.getStatus().name());</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">            pstmt.setString(5, entity.getAssignedUser() != null ? entity.getAssignedUser().getId() : null);</span>
+<span class="fc" id="L61">            pstmt.executeUpdate();</span>
+<span class="fc" id="L62">        } catch (SQLException e) {</span>
+<span class="fc" id="L63">            System.err.println(&quot;Error creating task: &quot; + e.getMessage());</span>
+<span class="fc" id="L64">        }</span>
+<span class="fc" id="L65">    }</span>
+
+    /**
+     * Reads a specific Task from the SQLite db using its ID.
+     * @param id Tracking index of the desired Task.
+     * @return Single Task reference, or null when undiscovered.
+     */
+    @Override
+    public Task findById(String id) {
+<span class="fc" id="L74">        String sql = &quot;SELECT * FROM tasks WHERE id = ?&quot;;</span>
+<span class="fc" id="L75">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L76">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L77">            pstmt.setString(1, id);</span>
+<span class="fc" id="L78">            ResultSet rs = pstmt.executeQuery();</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">            if (rs.next()) {</span>
+<span class="fc" id="L80">                Task task = new Task(</span>
+<span class="fc" id="L81">                    rs.getString(&quot;id&quot;),</span>
+<span class="fc" id="L82">                    rs.getString(&quot;title&quot;),</span>
+<span class="fc" id="L83">                    rs.getString(&quot;description&quot;)</span>
+                );
+<span class="fc" id="L85">                task.setStatus(TaskStatus.valueOf(rs.getString(&quot;status&quot;)));</span>
+<span class="fc" id="L86">                String userId = rs.getString(&quot;assigned_user_id&quot;);</span>
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">                if (userId != null) {</span>
+<span class="fc" id="L88">                    User assignee = new SQLiteUserRepository().findById(userId);</span>
+<span class="fc" id="L89">                    task.setAssignedUser(assignee);</span>
+                }
+<span class="fc" id="L91">                return task;</span>
+            }
+<span class="pc bpc" id="L93" title="2 of 4 branches missed.">        } catch (SQLException e) {</span>
+<span class="fc" id="L94">            System.err.println(&quot;Error finding task by id: &quot; + e.getMessage());</span>
+<span class="fc" id="L95">        }</span>
+<span class="fc" id="L96">        return null;</span>
+    }
+
+    /**
+     * Discovers and yields all Task forms positioned in the SQLite db.
+     * @return Exhaustive list collection of Tasks.
+     */
+    @Override
+    public List&lt;Task&gt; findAll() {
+<span class="fc" id="L105">        List&lt;Task&gt; tasks = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L106">        String sql = &quot;SELECT * FROM tasks&quot;;</span>
+<span class="fc" id="L107">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L108">             Statement stmt = conn.createStatement();</span>
+<span class="fc" id="L109">             ResultSet rs = stmt.executeQuery(sql)) {</span>
+<span class="fc" id="L110">            SQLiteUserRepository userRepo = new SQLiteUserRepository();</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L112">                Task task = new Task(</span>
+<span class="fc" id="L113">                    rs.getString(&quot;id&quot;),</span>
+<span class="fc" id="L114">                    rs.getString(&quot;title&quot;),</span>
+<span class="fc" id="L115">                    rs.getString(&quot;description&quot;)</span>
+                );
+<span class="fc" id="L117">                task.setStatus(TaskStatus.valueOf(rs.getString(&quot;status&quot;)));</span>
+<span class="fc" id="L118">                String userId = rs.getString(&quot;assigned_user_id&quot;);</span>
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">                if (userId != null) {</span>
+<span class="fc" id="L120">                    task.setAssignedUser(userRepo.findById(userId));</span>
+                }
+<span class="fc" id="L122">                tasks.add(task);</span>
+<span class="fc" id="L123">            }</span>
+<span class="fc" id="L124">        } catch (SQLException e) {</span>
+<span class="fc" id="L125">            System.err.println(&quot;Error finding all tasks: &quot; + e.getMessage());</span>
+<span class="fc" id="L126">        }</span>
+<span class="fc" id="L127">        return tasks;</span>
+    }
+
+    /**
+     * Re-registers an associated Task inside SQLite with incoming tweaks.
+     * @param entity Modified Task form.
+     */
+    @Override
+    public void update(Task entity) {
+<span class="fc" id="L136">        String sql = &quot;UPDATE tasks SET title = ?, description = ?, status = ?, assigned_user_id = ? WHERE id = ?&quot;;</span>
+<span class="fc" id="L137">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L138">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L139">            pstmt.setString(1, entity.getTitle());</span>
+<span class="fc" id="L140">            pstmt.setString(2, entity.getDescription());</span>
+<span class="fc" id="L141">            pstmt.setString(3, entity.getStatus().name());</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">            pstmt.setString(4, entity.getAssignedUser() != null ? entity.getAssignedUser().getId() : null);</span>
+<span class="fc" id="L143">            pstmt.setString(5, entity.getId());</span>
+<span class="fc" id="L144">            pstmt.executeUpdate();</span>
+<span class="fc" id="L145">        } catch (SQLException e) {</span>
+<span class="fc" id="L146">            System.err.println(&quot;Error updating task: &quot; + e.getMessage());</span>
+<span class="fc" id="L147">        }</span>
+<span class="fc" id="L148">    }</span>
+
+    /**
+     * Withdraws a given Task from the associated SQLite db using ID.
+     * @param id The corresponding Task id string.
+     */
+    @Override
+    public void delete(String id) {
+<span class="fc" id="L156">        String sql = &quot;DELETE FROM tasks WHERE id = ?&quot;;</span>
+<span class="fc" id="L157">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L158">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L159">            pstmt.setString(1, id);</span>
+<span class="fc" id="L160">            pstmt.executeUpdate();</span>
+<span class="fc" id="L161">        } catch (SQLException e) {</span>
+<span class="fc" id="L162">            System.err.println(&quot;Error deleting task: &quot; + e.getMessage());</span>
+<span class="fc" id="L163">        }</span>
+<span class="fc" id="L164">    }</span>
+
+<span class="fc" id="L166">    protected Connection getConnection() throws SQLException { return DriverManager.getConnection(URL); }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,9 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+title C4 Context Diagram - Project Management System
+Person(user, "User", "A team member or manager interacting with the CLI")
+System(ppm, "Project Management Console", "Allows users to manage tasks, projects, and track progress.")
+System_Ext(db, "Database Systems", "MySQL / SQLite databases storing persistent data")
+Rel(user, ppm, "Uses")
+Rel(ppm, db, "Reads from and writes to")
+@enduml

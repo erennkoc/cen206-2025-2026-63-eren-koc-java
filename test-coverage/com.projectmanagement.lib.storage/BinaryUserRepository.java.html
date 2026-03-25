@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BinaryUserRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.storage</a> &gt; <span class="el_source">BinaryUserRepository.java</span></div><h1>BinaryUserRepository.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.storage;
+
+import com.projectmanagement.lib.models.User;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Binary File I/O implementation of the User repository.
+ * &lt;p&gt; Implements IRepository. Handles CRUD operations for User entities using a Binary File.
+ */
+<span class="fc" id="L12">public class BinaryUserRepository implements IRepository&lt;User&gt; {</span>
+
+    /**
+     * The file path where user data is serialized.
+     */
+<span class="fc" id="L17">    private final String FILE_PATH = &quot;users.dat&quot;;</span>
+
+    /**
+     * Loads user list from the binary file.
+     * @return A list of users.
+     */
+    @SuppressWarnings(&quot;unchecked&quot;)
+    private List&lt;User&gt; loadFromFile() {
+<span class="fc" id="L25">        File file = new File(FILE_PATH);</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if (!file.exists()) {</span>
+<span class="fc" id="L27">            return new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L29">        try (FileInputStream fis = new FileInputStream(file);</span>
+<span class="fc" id="L30">             ObjectInputStream ois = new ObjectInputStream(fis)) {</span>
+<span class="fc" id="L31">            return (List&lt;User&gt;) ois.readObject();</span>
+<span class="fc" id="L32">        } catch (Exception e) {</span>
+<span class="fc" id="L33">            return new ArrayList&lt;&gt;();</span>
+        }
+    }
+
+    /**
+     * Saves the given user list to the binary file.
+     * @param users The list of users to be saved.
+     */
+    private void saveToFile(List&lt;User&gt; users) {
+<span class="fc" id="L42">        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))) {</span>
+<span class="fc" id="L43">            oos.writeObject(users);</span>
+<span class="fc" id="L44">        } catch (IOException e) {</span>
+<span class="fc" id="L45">            System.err.println(&quot;Error writing binary file: &quot; + e.getMessage());</span>
+<span class="fc" id="L46">        }</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+     * Creates a new User record in the binary file.
+     * @param entity The User object to save.
+     */
+    @Override
+    public void save(User entity) {
+<span class="fc" id="L55">        List&lt;User&gt; users = loadFromFile();</span>
+<span class="fc" id="L56">        users.add(entity);</span>
+<span class="fc" id="L57">        saveToFile(users);</span>
+<span class="fc" id="L58">    }</span>
+
+    /**
+     * Finds a User by corresponding ID.
+     * @param id The unique identifier.
+     * @return The matched User, or null if not found.
+     */
+    @Override
+    public User findById(String id) {
+<span class="fc" id="L67">        List&lt;User&gt; users = loadFromFile();</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        for (User u : users) {</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">            if (u.getId().equals(id)) {</span>
+<span class="fc" id="L70">                return u;</span>
+            }
+<span class="nc" id="L72">        }</span>
+<span class="fc" id="L73">        return null;</span>
+    }
+
+    /**
+     * Retrieves a roster of all Users from the binary file.
+     * @return List of all stored User entities.
+     */
+    @Override
+    public List&lt;User&gt; findAll() {
+<span class="fc" id="L82">        return loadFromFile();</span>
+    }
+
+    /**
+     * Overwrites an existing User's data in the binary file.
+     * @param entity The updated User instance containing changes.
+     */
+    @Override
+    public void update(User entity) {
+<span class="fc" id="L91">        List&lt;User&gt; users = loadFromFile();</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        for (int i = 0; i &lt; users.size(); i++) {</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">            if (users.get(i).getId().equals(entity.getId())) {</span>
+<span class="fc" id="L94">                users.set(i, entity);</span>
+<span class="fc" id="L95">                break;</span>
+            }
+        }
+<span class="fc" id="L98">        saveToFile(users);</span>
+<span class="fc" id="L99">    }</span>
+
+    /**
+     * Purges a User from the binary storage system by ID.
+     * @param id The ID of the User to delete.
+     */
+    @Override
+    public void delete(String id) {
+<span class="fc" id="L107">        List&lt;User&gt; users = loadFromFile();</span>
+<span class="fc" id="L108">        users.removeIf(u -&gt; u.getId().equals(id));</span>
+<span class="fc" id="L109">        saveToFile(users);</span>
+<span class="fc" id="L110">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.services</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.services;
+
+import com.projectmanagement.lib.models.User;
+import com.projectmanagement.lib.storage.IRepository;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+
+/**
+ * Provides business logic and validation for User operations.
+ * &lt;p&gt; Implements functionalities such as User Registration, Login and Password Hashing using SHA-256. Follows the Dependency Injection principle by accepting an IRepository instance.
+ */
+public class UserService {
+
+    /**
+     * The User repository used for data persistence.
+     * &lt;p&gt; Abstracted via IRepository to allow flexible storage backends.
+     */
+    private final IRepository&lt;User&gt; userRepository;
+
+    /**
+     * Constructs a new UserService with the designated User repository.
+     * @param userRepository The storage implementation (dependency) to be injected.
+     */
+<span class="fc" id="L26">    public UserService(IRepository&lt;User&gt; userRepository) {</span>
+<span class="fc" id="L27">        this.userRepository = userRepository;</span>
+<span class="fc" id="L28">    }</span>
+
+    /**
+     * Registers a new user in the system.
+     * &lt;p&gt; Securely hashes the provided password before storing the User object.
+     * @param id The unique identifier for the new user.
+     * @param username The desired username.
+     * @param email The user's email address.
+     * @param plainPassword The unencrypted password to be hashed and stored.
+     * @throws IllegalArgumentException If any required parameter is null or empty.
+     */
+    public void registerUser(String id, String username, String email, String plainPassword) {
+<span class="fc bfc" id="L40" title="All 10 branches covered.">        if (id == null || username == null || email == null || plainPassword == null || plainPassword.isEmpty()) {</span>
+<span class="fc" id="L41">            throw new IllegalArgumentException(&quot;Registration fields cannot be null or empty.&quot;);</span>
+        }
+
+<span class="fc" id="L44">        String hashedPassword = hashPassword(plainPassword);</span>
+<span class="fc" id="L45">        User newUser = new User(id, username, email, hashedPassword);</span>
+<span class="fc" id="L46">        userRepository.save(newUser);</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+     * Authenticates a user attempting to log in.
+     * &lt;p&gt; Retrieves all active users and verifies if the username and securely hashed password match a system record.
+     * @param username The username attempting login.
+     * @param plainPassword The unencrypted password provided during login.
+     * @return The authenticated User object if credentials are correct, null otherwise.
+     */
+    public User login(String username, String plainPassword) {
+<span class="fc bfc" id="L57" title="All 6 branches covered.">        if (username == null || plainPassword == null || plainPassword.isEmpty()) {</span>
+<span class="fc" id="L58">            return null;</span>
+        }
+
+<span class="fc" id="L61">        String targetHash = hashPassword(plainPassword);</span>
+<span class="fc" id="L62">        List&lt;User&gt; allUsers = userRepository.findAll();</span>
+        
+        // This is a basic implementation; realistic systems might query the repository directly via username
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        if (allUsers != null) {</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            for (User user : allUsers) {</span>
+<span class="pc bpc" id="L67" title="1 of 4 branches missed.">                if (user.getUsername().equals(username) &amp;&amp; user.getPassword().equals(targetHash)) {</span>
+<span class="fc" id="L68">                    return user; // Successful login</span>
+                }
+<span class="fc" id="L70">            }</span>
+        }
+        
+<span class="fc" id="L73">        return null; // Login failed</span>
+    }
+
+    /**
+     * Retrieves all registered users from the repository.
+     * @return List of all User instances in storage.
+     */
+    public List&lt;User&gt; getAllUsers() {
+<span class="fc" id="L81">        return userRepository.findAll();</span>
+    }
+
+    /**
+     * Utility method to securely hash a plain text password.
+     * &lt;p&gt; Implements the &quot;Data Security&quot; constraint using the SHA-256 cryptographic hash function.
+     * @param password The plaintext string to encompass via hashing.
+     * @return The hexadecimal string representation of the hashed payload.
+     * @throws RuntimeException If the underlying JVM lacks the SHA-256 algorithm.
+     */
+    private String hashPassword(String password) {
+        try {
+<span class="fc" id="L93">            MessageDigest digest = MessageDigest.getInstance(&quot;SHA-256&quot;);</span>
+<span class="fc" id="L94">            byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));</span>
+<span class="fc" id="L95">            return bytesToHex(encodedhash);</span>
+<span class="nc" id="L96">        } catch (NoSuchAlgorithmException e) {</span>
+<span class="nc" id="L97">            throw new RuntimeException(&quot;SHA-256 algorithm not found.&quot;, e);</span>
+        }
+    }
+
+    /**
+     * Helper function to convert a byte array to a hex string.
+     * @param hash The byte array returned from MessageDigest.
+     * @return The formatted hexadecimal String.
+     */
+    private String bytesToHex(byte[] hash) {
+<span class="fc" id="L107">        StringBuilder hexString = new StringBuilder(2 * hash.length);</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        for (int i = 0; i &lt; hash.length; i++) {</span>
+<span class="fc" id="L109">            String hex = Integer.toHexString(0xff &amp; hash[i]);</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">            if (hex.length() == 1) {</span>
+<span class="fc" id="L111">                hexString.append('0');</span>
+            }
+<span class="fc" id="L113">            hexString.append(hex);</span>
+        }
+<span class="fc" id="L115">        return hexString.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

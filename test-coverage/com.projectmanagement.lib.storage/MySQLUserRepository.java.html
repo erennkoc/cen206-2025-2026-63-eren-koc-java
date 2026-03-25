@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MySQLUserRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.storage</a> &gt; <span class="el_source">MySQLUserRepository.java</span></div><h1>MySQLUserRepository.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.storage;
+
+import com.projectmanagement.lib.models.User;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * MySQL implementation of the User repository.
+ * &lt;p&gt; Implements IRepository. Connects to a remote MySQL database for User CRUD operations.
+ */
+public class MySQLUserRepository implements IRepository&lt;User&gt; {
+
+    private static final String URL = &quot;jdbc:mysql://localhost:3306/projectmanager?createDatabaseIfNotExist=true&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC&quot;;
+    private static final String USER_DB = &quot;root&quot;;
+    private static final String PASS_DB = &quot;root&quot;;
+
+    /**
+     * Constructor for MySQLUserRepository.
+     */
+<span class="fc" id="L21">    public MySQLUserRepository() {</span>
+<span class="fc" id="L22">        createTableIfNotExists();</span>
+<span class="fc" id="L23">    }</span>
+
+    private void createTableIfNotExists() {
+<span class="fc" id="L26">        String sql = &quot;CREATE TABLE IF NOT EXISTS users (&quot;</span>
+                   + &quot;id VARCHAR(255) PRIMARY KEY,&quot;
+                   + &quot;username VARCHAR(255) NOT NULL,&quot;
+                   + &quot;email VARCHAR(255) NOT NULL,&quot;
+                   + &quot;password VARCHAR(255) NOT NULL&quot;
+                   + &quot;);&quot;;
+<span class="fc" id="L32">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L33">             Statement stmt = conn.createStatement()) {</span>
+<span class="fc" id="L34">            stmt.execute(sql);</span>
+<span class="fc" id="L35">        } catch (SQLException e) {</span>
+<span class="fc" id="L36">            System.err.println(&quot;Error creating users table (MySQL): &quot; + e.getMessage());</span>
+<span class="fc" id="L37">        }</span>
+<span class="fc" id="L38">    }</span>
+
+    /**
+     * Persists a novel User entity to the MySQL db.
+     * @param entity The User to save.
+     */
+    @Override
+    public void save(User entity) {
+<span class="fc" id="L46">        String sql = &quot;INSERT INTO users(id, username, email, password) VALUES(?, ?, ?, ?)&quot;;</span>
+<span class="fc" id="L47">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L48">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L49">            pstmt.setString(1, entity.getId());</span>
+<span class="fc" id="L50">            pstmt.setString(2, entity.getUsername());</span>
+<span class="fc" id="L51">            pstmt.setString(3, entity.getEmail());</span>
+<span class="fc" id="L52">            pstmt.setString(4, entity.getPassword());</span>
+<span class="fc" id="L53">            pstmt.executeUpdate();</span>
+<span class="fc" id="L54">        } catch (SQLException e) {</span>
+<span class="fc" id="L55">            System.err.println(&quot;Error creating user (MySQL): &quot; + e.getMessage());</span>
+<span class="fc" id="L56">        }</span>
+<span class="fc" id="L57">    }</span>
+
+    /**
+     * Searches the MySQL db for a given User ID.
+     * @param id The target User identifier.
+     * @return The matched User, or null if unlocated.
+     */
+    @Override
+    public User findById(String id) {
+<span class="fc" id="L66">        String sql = &quot;SELECT * FROM users WHERE id = ?&quot;;</span>
+<span class="fc" id="L67">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L68">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L69">            pstmt.setString(1, id);</span>
+<span class="fc" id="L70">            ResultSet rs = pstmt.executeQuery();</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">            if (rs.next()) {</span>
+<span class="fc" id="L72">                return new User(</span>
+<span class="fc" id="L73">                    rs.getString(&quot;id&quot;),</span>
+<span class="fc" id="L74">                    rs.getString(&quot;username&quot;),</span>
+<span class="fc" id="L75">                    rs.getString(&quot;email&quot;),</span>
+<span class="fc" id="L76">                    rs.getString(&quot;password&quot;)</span>
+                );
+            }
+<span class="pc bpc" id="L79" title="2 of 4 branches missed.">        } catch (SQLException e) {</span>
+<span class="fc" id="L80">            System.err.println(&quot;Error finding user by id (MySQL): &quot; + e.getMessage());</span>
+<span class="nc" id="L81">        }</span>
+<span class="fc" id="L82">        return null;</span>
+    }
+
+    /**
+     * Pulls all Users from the MySQL tables.
+     * @return Full list of User entities.
+     */
+    @Override
+    public List&lt;User&gt; findAll() {
+<span class="fc" id="L91">        List&lt;User&gt; users = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L92">        String sql = &quot;SELECT * FROM users&quot;;</span>
+<span class="fc" id="L93">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L94">             Statement stmt = conn.createStatement();</span>
+<span class="fc" id="L95">             ResultSet rs = stmt.executeQuery(sql)) {</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L97">                users.add(new User(</span>
+<span class="fc" id="L98">                    rs.getString(&quot;id&quot;),</span>
+<span class="fc" id="L99">                    rs.getString(&quot;username&quot;),</span>
+<span class="fc" id="L100">                    rs.getString(&quot;email&quot;),</span>
+<span class="fc" id="L101">                    rs.getString(&quot;password&quot;)</span>
+                ));
+            }
+<span class="fc" id="L104">        } catch (SQLException e) {</span>
+<span class="fc" id="L105">            System.err.println(&quot;Error finding all users (MySQL): &quot; + e.getMessage());</span>
+<span class="fc" id="L106">        }</span>
+<span class="fc" id="L107">        return users;</span>
+    }
+
+    /**
+     * Merges an updated User entity into the MySQL db.
+     * @param entity User object sporting recent updates.
+     */
+    @Override
+    public void update(User entity) {
+<span class="fc" id="L116">        String sql = &quot;UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?&quot;;</span>
+<span class="fc" id="L117">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L118">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L119">            pstmt.setString(1, entity.getUsername());</span>
+<span class="fc" id="L120">            pstmt.setString(2, entity.getEmail());</span>
+<span class="fc" id="L121">            pstmt.setString(3, entity.getPassword());</span>
+<span class="fc" id="L122">            pstmt.setString(4, entity.getId());</span>
+<span class="fc" id="L123">            pstmt.executeUpdate();</span>
+<span class="fc" id="L124">        } catch (SQLException e) {</span>
+<span class="fc" id="L125">            System.err.println(&quot;Error updating user (MySQL): &quot; + e.getMessage());</span>
+<span class="fc" id="L126">        }</span>
+<span class="fc" id="L127">    }</span>
+
+    /**
+     * Executes a DELETE statement on a User in the MySQL db.
+     * @param id Target ID to drop.
+     */
+    @Override
+    public void delete(String id) {
+<span class="fc" id="L135">        String sql = &quot;DELETE FROM users WHERE id = ?&quot;;</span>
+<span class="fc" id="L136">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L137">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L138">            pstmt.setString(1, id);</span>
+<span class="fc" id="L139">            pstmt.executeUpdate();</span>
+<span class="fc" id="L140">        } catch (SQLException e) {</span>
+<span class="fc" id="L141">            System.err.println(&quot;Error deleting user (MySQL): &quot; + e.getMessage());</span>
+<span class="fc" id="L142">        }</span>
+<span class="fc" id="L143">    }</span>
+
+<span class="nc" id="L145">    protected Connection getConnection() throws SQLException { return DriverManager.getConnection(URL, USER_DB, PASS_DB); }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

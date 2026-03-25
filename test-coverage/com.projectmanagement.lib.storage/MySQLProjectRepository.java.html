@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MySQLProjectRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.storage</a> &gt; <span class="el_source">MySQLProjectRepository.java</span></div><h1>MySQLProjectRepository.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.storage;
+
+import com.projectmanagement.lib.models.Project;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * MySQL implementation of the Project repository.
+ * &lt;p&gt; Implements IRepository.
+ */
+public class MySQLProjectRepository implements IRepository&lt;Project&gt; {
+
+    private static final String URL = &quot;jdbc:mysql://localhost:3306/projectmanager?createDatabaseIfNotExist=true&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC&quot;;
+    private static final String USER_DB = &quot;root&quot;;
+    private static final String PASS_DB = &quot;root&quot;;
+
+    /**
+     * Constructor for MySQLProjectRepository.
+     */
+<span class="fc" id="L21">    public MySQLProjectRepository() {</span>
+<span class="fc" id="L22">        createTableIfNotExists();</span>
+<span class="fc" id="L23">    }</span>
+
+    private void createTableIfNotExists() {
+<span class="fc" id="L26">        String sql = &quot;CREATE TABLE IF NOT EXISTS projects (&quot;</span>
+                   + &quot;id VARCHAR(255) PRIMARY KEY,&quot;
+                   + &quot;name VARCHAR(255) NOT NULL,&quot;
+                   + &quot;description TEXT&quot;
+                   + &quot;);&quot;;
+<span class="fc" id="L31">        String mappingSql = &quot;CREATE TABLE IF NOT EXISTS project_tasks (&quot;</span>
+                   + &quot;project_id VARCHAR(255),&quot;
+                   + &quot;task_id VARCHAR(255),&quot;
+                   + &quot;PRIMARY KEY (project_id, task_id)&quot;
+                   + &quot;);&quot;;
+<span class="fc" id="L36">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L37">             Statement stmt = conn.createStatement()) {</span>
+<span class="fc" id="L38">            stmt.execute(sql);</span>
+<span class="fc" id="L39">            stmt.execute(mappingSql);</span>
+<span class="fc" id="L40">        } catch (SQLException e) {</span>
+<span class="fc" id="L41">            System.err.println(&quot;Error creating projects table (MySQL): &quot; + e.getMessage());</span>
+<span class="fc" id="L42">        }</span>
+<span class="fc" id="L43">    }</span>
+
+    /**
+     * Inserts a new Project record into the MySQL db.
+     * @param entity The Project instance to be added.
+     */
+    @Override
+    public void save(Project entity) {
+<span class="fc" id="L51">        String sql = &quot;INSERT INTO projects(id, name, description) VALUES(?, ?, ?)&quot;;</span>
+<span class="fc" id="L52">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L53">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L54">            pstmt.setString(1, entity.getId());</span>
+<span class="fc" id="L55">            pstmt.setString(2, entity.getName());</span>
+<span class="fc" id="L56">            pstmt.setString(3, entity.getDescription());</span>
+<span class="fc" id="L57">            pstmt.executeUpdate();</span>
+            
+<span class="fc" id="L59">            saveProjectTasks(conn, entity);</span>
+<span class="fc" id="L60">        } catch (SQLException e) {</span>
+<span class="fc" id="L61">            System.err.println(&quot;Error creating project: &quot; + e.getMessage());</span>
+<span class="fc" id="L62">        }</span>
+<span class="fc" id="L63">    }</span>
+
+    private void saveProjectTasks(Connection conn, Project entity) throws SQLException {
+<span class="fc" id="L66">        String delSql = &quot;DELETE FROM project_tasks WHERE project_id = ?&quot;;</span>
+<span class="fc" id="L67">        try (PreparedStatement delStmt = conn.prepareStatement(delSql)) {</span>
+<span class="fc" id="L68">            delStmt.setString(1, entity.getId());</span>
+<span class="fc" id="L69">            delStmt.executeUpdate();</span>
+        }
+
+<span class="pc bpc" id="L72" title="2 of 4 branches missed.">        if (entity.getTasks() != null &amp;&amp; !entity.getTasks().isEmpty()) {</span>
+<span class="fc" id="L73">            String insSql = &quot;INSERT INTO project_tasks (project_id, task_id) VALUES (?, ?)&quot;;</span>
+<span class="fc" id="L74">            try (PreparedStatement insStmt = conn.prepareStatement(insSql)) {</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">                for (com.projectmanagement.lib.models.Task task : entity.getTasks()) {</span>
+<span class="fc" id="L76">                    insStmt.setString(1, entity.getId());</span>
+<span class="fc" id="L77">                    insStmt.setString(2, task.getId());</span>
+<span class="fc" id="L78">                    insStmt.executeUpdate();</span>
+<span class="fc" id="L79">                }</span>
+            }
+        }
+<span class="fc" id="L82">    }</span>
+
+    /**
+     * Looks up a Project from the MySQL db based on ID.
+     * @param id The sought-after Project ID.
+     * @return The distinct Project, or null if undiscovered.
+     */
+    @Override
+    public Project findById(String id) {
+<span class="fc" id="L91">        String sql = &quot;SELECT * FROM projects WHERE id = ?&quot;;</span>
+<span class="fc" id="L92">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L93">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L94">            pstmt.setString(1, id);</span>
+<span class="fc" id="L95">            ResultSet rs = pstmt.executeQuery();</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">            if (rs.next()) {</span>
+<span class="fc" id="L97">                Project project = new Project(</span>
+<span class="fc" id="L98">                    rs.getString(&quot;id&quot;),</span>
+<span class="fc" id="L99">                    rs.getString(&quot;name&quot;),</span>
+<span class="fc" id="L100">                    rs.getString(&quot;description&quot;)</span>
+                );
+<span class="fc" id="L102">                loadProjectTasks(conn, project);</span>
+<span class="fc" id="L103">                return project;</span>
+            }
+<span class="pc bpc" id="L105" title="2 of 4 branches missed.">        } catch (SQLException e) {</span>
+<span class="fc" id="L106">            System.err.println(&quot;Error finding project by id: &quot; + e.getMessage());</span>
+<span class="nc" id="L107">        }</span>
+<span class="fc" id="L108">        return null;</span>
+    }
+
+    private void loadProjectTasks(Connection conn, Project project) throws SQLException {
+<span class="fc" id="L112">        String taskSql = &quot;SELECT task_id FROM project_tasks WHERE project_id = ?&quot;;</span>
+<span class="fc" id="L113">        try (PreparedStatement tpstmt = conn.prepareStatement(taskSql)) {</span>
+<span class="fc" id="L114">            tpstmt.setString(1, project.getId());</span>
+<span class="fc" id="L115">            ResultSet trs = tpstmt.executeQuery();</span>
+<span class="fc" id="L116">            MySQLTaskRepository taskRepo = new MySQLTaskRepository();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            while (trs.next()) {</span>
+<span class="fc" id="L118">                com.projectmanagement.lib.models.Task task = taskRepo.findById(trs.getString(&quot;task_id&quot;));</span>
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">                if (task != null) {</span>
+<span class="nc" id="L120">                    project.addTask(task);</span>
+                }
+<span class="fc" id="L122">            }</span>
+        }
+<span class="fc" id="L124">    }</span>
+
+    /**
+     * Retrieves the entirety of Project records from the MySQL db.
+     * @return Complete list of Project occurrences.
+     */
+    @Override
+    public List&lt;Project&gt; findAll() {
+<span class="fc" id="L132">        List&lt;Project&gt; projects = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L133">        String sql = &quot;SELECT * FROM projects&quot;;</span>
+<span class="fc" id="L134">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L135">             Statement stmt = conn.createStatement();</span>
+<span class="fc" id="L136">             ResultSet rs = stmt.executeQuery(sql)) {</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L138">                Project project = new Project(</span>
+<span class="fc" id="L139">                    rs.getString(&quot;id&quot;),</span>
+<span class="fc" id="L140">                    rs.getString(&quot;name&quot;),</span>
+<span class="fc" id="L141">                    rs.getString(&quot;description&quot;)</span>
+                );
+<span class="fc" id="L143">                loadProjectTasks(conn, project);</span>
+<span class="fc" id="L144">                projects.add(project);</span>
+<span class="fc" id="L145">            }</span>
+<span class="fc" id="L146">        } catch (SQLException e) {</span>
+<span class="fc" id="L147">            System.err.println(&quot;Error finding all projects: &quot; + e.getMessage());</span>
+<span class="fc" id="L148">        }</span>
+<span class="fc" id="L149">        return projects;</span>
+    }
+
+    /**
+     * Applies modifications to a documented Project in the MySQL db.
+     * @param entity Project entity carrying current revisions.
+     */
+    @Override
+    public void update(Project entity) {
+<span class="fc" id="L158">        String sql = &quot;UPDATE projects SET name = ?, description = ? WHERE id = ?&quot;;</span>
+<span class="fc" id="L159">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L160">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L161">            pstmt.setString(1, entity.getName());</span>
+<span class="fc" id="L162">            pstmt.setString(2, entity.getDescription());</span>
+<span class="fc" id="L163">            pstmt.setString(3, entity.getId());</span>
+<span class="fc" id="L164">            pstmt.executeUpdate();</span>
+            
+<span class="fc" id="L166">            saveProjectTasks(conn, entity);</span>
+<span class="fc" id="L167">        } catch (SQLException e) {</span>
+<span class="fc" id="L168">            System.err.println(&quot;Error updating project: &quot; + e.getMessage());</span>
+<span class="fc" id="L169">        }</span>
+<span class="fc" id="L170">    }</span>
+
+    /**
+     * Eradicates a Project from the MySQL database stream by ID.
+     * @param id Targeted Project identifier.
+     */
+    @Override
+    public void delete(String id) {
+<span class="fc" id="L178">        String sql = &quot;DELETE FROM projects WHERE id = ?&quot;;</span>
+<span class="fc" id="L179">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L180">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L181">            pstmt.setString(1, id);</span>
+<span class="fc" id="L182">            pstmt.executeUpdate();</span>
+            
+<span class="fc" id="L184">            String delSql = &quot;DELETE FROM project_tasks WHERE project_id = ?&quot;;</span>
+<span class="fc" id="L185">            try (PreparedStatement delStmt = conn.prepareStatement(delSql)) {</span>
+<span class="fc" id="L186">                delStmt.setString(1, id);</span>
+<span class="fc" id="L187">                delStmt.executeUpdate();</span>
+            }
+<span class="fc" id="L189">        } catch (SQLException e) {</span>
+<span class="fc" id="L190">            System.err.println(&quot;Error deleting project: &quot; + e.getMessage());</span>
+<span class="fc" id="L191">        }</span>
+<span class="fc" id="L192">    }</span>
+
+<span class="nc" id="L194">    protected Connection getConnection() throws SQLException { return DriverManager.getConnection(URL, USER_DB, PASS_DB); }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RepositoryFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.storage</a> &gt; <span class="el_source">RepositoryFactory.java</span></div><h1>RepositoryFactory.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.storage;
+
+import com.projectmanagement.lib.models.Project;
+import com.projectmanagement.lib.models.Task;
+import com.projectmanagement.lib.models.User;
+
+/**
+ * Factory class to resolve and retrieve specific storage repositories.
+ * &lt;p&gt; Examines the current StorageConfig and supplies the correct implementation (Binary, SQLite, MySQL) for User, Project, or Task. Applies the Factory Design Pattern.
+ */
+public class RepositoryFactory {
+
+    /**
+     * The configuration dictating which storage type to manufacture.
+     */
+    private StorageConfig config;
+
+    /**
+     * Constructor for the RepositoryFactory.
+     * @param config The active storage configuration to reference during instantiation.
+     */
+<span class="fc" id="L22">    public RepositoryFactory(StorageConfig config) {</span>
+<span class="fc" id="L23">        this.config = config;</span>
+<span class="fc" id="L24">    }</span>
+
+    /**
+     * Generates the matched IRepository for User domains.
+     * @return The correctly typed User repository.
+     */
+    public IRepository&lt;User&gt; getUserRepository() {
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (config.getActiveStorageType() == StorageType.BINARY_FILE) {</span>
+<span class="fc" id="L32">            return new BinaryUserRepository();</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        } else if (config.getActiveStorageType() == StorageType.SQLITE) {</span>
+<span class="fc" id="L34">            return new SQLiteUserRepository();</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        } else if (config.getActiveStorageType() == StorageType.MYSQL) {</span>
+<span class="fc" id="L36">            return new MySQLUserRepository();</span>
+        }
+<span class="fc" id="L38">        throw new IllegalStateException(&quot;Unsupported storage type for Users&quot;);</span>
+    }
+
+    /**
+     * Generates the matched IRepository for Project domains.
+     * @return The correctly typed Project repository.
+     */
+    public IRepository&lt;Project&gt; getProjectRepository() {
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (config.getActiveStorageType() == StorageType.BINARY_FILE) {</span>
+<span class="fc" id="L47">            return new BinaryProjectRepository();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        } else if (config.getActiveStorageType() == StorageType.SQLITE) {</span>
+<span class="fc" id="L49">            return new SQLiteProjectRepository();</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        } else if (config.getActiveStorageType() == StorageType.MYSQL) {</span>
+<span class="fc" id="L51">            return new MySQLProjectRepository();</span>
+        }
+<span class="fc" id="L53">        throw new IllegalStateException(&quot;Unsupported storage type for Projects&quot;);</span>
+    }
+
+    /**
+     * Generates the matched IRepository for Task domains.
+     * @return The correctly typed Task repository.
+     */
+    public IRepository&lt;Task&gt; getTaskRepository() {
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (config.getActiveStorageType() == StorageType.BINARY_FILE) {</span>
+<span class="fc" id="L62">            return new BinaryTaskRepository();</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        } else if (config.getActiveStorageType() == StorageType.SQLITE) {</span>
+<span class="fc" id="L64">            return new SQLiteTaskRepository();</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        } else if (config.getActiveStorageType() == StorageType.MYSQL) {</span>
+<span class="fc" id="L66">            return new MySQLTaskRepository();</span>
+        }
+<span class="fc" id="L68">        throw new IllegalStateException(&quot;Unsupported storage type for Tasks&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

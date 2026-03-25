@@ -1,0 +1,28 @@
+<mxfile host="Electron" modified="2023-11-22T00:00:00.000Z" agent="Mozilla/5.0" version="22.1.2" type="device">
+  <diagram id="dep-diagram" name="Deployment">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="node-vm" value="&lt;b&gt;Local Machine (OS)&lt;/b&gt;&#10;JVM Boundary" style="shape=cube;size=10;whiteSpace=wrap;html=1;align=center;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="100" y="100" width="300" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="node-app" value="&lt;b&gt;ProjectManagerApp.jar&lt;/b&gt;&#10;(Console Application)" style="shape=module;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" vertex="1" parent="node-vm">
+          <mxGeometry x="50" y="80" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="node-db" value="&lt;b&gt;MySQL Server&lt;/b&gt;&#10;Database Instance" style="shape=cylinder3;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="500" y="120" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="node-file" value="&lt;b&gt;File System&lt;/b&gt;&#10;(.dat / .db)" style="shape=note;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="200" y="350" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" value="JDBC (TCP 3306)" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="node-app" target="node-db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" value="File I/O" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="node-vm" target="node-file">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

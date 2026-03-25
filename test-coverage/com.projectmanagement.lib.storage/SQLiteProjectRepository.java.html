@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SQLiteProjectRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.storage</a> &gt; <span class="el_source">SQLiteProjectRepository.java</span></div><h1>SQLiteProjectRepository.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.storage;
+
+import com.projectmanagement.lib.models.Project;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * SQLite implementation of the Project repository.
+ * &lt;p&gt; Implements IRepository to persist Project entities to a local SQLite database.
+ */
+public class SQLiteProjectRepository implements IRepository&lt;Project&gt; {
+
+    /**
+     * SQLite database url
+     */
+    private static final String URL = &quot;jdbc:sqlite:projectmanager.db&quot;;
+
+    /**
+     * Constructor for SQLiteProjectRepository.
+     */
+<span class="fc" id="L22">    public SQLiteProjectRepository() {</span>
+<span class="fc" id="L23">        createTableIfNotExists();</span>
+<span class="fc" id="L24">    }</span>
+
+    /**
+     * Creates projects table.
+     */
+    private void createTableIfNotExists() {
+<span class="fc" id="L30">        String sql = &quot;CREATE TABLE IF NOT EXISTS projects (&quot;</span>
+                   + &quot;id TEXT PRIMARY KEY,&quot;
+                   + &quot;name TEXT NOT NULL,&quot;
+                   + &quot;description TEXT&quot;
+                   + &quot;);&quot;;
+<span class="fc" id="L35">        String mappingSql = &quot;CREATE TABLE IF NOT EXISTS project_tasks (&quot;</span>
+                   + &quot;project_id TEXT,&quot;
+                   + &quot;task_id TEXT,&quot;
+                   + &quot;PRIMARY KEY (project_id, task_id)&quot;
+                   + &quot;);&quot;;
+<span class="fc" id="L40">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L41">             Statement stmt = conn.createStatement()) {</span>
+<span class="fc" id="L42">            stmt.execute(sql);</span>
+<span class="fc" id="L43">            stmt.execute(mappingSql);</span>
+<span class="fc" id="L44">        } catch (SQLException e) {</span>
+<span class="fc" id="L45">            System.err.println(&quot;Error creating projects table: &quot; + e.getMessage());</span>
+<span class="fc" id="L46">        }</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+     * Inserts a new Project record into the SQLite db.
+     * @param entity The Project instance to be added.
+     */
+    @Override
+    public void save(Project entity) {
+<span class="fc" id="L55">        String sql = &quot;INSERT INTO projects(id, name, description) VALUES(?, ?, ?)&quot;;</span>
+<span class="fc" id="L56">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L57">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L58">            pstmt.setString(1, entity.getId());</span>
+<span class="fc" id="L59">            pstmt.setString(2, entity.getName());</span>
+<span class="fc" id="L60">            pstmt.setString(3, entity.getDescription());</span>
+<span class="fc" id="L61">            pstmt.executeUpdate();</span>
+            
+<span class="fc" id="L63">            saveProjectTasks(conn, entity);</span>
+<span class="fc" id="L64">        } catch (SQLException e) {</span>
+<span class="fc" id="L65">            System.err.println(&quot;Error creating project: &quot; + e.getMessage());</span>
+<span class="fc" id="L66">        }</span>
+<span class="fc" id="L67">    }</span>
+
+    private void saveProjectTasks(Connection conn, Project entity) throws SQLException {
+<span class="fc" id="L70">        String delSql = &quot;DELETE FROM project_tasks WHERE project_id = ?&quot;;</span>
+<span class="fc" id="L71">        try (PreparedStatement delStmt = conn.prepareStatement(delSql)) {</span>
+<span class="fc" id="L72">            delStmt.setString(1, entity.getId());</span>
+<span class="fc" id="L73">            delStmt.executeUpdate();</span>
+        }
+
+<span class="pc bpc" id="L76" title="2 of 4 branches missed.">        if (entity.getTasks() != null &amp;&amp; !entity.getTasks().isEmpty()) {</span>
+<span class="fc" id="L77">            String insSql = &quot;INSERT INTO project_tasks (project_id, task_id) VALUES (?, ?)&quot;;</span>
+<span class="fc" id="L78">            try (PreparedStatement insStmt = conn.prepareStatement(insSql)) {</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">                for (com.projectmanagement.lib.models.Task task : entity.getTasks()) {</span>
+<span class="fc" id="L80">                    insStmt.setString(1, entity.getId());</span>
+<span class="fc" id="L81">                    insStmt.setString(2, task.getId());</span>
+<span class="fc" id="L82">                    insStmt.executeUpdate();</span>
+<span class="fc" id="L83">                }</span>
+            }
+        }
+<span class="fc" id="L86">    }</span>
+
+    /**
+     * Looks up a Project from the SQLite db based on ID.
+     * @param id The sought-after Project ID.
+     * @return The distinct Project, or null if undiscovered.
+     */
+    @Override
+    public Project findById(String id) {
+<span class="fc" id="L95">        String sql = &quot;SELECT * FROM projects WHERE id = ?&quot;;</span>
+<span class="fc" id="L96">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L97">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L98">            pstmt.setString(1, id);</span>
+<span class="fc" id="L99">            ResultSet rs = pstmt.executeQuery();</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">            if (rs.next()) {</span>
+<span class="fc" id="L101">                Project project = new Project(</span>
+<span class="fc" id="L102">                    rs.getString(&quot;id&quot;),</span>
+<span class="fc" id="L103">                    rs.getString(&quot;name&quot;),</span>
+<span class="fc" id="L104">                    rs.getString(&quot;description&quot;)</span>
+                );
+<span class="fc" id="L106">                loadProjectTasks(conn, project);</span>
+<span class="fc" id="L107">                return project;</span>
+            }
+<span class="pc bpc" id="L109" title="2 of 4 branches missed.">        } catch (SQLException e) {</span>
+<span class="fc" id="L110">            System.err.println(&quot;Error finding project by id: &quot; + e.getMessage());</span>
+<span class="nc" id="L111">        }</span>
+<span class="fc" id="L112">        return null;</span>
+    }
+
+    private void loadProjectTasks(Connection conn, Project project) throws SQLException {
+<span class="fc" id="L116">        String taskSql = &quot;SELECT task_id FROM project_tasks WHERE project_id = ?&quot;;</span>
+<span class="fc" id="L117">        try (PreparedStatement tpstmt = conn.prepareStatement(taskSql)) {</span>
+<span class="fc" id="L118">            tpstmt.setString(1, project.getId());</span>
+<span class="fc" id="L119">            ResultSet trs = tpstmt.executeQuery();</span>
+<span class="fc" id="L120">            SQLiteTaskRepository taskRepo = new SQLiteTaskRepository();</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">            while (trs.next()) {</span>
+<span class="fc" id="L122">                com.projectmanagement.lib.models.Task task = taskRepo.findById(trs.getString(&quot;task_id&quot;));</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">                if (task != null) {</span>
+<span class="nc" id="L124">                    project.addTask(task);</span>
+                }
+<span class="fc" id="L126">            }</span>
+        }
+<span class="fc" id="L128">    }</span>
+
+    /**
+     * Retrieves the entirety of Project records from the SQLite db.
+     * @return Complete list of Project occurrences.
+     */
+    @Override
+    public List&lt;Project&gt; findAll() {
+<span class="fc" id="L136">        List&lt;Project&gt; projects = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L137">        String sql = &quot;SELECT * FROM projects&quot;;</span>
+<span class="fc" id="L138">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L139">             Statement stmt = conn.createStatement();</span>
+<span class="fc" id="L140">             ResultSet rs = stmt.executeQuery(sql)) {</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L142">                Project project = new Project(</span>
+<span class="fc" id="L143">                    rs.getString(&quot;id&quot;),</span>
+<span class="fc" id="L144">                    rs.getString(&quot;name&quot;),</span>
+<span class="fc" id="L145">                    rs.getString(&quot;description&quot;)</span>
+                );
+<span class="fc" id="L147">                loadProjectTasks(conn, project);</span>
+<span class="fc" id="L148">                projects.add(project);</span>
+<span class="fc" id="L149">            }</span>
+<span class="fc" id="L150">        } catch (SQLException e) {</span>
+<span class="fc" id="L151">            System.err.println(&quot;Error finding all projects: &quot; + e.getMessage());</span>
+<span class="fc" id="L152">        }</span>
+<span class="fc" id="L153">        return projects;</span>
+    }
+
+    /**
+     * Applies modifications to a documented Project in the SQLite db.
+     * @param entity Project entity carrying current revisions.
+     */
+    @Override
+    public void update(Project entity) {
+<span class="fc" id="L162">        String sql = &quot;UPDATE projects SET name = ?, description = ? WHERE id = ?&quot;;</span>
+<span class="fc" id="L163">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L164">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L165">            pstmt.setString(1, entity.getName());</span>
+<span class="fc" id="L166">            pstmt.setString(2, entity.getDescription());</span>
+<span class="fc" id="L167">            pstmt.setString(3, entity.getId());</span>
+<span class="fc" id="L168">            pstmt.executeUpdate();</span>
+            
+<span class="fc" id="L170">            saveProjectTasks(conn, entity);</span>
+<span class="fc" id="L171">        } catch (SQLException e) {</span>
+<span class="fc" id="L172">            System.err.println(&quot;Error updating project: &quot; + e.getMessage());</span>
+<span class="fc" id="L173">        }</span>
+<span class="fc" id="L174">    }</span>
+
+    /**
+     * Eradicates a Project from the SQLite database stream by ID.
+     * @param id Targeted Project identifier.
+     */
+    @Override
+    public void delete(String id) {
+<span class="fc" id="L182">        String sql = &quot;DELETE FROM projects WHERE id = ?&quot;;</span>
+<span class="fc" id="L183">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L184">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L185">            pstmt.setString(1, id);</span>
+<span class="fc" id="L186">            pstmt.executeUpdate();</span>
+            
+<span class="fc" id="L188">            String delSql = &quot;DELETE FROM project_tasks WHERE project_id = ?&quot;;</span>
+<span class="fc" id="L189">            try (PreparedStatement delStmt = conn.prepareStatement(delSql)) {</span>
+<span class="fc" id="L190">                delStmt.setString(1, id);</span>
+<span class="fc" id="L191">                delStmt.executeUpdate();</span>
+            }
+<span class="fc" id="L193">        } catch (SQLException e) {</span>
+<span class="fc" id="L194">            System.err.println(&quot;Error deleting project: &quot; + e.getMessage());</span>
+<span class="fc" id="L195">        }</span>
+<span class="fc" id="L196">    }</span>
+
+<span class="fc" id="L198">    protected Connection getConnection() throws SQLException { return DriverManager.getConnection(URL); }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

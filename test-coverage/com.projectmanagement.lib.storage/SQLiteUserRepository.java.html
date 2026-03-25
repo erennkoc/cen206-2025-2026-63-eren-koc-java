@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SQLiteUserRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.storage</a> &gt; <span class="el_source">SQLiteUserRepository.java</span></div><h1>SQLiteUserRepository.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.storage;
+
+import com.projectmanagement.lib.models.User;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * SQLite implementation of the User repository.
+ * &lt;p&gt; Implements IRepository to persist User data to a local SQLite database.
+ */
+public class SQLiteUserRepository implements IRepository&lt;User&gt; {
+
+    /**
+     * The connection string for the SQLite database.
+     */
+    private static final String URL = &quot;jdbc:sqlite:projectmanager.db&quot;;
+
+    /**
+     * Constructor for SQLiteUserRepository.
+     * &lt;p&gt; Ensures that the users table exists when the repository is created.
+     */
+<span class="fc" id="L23">    public SQLiteUserRepository() {</span>
+<span class="fc" id="L24">        createTableIfNotExists();</span>
+<span class="fc" id="L25">    }</span>
+
+    /**
+     * Creates the users table if it does not already exist.
+     */
+    private void createTableIfNotExists() {
+<span class="fc" id="L31">        String sql = &quot;CREATE TABLE IF NOT EXISTS users (&quot;</span>
+                   + &quot;id TEXT PRIMARY KEY,&quot;
+                   + &quot;username TEXT NOT NULL,&quot;
+                   + &quot;email TEXT NOT NULL,&quot;
+                   + &quot;password TEXT NOT NULL&quot;
+                   + &quot;);&quot;;
+<span class="fc" id="L37">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L38">             Statement stmt = conn.createStatement()) {</span>
+<span class="fc" id="L39">            stmt.execute(sql);</span>
+<span class="fc" id="L40">        } catch (SQLException e) {</span>
+<span class="fc" id="L41">            System.err.println(&quot;Error creating users table: &quot; + e.getMessage());</span>
+<span class="fc" id="L42">        }</span>
+<span class="fc" id="L43">    }</span>
+
+    /**
+     * Inserts a new User into the SQLite db.
+     * @param entity The User object to insert.
+     */
+    @Override
+    public void save(User entity) {
+<span class="fc" id="L51">        String sql = &quot;INSERT INTO users(id, username, email, password) VALUES(?, ?, ?, ?)&quot;;</span>
+<span class="fc" id="L52">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L53">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L54">            pstmt.setString(1, entity.getId());</span>
+<span class="fc" id="L55">            pstmt.setString(2, entity.getUsername());</span>
+<span class="fc" id="L56">            pstmt.setString(3, entity.getEmail());</span>
+<span class="fc" id="L57">            pstmt.setString(4, entity.getPassword());</span>
+<span class="fc" id="L58">            pstmt.executeUpdate();</span>
+<span class="fc" id="L59">        } catch (SQLException e) {</span>
+<span class="fc" id="L60">            System.err.println(&quot;Error creating user: &quot; + e.getMessage());</span>
+<span class="fc" id="L61">        }</span>
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * Queries for a User by identifier from the SQLite db.
+     * @param id The unique identifier.
+     * @return The matched User, or null if missing.
+     */
+    @Override
+    public User findById(String id) {
+<span class="fc" id="L71">        String sql = &quot;SELECT * FROM users WHERE id = ?&quot;;</span>
+<span class="fc" id="L72">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L73">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L74">            pstmt.setString(1, id);</span>
+<span class="fc" id="L75">            ResultSet rs = pstmt.executeQuery();</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            if (rs.next()) {</span>
+<span class="fc" id="L77">                return new User(</span>
+<span class="fc" id="L78">                    rs.getString(&quot;id&quot;),</span>
+<span class="fc" id="L79">                    rs.getString(&quot;username&quot;),</span>
+<span class="fc" id="L80">                    rs.getString(&quot;email&quot;),</span>
+<span class="fc" id="L81">                    rs.getString(&quot;password&quot;)</span>
+                );
+            }
+<span class="pc bpc" id="L84" title="2 of 4 branches missed.">        } catch (SQLException e) {</span>
+<span class="fc" id="L85">            System.err.println(&quot;Error finding user by id: &quot; + e.getMessage());</span>
+<span class="fc" id="L86">        }</span>
+<span class="fc" id="L87">        return null;</span>
+    }
+
+    /**
+     * Retrieves all Users stored in the SQLite db.
+     * @return A list of all User entities.
+     */
+    @Override
+    public List&lt;User&gt; findAll() {
+<span class="fc" id="L96">        List&lt;User&gt; users = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L97">        String sql = &quot;SELECT * FROM users&quot;;</span>
+<span class="fc" id="L98">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L99">             Statement stmt = conn.createStatement();</span>
+<span class="fc" id="L100">             ResultSet rs = stmt.executeQuery(sql)) {</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L102">                users.add(new User(</span>
+<span class="fc" id="L103">                    rs.getString(&quot;id&quot;),</span>
+<span class="fc" id="L104">                    rs.getString(&quot;username&quot;),</span>
+<span class="fc" id="L105">                    rs.getString(&quot;email&quot;),</span>
+<span class="fc" id="L106">                    rs.getString(&quot;password&quot;)</span>
+                ));
+            }
+<span class="fc" id="L109">        } catch (SQLException e) {</span>
+<span class="fc" id="L110">            System.err.println(&quot;Error finding all users: &quot; + e.getMessage());</span>
+<span class="fc" id="L111">        }</span>
+<span class="fc" id="L112">        return users;</span>
+    }
+
+    /**
+     * Updates an existing User's attributes in the SQLite db.
+     * @param entity The User instance containing modified data.
+     */
+    @Override
+    public void update(User entity) {
+<span class="fc" id="L121">        String sql = &quot;UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?&quot;;</span>
+<span class="fc" id="L122">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L123">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L124">            pstmt.setString(1, entity.getUsername());</span>
+<span class="fc" id="L125">            pstmt.setString(2, entity.getEmail());</span>
+<span class="fc" id="L126">            pstmt.setString(3, entity.getPassword());</span>
+<span class="fc" id="L127">            pstmt.setString(4, entity.getId());</span>
+<span class="fc" id="L128">            pstmt.executeUpdate();</span>
+<span class="fc" id="L129">        } catch (SQLException e) {</span>
+<span class="fc" id="L130">            System.err.println(&quot;Error updating user: &quot; + e.getMessage());</span>
+<span class="fc" id="L131">        }</span>
+<span class="fc" id="L132">    }</span>
+
+    /**
+     * Evicts a User from the SQLite database by ID.
+     * @param id The ID of the User to remove.
+     */
+    @Override
+    public void delete(String id) {
+<span class="fc" id="L140">        String sql = &quot;DELETE FROM users WHERE id = ?&quot;;</span>
+<span class="fc" id="L141">        try (Connection conn = getConnection();</span>
+<span class="fc" id="L142">             PreparedStatement pstmt = conn.prepareStatement(sql)) {</span>
+<span class="fc" id="L143">            pstmt.setString(1, id);</span>
+<span class="fc" id="L144">            pstmt.executeUpdate();</span>
+<span class="fc" id="L145">        } catch (SQLException e) {</span>
+<span class="fc" id="L146">            System.err.println(&quot;Error deleting user: &quot; + e.getMessage());</span>
+<span class="fc" id="L147">        }</span>
+<span class="fc" id="L148">    }</span>
+
+<span class="fc" id="L150">    protected Connection getConnection() throws SQLException { return DriverManager.getConnection(URL); }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

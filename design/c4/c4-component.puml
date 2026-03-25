@@ -1,0 +1,17 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title C4 Component Diagram - Core Services
+Container_Boundary(core, "Core Services") {
+    Component(userService, "UserService", "Java", "Validates and hashes users")
+    Component(projectService, "ProjectService", "Java", "Manages Project structures")
+    Component(taskService, "TaskService", "Java", "Updates Task state and assignment")
+    Component(reportService, "ReportService", "Java", "Aggregates analytical text reports")
+}
+Container(storage, "Repository Factory", "Java", "Abstracts the database connections")
+Rel(userService, storage, "Queries User data", "IRepository")
+Rel(projectService, storage, "Queries Project data", "IRepository")
+Rel(taskService, storage, "Queries Task data", "IRepository")
+Rel(reportService, userService, "Uses")
+Rel(reportService, projectService, "Uses")
+Rel(reportService, taskService, "Uses")
+@enduml

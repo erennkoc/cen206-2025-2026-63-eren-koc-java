@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="tr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BinaryTaskRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">projectmanager-app</a> &gt; <a href="index.source.html" class="el_package">com.projectmanagement.lib.storage</a> &gt; <span class="el_source">BinaryTaskRepository.java</span></div><h1>BinaryTaskRepository.java</h1><pre class="source lang-java linenums">package com.projectmanagement.lib.storage;
+
+import com.projectmanagement.lib.models.Task;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Binary File I/O implementation of the Task repository.
+ * &lt;p&gt; Implements IRepository to persist Task entities to local binary file storage.
+ */
+<span class="fc" id="L12">public class BinaryTaskRepository implements IRepository&lt;Task&gt; {</span>
+
+    /**
+     * The file path where task data is serialized.
+     */
+<span class="fc" id="L17">    private final String FILE_PATH = &quot;tasks.dat&quot;;</span>
+
+    /**
+     * Loads task list from the binary file.
+     * @return A list of tasks.
+     */
+    @SuppressWarnings(&quot;unchecked&quot;)
+    private List&lt;Task&gt; loadFromFile() {
+<span class="fc" id="L25">        File file = new File(FILE_PATH);</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if (!file.exists()) {</span>
+<span class="fc" id="L27">            return new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L29">        try (FileInputStream fis = new FileInputStream(file);</span>
+<span class="fc" id="L30">             ObjectInputStream ois = new ObjectInputStream(fis)) {</span>
+<span class="fc" id="L31">            return (List&lt;Task&gt;) ois.readObject();</span>
+<span class="fc" id="L32">        } catch (Exception e) {</span>
+<span class="fc" id="L33">            return new ArrayList&lt;&gt;();</span>
+        }
+    }
+
+    /**
+     * Saves the given task list to the binary file.
+     * @param tasks The list of tasks to be saved.
+     */
+    private void saveToFile(List&lt;Task&gt; tasks) {
+<span class="fc" id="L42">        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))) {</span>
+<span class="fc" id="L43">            oos.writeObject(tasks);</span>
+<span class="fc" id="L44">        } catch (IOException e) {</span>
+<span class="fc" id="L45">            System.err.println(&quot;Error writing binary file: &quot; + e.getMessage());</span>
+<span class="fc" id="L46">        }</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+     * Generates a new Task recording in the binary file.
+     * @param entity The Task form to log.
+     */
+    @Override
+    public void save(Task entity) {
+<span class="fc" id="L55">        List&lt;Task&gt; tasks = loadFromFile();</span>
+<span class="fc" id="L56">        tasks.add(entity);</span>
+<span class="fc" id="L57">        saveToFile(tasks);</span>
+<span class="fc" id="L58">    }</span>
+
+    /**
+     * Fetches a Task by correlating ID from the binary data stream.
+     * @param id The matching Task ID.
+     * @return The target Task object, resolving to null otherwise.
+     */
+    @Override
+    public Task findById(String id) {
+<span class="fc" id="L67">        List&lt;Task&gt; tasks = loadFromFile();</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        for (Task t : tasks) {</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">            if (t.getId().equals(id)) {</span>
+<span class="fc" id="L70">                return t;</span>
+            }
+<span class="nc" id="L72">        }</span>
+<span class="fc" id="L73">        return null;</span>
+    }
+
+    /**
+     * Interprets all Task entries secured inside binary files.
+     * @return Collection array of Tasks.
+     */
+    @Override
+    public List&lt;Task&gt; findAll() {
+<span class="fc" id="L82">        return loadFromFile();</span>
+    }
+
+    /**
+     * Refreshes an operational Task entity in binary file content.
+     * @param entity Altered Task structure holding new details.
+     */
+    @Override
+    public void update(Task entity) {
+<span class="fc" id="L91">        List&lt;Task&gt; tasks = loadFromFile();</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        for (int i = 0; i &lt; tasks.size(); i++) {</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">            if (tasks.get(i).getId().equals(entity.getId())) {</span>
+<span class="fc" id="L94">                tasks.set(i, entity);</span>
+<span class="fc" id="L95">                break;</span>
+            }
+        }
+<span class="fc" id="L98">        saveToFile(tasks);</span>
+<span class="fc" id="L99">    }</span>
+
+    /**
+     * Strips a Task entity from the binary footprint by ID matching.
+     * @param id The corresponding identifier.
+     */
+    @Override
+    public void delete(String id) {
+<span class="fc" id="L107">        List&lt;Task&gt; tasks = loadFromFile();</span>
+<span class="fc" id="L108">        tasks.removeIf(t -&gt; t.getId().equals(id));</span>
+<span class="fc" id="L109">        saveToFile(tasks);</span>
+<span class="fc" id="L110">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
